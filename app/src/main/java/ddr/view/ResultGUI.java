@@ -9,7 +9,8 @@ public class ResultGUI { //result screen after failing/finishing song
     private JLabel clearType; //did player fail or clear?
     private JLabel labels;
     private JPanel buttonPanel; // display navigational buttons
-    private JButton button;
+    private JButton buttonRetry;
+    private JButton buttonMain;
 
     public ResultGUI(){ //javaswing constructor
         JFrame frame3 = new JFrame("Results Screen");
@@ -37,12 +38,13 @@ public class ResultGUI { //result screen after failing/finishing song
         buttonPanel = new JPanel(); //make navigational buttons panel
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
-        String[] navi = {"Play Again", "Main Menu"};
-        for(int i = 0; i < navi.length; i++){
-            button = new JButton(navi[i]);
-            button.setPreferredSize(new Dimension(100, 50));
-            buttonPanel.add(button);
-        }
+        buttonRetry = new JButton("Play Again");
+        buttonRetry.setPreferredSize(new Dimension(100,50));
+        buttonPanel.add(buttonRetry);
+
+        buttonMain = new JButton("Main Menu");
+        buttonMain.setPreferredSize(new Dimension(100,50));
+        buttonPanel.add(buttonMain);
 
         //final adding stuff
         scorePanel.add(buttonPanel);

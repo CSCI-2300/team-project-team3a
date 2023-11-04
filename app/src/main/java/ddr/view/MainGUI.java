@@ -15,7 +15,8 @@ public class MainGUI {
         Dimension butoonsize = new Dimension(100,50);
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         titlePanel.setBackground(Color.CYAN);
-        JLabel title = new JLabel("Dane Dance Revolution!");
+        JLabel title = new JLabel("Dance Dance Revolution!"); 
+        /////////ADD HIGH SCORE TOP LEFT
         titlePanel.add(title);
         //JLabel modes = new JLabel("Modes:");
         panel.add(titlePanel);
