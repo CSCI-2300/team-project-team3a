@@ -15,12 +15,10 @@ public class MainGUI {
         Dimension butoonsize = new Dimension(100,50);
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         titlePanel.setBackground(Color.CYAN);
-<<<<<<< HEAD
-        JLabel title = new JLabel("Dane Dance Revolution!");
-=======
+
         JLabel title = new JLabel("Dance Dance Revolution!"); 
         /////////ADD HIGH SCORE TOP LEFT
->>>>>>> b872593c9b6d74f91671017e4b810c0902d85646
+
         titlePanel.add(title);
         //JLabel modes = new JLabel("Modes:");
         panel.add(titlePanel);
@@ -32,31 +30,28 @@ public class MainGUI {
         JButton easy = new JButton("easy");
         butoonpanel.add(easy);
         easy.setPreferredSize(butoonsize);
-<<<<<<< HEAD
+
         easy.setOpaque(false);
         easy.setContentAreaFilled(false);
-=======
->>>>>>> b872593c9b6d74f91671017e4b810c0902d85646
+
         //panel.add(easyPanel);
 
         JButton medium = new JButton("medium");
         medium.setPreferredSize(butoonsize);
          butoonpanel.add(medium);
-<<<<<<< HEAD
+
         medium.setOpaque(false);
         medium.setContentAreaFilled(false);
-=======
->>>>>>> b872593c9b6d74f91671017e4b810c0902d85646
+
             //panel.add(mediumPanel);
 
         JButton hard = new JButton("hard");
         hard.setPreferredSize(butoonsize);
          butoonpanel.add(hard);
-<<<<<<< HEAD
+
         hard.setOpaque(false);
         hard.setContentAreaFilled(false);
-=======
->>>>>>> b872593c9b6d74f91671017e4b810c0902d85646
+
         //panel.add(hardPanel);
 
         panel.add(butoonpanel);

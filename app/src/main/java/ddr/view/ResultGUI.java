@@ -35,16 +35,21 @@ public class ResultGUI { //result screen after failing/finishing song
         }
 
         //adding buttons now
-        buttonPanel = new JPanel(); //make navigational buttons panel
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,0)); //make navigational buttons panel
+        buttonPanel.setBackground(new Color(135, 206, 235));
 
         buttonRetry = new JButton("Play Again");
         buttonRetry.setPreferredSize(new Dimension(100,50));
+        buttonRetry.setOpaque(false);
+        buttonRetry.setContentAreaFilled(false);
         buttonPanel.add(buttonRetry);
 
         buttonMain = new JButton("Main Menu");
-        buttonMain.setPreferredSize(new Dimension(100,50));
         buttonPanel.add(buttonMain);
+        buttonMain.setPreferredSize(new Dimension(100,50));
+        
+        buttonMain.setOpaque(false);
+        buttonMain.setContentAreaFilled(false);
 
         //final adding stuff
         scorePanel.add(buttonPanel);
