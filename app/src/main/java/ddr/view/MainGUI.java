@@ -11,10 +11,10 @@ public class MainGUI {
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel(new GridLayout(5, 1));
         panel.setPreferredSize(new Dimension(700,500));
-        panel.setBackground(Color.CYAN);
+        panel.setBackground(new Color(135, 206, 235));
         Dimension butoonsize = new Dimension(100,50);
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        titlePanel.setBackground(Color.CYAN);
+        titlePanel.setBackground(new Color(135, 206, 235));
 
         JLabel title = new JLabel("Dance Dance Revolution!"); 
         /////////ADD HIGH SCORE TOP LEFT
@@ -25,7 +25,7 @@ public class MainGUI {
         //panel.add(modes);
 
         JPanel butoonpanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,0));
-        butoonpanel.setBackground(Color.CYAN);
+        butoonpanel.setBackground(new Color(135, 206, 235));
 
         JButton easy = new JButton("easy");
         butoonpanel.add(easy);
