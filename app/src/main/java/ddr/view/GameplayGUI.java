@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class GameplayGUI  { //UI during gameplay
     JFrame frame2;
-    JPanel mainPanel;
+    ImagePanel mainPanel;
 
     JPanel arrowsPanel;
     JPanel space1;
@@ -22,12 +22,19 @@ public class GameplayGUI  { //UI during gameplay
     JLabel down;
     ImageIcon downs;
 
+    JLabel back;
+    ImageIcon backs;
+
     JPanel gridArrows;
     public GameplayGUI(){ //javaswing constructor
         frame2 = new JFrame("Gameplay"); 
         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainPanel = new JPanel();
+        backs = new ImageIcon(getClass().getClassLoader().getResource("game_background.png"));
+        mainPanel = new ImagePanel(backs);
         mainPanel.setPreferredSize(new Dimension(700,500));
+
+
+
 
         arrowsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,30,0));
         arrowsPanel.setPreferredSize(new Dimension(700,100));
@@ -47,7 +54,7 @@ public class GameplayGUI  { //UI during gameplay
         space4.setOpaque(false);
 
         gridArrows = new JPanel(new GridLayout(5, 1));
-        gridArrows.setBackground(new Color(135, 206, 235));
+        gridArrows.setOpaque(false);
 
         gridArrows.add(space1);
         gridArrows.add(space2);
@@ -61,7 +68,6 @@ public class GameplayGUI  { //UI during gameplay
         lefts = new ImageIcon(getClass().getClassLoader().getResource("leftarrow.png"));
         left = new JLabel(lefts);
         arrowsPanel.add(left);
-
 
         downs = new ImageIcon(getClass().getClassLoader().getResource("downarrow.png"));
         down = new JLabel(downs);
@@ -77,6 +83,7 @@ public class GameplayGUI  { //UI during gameplay
 
         frame2.pack();
         frame2.setVisible(true);
+        frame2.setResizable(false);
     }
 }
     
