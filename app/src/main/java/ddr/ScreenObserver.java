@@ -1,5 +1,5 @@
 package ddr;
 
-public interface screen_obvs {
+public interface ScreenObserver {
     public void transition();
 }
