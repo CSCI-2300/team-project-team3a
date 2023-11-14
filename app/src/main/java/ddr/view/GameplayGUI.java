@@ -1,9 +1,10 @@
 package ddr.view;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
-public class GameplayGUI  { //UI during gameplay
+public class GameplayGUI implements KeyListener { //UI during gameplay
     JFrame frame2;
     ImagePanel mainPanel;
 
@@ -32,6 +33,7 @@ public class GameplayGUI  { //UI during gameplay
         backs = new ImageIcon(getClass().getClassLoader().getResource("game_background.png"));
         mainPanel = new ImagePanel(backs);
         mainPanel.setPreferredSize(new Dimension(700,500));
+        frame2.addKeyListener(this);
 
 
 
@@ -67,6 +69,7 @@ public class GameplayGUI  { //UI during gameplay
 
         lefts = new ImageIcon(getClass().getClassLoader().getResource("leftarrow.png"));
         left = new JLabel(lefts);
+          
         arrowsPanel.add(left);
 
         downs = new ImageIcon(getClass().getClassLoader().getResource("downarrow.png"));
@@ -84,6 +87,33 @@ public class GameplayGUI  { //UI during gameplay
         frame2.pack();
         frame2.setVisible(true);
         frame2.setResizable(false);
+    
     }
+        public void disable(){
+            frame2.setVisible(false);
+            frame2.setEnabled(false);
+        }
+
+        public void enable(){
+        frame2.setVisible(true);
+        frame2.setEnabled(true);
+        }
+        public void keyPressed(KeyEvent e) {
+            System.out.println("here");
+            if(e.getKeyCode()== KeyEvent.VK_RIGHT)
+                System.out.println("right");
+            else if(e.getKeyCode()== KeyEvent.VK_LEFT)
+                System.out.println("left");
+            else if(e.getKeyCode()== KeyEvent.VK_UP)
+                System.out.println("up");
+            else if(e.getKeyCode()== KeyEvent.VK_DOWN)
+                System.out.println("down");
+        }
+    
+        public void keyReleased(KeyEvent e) {
+        }
+    
+        public void keyTyped(KeyEvent e) {
+        }
 }
     
