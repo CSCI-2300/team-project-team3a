@@ -31,8 +31,10 @@ public class MainGUI implements ActionListener {
     }
 
         for(int i = 0;i<3;i++){
-          highscores.add(highscores_a[i]);}
+        highscores.add(highscores_a[i]);}
         panel.add(highscores);
+        highscores.setLocation(new Point (100,100));
+
 
 
         panel.setPreferredSize(new Dimension(700,500));
