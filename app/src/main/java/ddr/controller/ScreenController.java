@@ -1,15 +1,15 @@
 package ddr.controller;
 
-import ddr.screen_obvs;
+import ddr.ScreenObserver;
 import ddr.view.GameplayGUI;
 import ddr.view.MainGUI;
 import ddr.view.ResultGUI;
 
-public class screen_controll implements screen_obvs {
+public class ScreenController implements ScreenObserver {
     MainGUI main;
     GameplayGUI game;
     ResultGUI result;
-    public screen_controll(){
+    public ScreenController(){
         main = new MainGUI(this);
         game = new GameplayGUI();
         game.disable();

@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import ddr.screen_obvs;
+import ddr.ScreenObserver;
 
 public class MainGUI implements ActionListener {
     JFrame frame1;
@@ -12,26 +12,28 @@ public class MainGUI implements ActionListener {
     ImageIcon backs;
     JPanel highscores;
     JLabel [] highscores_a;
-    screen_obvs controller;
+    ScreenObserver controller;
 
-    public MainGUI(screen_obvs control) {
+    public MainGUI(ScreenObserver control) {
         frame1 = new JFrame("Main Menu");
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         backs = new ImageIcon(getClass().getClassLoader().getResource("game_background.png"));
         panel = new ImagePanel(backs);
+        panel.setLayout(new GridLayout(3,1,0,0));
         controller = control;
 
-        highscores = new JPanel(new GridLayout(3,1));
+        highscores = new JPanel(new GridLayout(3,1,0,0));
         highscores.setOpaque(false);
         highscores_a = new JLabel[3];
-        for(int i = 0;i<3;i++){
-        highscores_a[i] = new JLabel("highscore: ");
-        highscores_a[i].setForeground(Color.WHITE);
-        highscores_a[i].setOpaque(false);
-    }
+        for(int i = 0; i<3 ;i++){
+            highscores_a[i] = new JLabel("highscore: ");
+            highscores_a[i].setForeground(Color.WHITE);
+            highscores_a[i].setOpaque(false);
+        }
 
-        for(int i = 0;i<3;i++){
-        highscores.add(highscores_a[i]);}
+        for(int i = 0; i<3 ;i++){
+            highscores.add(highscores_a[i]);
+        }
         panel.add(highscores);
         highscores.setLocation(new Point (100,100));
 
@@ -45,7 +47,7 @@ public class MainGUI implements ActionListener {
 
         
         logo = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
-        Image image = logo.getImage().getScaledInstance(300, 350, Image.SCALE_DEFAULT);
+        Image image = logo.getImage().getScaledInstance(200, 300, Image.SCALE_DEFAULT);
         logo.setImage(image);
         JLabel title = new JLabel(logo); 
         /////////ADD HIGH SCORE TOP LEFT
@@ -77,7 +79,7 @@ public class MainGUI implements ActionListener {
         medium.setContentAreaFilled(false);
         medium.addActionListener(this);
 
-            //panel.add(mediumPanel);
+        //panel.add(mediumPanel);
 
         JButton hard = new JButton("hard");
         hard.setPreferredSize(butoonsize);

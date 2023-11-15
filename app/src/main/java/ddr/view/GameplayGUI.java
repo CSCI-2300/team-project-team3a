@@ -27,7 +27,8 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
     ImageIcon backs;
 
     JPanel gridArrows;
-    public GameplayGUI(){ //javaswing constructor
+    public GameplayGUI()
+    { //javaswing constructor
         frame2 = new JFrame("Gameplay"); 
         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         backs = new ImageIcon(getClass().getClassLoader().getResource("game_background.png"));
@@ -89,31 +90,36 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         frame2.setResizable(false);
     
     }
-        public void disable(){
-            frame2.setVisible(false);
-            frame2.setEnabled(false);
-        }
+    
+    public void disable()
+    {
+        frame2.setVisible(false);
+        frame2.setEnabled(false);
+    }
 
-        public void enable(){
+    public void enable()
+    {
         frame2.setVisible(true);
         frame2.setEnabled(true);
-        }
-        public void keyPressed(KeyEvent e) {
-            System.out.println("here");
-            if(e.getKeyCode()== KeyEvent.VK_RIGHT)
-                System.out.println("right");
-            else if(e.getKeyCode()== KeyEvent.VK_LEFT)
-                System.out.println("left");
-            else if(e.getKeyCode()== KeyEvent.VK_UP)
-                System.out.println("up");
-            else if(e.getKeyCode()== KeyEvent.VK_DOWN)
-                System.out.println("down");
-        }
+    }
     
-        public void keyReleased(KeyEvent e) {
-        }
+    public void keyPressed(KeyEvent e) 
+    {
+        System.out.println("here");
+        if(e.getKeyCode()== KeyEvent.VK_RIGHT)
+            System.out.println("right");
+        else if(e.getKeyCode()== KeyEvent.VK_LEFT)
+            System.out.println("left");
+        else if(e.getKeyCode()== KeyEvent.VK_UP)
+            System.out.println("up");
+        else if(e.getKeyCode()== KeyEvent.VK_DOWN)
+            System.out.println("down");
+    }
     
-        public void keyTyped(KeyEvent e) {
-        }
+    public void keyReleased(KeyEvent e) {
+    }
+
+    public void keyTyped(KeyEvent e) {
+    }
 }
     
