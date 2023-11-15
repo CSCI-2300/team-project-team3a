@@ -38,8 +38,9 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
     JLabel downMove;
     JLabel upMove;
     JLabel rightMove;
-    JLabel [] leftarr, rightarr, uparr, downarr ;
+
     int bottom_row = 450;
+    scores_panel score;
     
     private Timer leftTimer, downTimer, upTimer, rightTimer;
     public GameplayGUI()
@@ -68,6 +69,8 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         mainPanel.add(downMove);
         mainPanel.add(upMove);
         mainPanel.add(rightMove);
+        score = new scores_panel();
+        mainPanel.add(score);
         
         //making the arrow receptors panel and adding it to a grid
         arrowsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,30,0));
@@ -118,6 +121,10 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         leftTimer = new Timer(100, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
+                if (leftMove.getY() > 460){
+                    System.out.println("booo");
+                }
+
             }
         });
 
@@ -147,12 +154,20 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
     {
         frame2.setVisible(false);
         frame2.setEnabled(false);
+        leftTimer.stop();
+        downTimer.stop();
+        upTimer.stop();
+        rightTimer.stop();
     }
 
     public void enable()
     {
         frame2.setVisible(true);
         frame2.setEnabled(true);
+            rightTimer.start();
+            leftTimer.start();
+            upTimer.start();
+            downTimer.start();
     }
     
     public void keyPressed(KeyEvent e) 
@@ -170,6 +185,7 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
             leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
             if (leftMove.getY() > 400 && leftMove.getY() < 450) {
                 System.out.println("aahhhhh");
+
             }
             
         }
@@ -192,8 +208,11 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
     }
 
     public void set_start(){
-        leftMove.setLocation(leftMove.getX(),-50);
-         rightMove.setLocation(rightMove.getX(),-50);
+        leftMove.setLocation(leftMove.getX()+65,-50);
+         rightMove.setLocation(rightMove.getX()+65,-50);
+        upMove.setLocation(upMove.getX()+65,-50);
+        downMove.setLocation(downMove.getX()+65,-50);
+        score.setLocation(downMove.getX()+50,350);
     }
 }
     
