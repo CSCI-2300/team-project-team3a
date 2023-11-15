@@ -13,6 +13,7 @@ public class MainGUI implements ActionListener {
     JPanel highscores;
     JLabel [] highscores_a;
     ScreenObserver controller;
+    JLayeredPane layeredPane;
 
     public MainGUI(ScreenObserver control) {
         frame1 = new JFrame("Main Menu");
@@ -21,20 +22,21 @@ public class MainGUI implements ActionListener {
         panel = new ImagePanel(backs);
         controller = control;
 
-        highscores = new JPanel(new GridLayout(3,1));
-        highscores.setOpaque(false);
+        highscores = new JPanel(new GridLayout(1,3));
         highscores_a = new JLabel[3];
         for(int i = 0; i<3 ;i++){
-            highscores_a[i] = new JLabel("highscore: ");
+            highscores_a[i] = new JLabel("#"+ (i+1) + " High Score: ");
             highscores_a[i].setForeground(Color.WHITE);
-            highscores_a[i].setOpaque(false);
         }
 
         for(int i = 0; i<3 ;i++){
             highscores.add(highscores_a[i]);
         }
-        panel.add(highscores);
+        highscores.setBackground(Color.BLACK);
 
+        //adding highscores to main frame
+        frame1.setLayout(new BorderLayout());
+        frame1.add(highscores, BorderLayout.NORTH);
 
         panel.setPreferredSize(new Dimension(700,500));
         panel.setBackground(new Color(135, 206, 235));
