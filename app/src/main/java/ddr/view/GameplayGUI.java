@@ -27,16 +27,41 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
     ImageIcon backs;
 
     JPanel gridArrows;
+    JPanel spawnpoint;
+
+
+
+    ImageIcon test;
+    JLabel tester;
+    ImageIcon test1;
+    JLabel tester1;
+    JLabel tester2;
+    JLabel tester3;
     public GameplayGUI()
     { //javaswing constructor
         frame2 = new JFrame("Gameplay"); 
         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         backs = new ImageIcon(getClass().getClassLoader().getResource("game_background.png"));
         mainPanel = new ImagePanel(backs);
+        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER,30,0));
         mainPanel.setPreferredSize(new Dimension(700,500));
         frame2.addKeyListener(this);
+        spawnpoint = new JPanel(new FlowLayout(FlowLayout.CENTER,30,0)); 
+        spawnpoint.setOpaque(false);
+        test = new ImageIcon(getClass().getClassLoader().getResource("left.gif"));
+        tester = new JLabel(test);
+       test1 = new ImageIcon(getClass().getClassLoader().getResource("down.gif"));
+        tester1 = new JLabel(test1);
+        ImageIcon test2 = new ImageIcon(getClass().getClassLoader().getResource("up.gif"));
+        tester2 = new JLabel(test2);
+        ImageIcon test3 = new ImageIcon(getClass().getClassLoader().getResource("right.gif"));
+        tester3 = new JLabel(test3);
 
-
+        mainPanel.add(tester);
+        mainPanel.add(tester1);
+         mainPanel.add(tester2);
+        mainPanel.add(tester3);
+        
 
 
         arrowsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,30,0));
@@ -47,14 +72,13 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         space2 = new JPanel();
         space3 = new JPanel();
         space4 = new JPanel();
-        space1.setPreferredSize(new Dimension(233,100));
-        space2.setPreferredSize(new Dimension(233,100));
-        space3.setPreferredSize(new Dimension(233,100));
-        space4.setPreferredSize(new Dimension(233,100));
+        space1.setPreferredSize(new Dimension(233,120));
+        space2.setPreferredSize(new Dimension(233,120));
+        space3.setPreferredSize(new Dimension(233,120));
         space1.setOpaque(false);
         space2.setOpaque(false);
         space3.setOpaque(false);
-        space4.setOpaque(false);
+
 
         gridArrows = new JPanel(new GridLayout(5, 1));
         gridArrows.setOpaque(false);
@@ -62,7 +86,6 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         gridArrows.add(space1);
         gridArrows.add(space2);
         gridArrows.add(space3);
-        gridArrows.add(space4);
         gridArrows.add(arrowsPanel);
 
         mainPanel.add(gridArrows);
@@ -105,15 +128,22 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
     
     public void keyPressed(KeyEvent e) 
     {
+        int stepSize = 10;
         System.out.println("here");
-        if(e.getKeyCode()== KeyEvent.VK_RIGHT)
+        if(e.getKeyCode()== KeyEvent.VK_RIGHT){
             System.out.println("right");
-        else if(e.getKeyCode()== KeyEvent.VK_LEFT)
+             tester3.setLocation(tester3.getX(), tester3.getY() + stepSize);}
+        else if(e.getKeyCode()== KeyEvent.VK_LEFT){
             System.out.println("left");
-        else if(e.getKeyCode()== KeyEvent.VK_UP)
+            tester.setLocation(tester.getX(), tester.getY() + stepSize);}
+        else if(e.getKeyCode()== KeyEvent.VK_UP){
             System.out.println("up");
-        else if(e.getKeyCode()== KeyEvent.VK_DOWN)
+            
+           tester2.setLocation(tester2.getX(), tester2.getY() + stepSize);}
+
+        else if(e.getKeyCode()== KeyEvent.VK_DOWN){
             System.out.println("down");
+            tester1.setLocation(tester1.getX(), tester1.getY() + stepSize);}
     }
     
     public void keyReleased(KeyEvent e) {
