@@ -31,12 +31,15 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
 
 
 
-    ImageIcon test;
-    JLabel tester;
-    ImageIcon test1;
-    JLabel tester1;
-    JLabel tester2;
-    JLabel tester3;
+    ImageIcon leftIcon;
+    ImageIcon downIcon;
+    ImageIcon upIcon;
+    ImageIcon rightIcon;
+
+    JLabel leftMove;
+    JLabel downMove;
+    JLabel upMove;
+    JLabel rightMove;
     public GameplayGUI()
     { //javaswing constructor
         frame2 = new JFrame("Gameplay"); 
@@ -48,22 +51,23 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         frame2.addKeyListener(this);
         spawnpoint = new JPanel(new FlowLayout(FlowLayout.CENTER,30,0)); 
         spawnpoint.setOpaque(false);
-        test = new ImageIcon(getClass().getClassLoader().getResource("left.gif"));
-        tester = new JLabel(test);
-       test1 = new ImageIcon(getClass().getClassLoader().getResource("down.gif"));
-        tester1 = new JLabel(test1);
-        ImageIcon test2 = new ImageIcon(getClass().getClassLoader().getResource("up.gif"));
-        tester2 = new JLabel(test2);
-        ImageIcon test3 = new ImageIcon(getClass().getClassLoader().getResource("right.gif"));
-        tester3 = new JLabel(test3);
-
-        mainPanel.add(tester);
-        mainPanel.add(tester1);
-         mainPanel.add(tester2);
-        mainPanel.add(tester3);
         
+        //creating moving arrows and adding them to main panel
+        leftIcon = new ImageIcon(getClass().getClassLoader().getResource("left.gif"));
+        leftMove = new JLabel(leftIcon);
+        downIcon = new ImageIcon(getClass().getClassLoader().getResource("down.gif"));
+        downMove = new JLabel(downIcon);
+        upIcon = new ImageIcon(getClass().getClassLoader().getResource("up.gif"));
+        upMove = new JLabel(upIcon);
+        rightIcon = new ImageIcon(getClass().getClassLoader().getResource("right.gif"));
+        rightMove = new JLabel(rightIcon);
 
-
+        mainPanel.add(leftMove);
+        mainPanel.add(downMove);
+        mainPanel.add(upMove);
+        mainPanel.add(rightMove);
+        
+        //making the arrow receptors panel and adding it to a grid
         arrowsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,30,0));
         arrowsPanel.setPreferredSize(new Dimension(700,100));
         arrowsPanel.setBackground(Color.gray);
@@ -82,7 +86,6 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
 
         gridArrows = new JPanel(new GridLayout(5, 1));
         gridArrows.setOpaque(false);
-
         gridArrows.add(space1);
         gridArrows.add(space2);
         gridArrows.add(space3);
@@ -93,7 +96,6 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
 
         lefts = new ImageIcon(getClass().getClassLoader().getResource("leftarrow.png"));
         left = new JLabel(lefts);
-          
         arrowsPanel.add(left);
 
         downs = new ImageIcon(getClass().getClassLoader().getResource("downarrow.png"));
@@ -130,20 +132,26 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
     {
         int stepSize = 10;
         System.out.println("here");
-        if(e.getKeyCode()== KeyEvent.VK_RIGHT){
+        if(e.getKeyCode()== KeyEvent.VK_RIGHT)
+        {
             System.out.println("right");
-             tester3.setLocation(tester3.getX(), tester3.getY() + stepSize);}
-        else if(e.getKeyCode()== KeyEvent.VK_LEFT){
+            rightMove.setLocation(rightMove.getX(), rightMove.getY() + stepSize);
+        }
+        else if(e.getKeyCode()== KeyEvent.VK_LEFT)
+        {
             System.out.println("left");
-            tester.setLocation(tester.getX(), tester.getY() + stepSize);}
-        else if(e.getKeyCode()== KeyEvent.VK_UP){
+            leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
+        }
+        else if(e.getKeyCode()== KeyEvent.VK_UP)
+        {
             System.out.println("up");
-            
-           tester2.setLocation(tester2.getX(), tester2.getY() + stepSize);}
-
-        else if(e.getKeyCode()== KeyEvent.VK_DOWN){
+            upMove.setLocation(upMove.getX(), upMove.getY() + stepSize);
+        }
+        else if(e.getKeyCode()== KeyEvent.VK_DOWN)
+        {
             System.out.println("down");
-            tester1.setLocation(tester1.getX(), tester1.getY() + stepSize);}
+            downMove.setLocation(downMove.getX(), downMove.getY() + stepSize);
+        }
     }
     
     public void keyReleased(KeyEvent e) {
