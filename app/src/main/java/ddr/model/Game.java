@@ -37,21 +37,8 @@ public class Game {
         this.rightArrows = new ArrayList<JLabel>();
 
         this.flag = false;
-        //this.clearType;
     }
 
-/* 
-    public void lose_health(){
-        health --;
-    }
-
-    public boolean check_health(){
-        if (health <10){
-            return false;
-        }
-        return true;
-    }
-*/
 
     public void save_start(int startx, int starty){
         startingx = startx;
