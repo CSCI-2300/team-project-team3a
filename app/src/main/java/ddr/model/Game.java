@@ -37,7 +37,7 @@ public class Game {
         this.rightArrows = new ArrayList<JLabel>();
 
         this.flag = false;
-        this.clearType;
+        //this.clearType;
     }
 
 /* 
