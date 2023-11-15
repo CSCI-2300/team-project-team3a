@@ -1,13 +1,13 @@
 package ddr.model;
 
-public class Arrows {
-    int health;
+public class Game {
+    int score;
     int startingx;
     int startingy;
     int currentx;
     int currenty;
-    public Arrows(){
-        health = 100;
+    public Game(){
+        score = 100;
     }
 
     public void lose_health(){
