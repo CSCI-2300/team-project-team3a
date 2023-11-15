@@ -29,8 +29,6 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
     JPanel gridArrows;
     JPanel spawnpoint;
 
-
-
     ImageIcon leftIcon;
     ImageIcon downIcon;
     ImageIcon upIcon;
@@ -83,7 +81,6 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         space2.setOpaque(false);
         space3.setOpaque(false);
 
-
         gridArrows = new JPanel(new GridLayout(5, 1));
         gridArrows.setOpaque(false);
         gridArrows.add(space1);
@@ -129,7 +126,7 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
     }
     
     public void keyPressed(KeyEvent e) 
-    {
+    {   // +420 immediatly goes to bottom arrows
         int stepSize = 10;
         System.out.println("here");
         if(e.getKeyCode()== KeyEvent.VK_RIGHT)
@@ -158,6 +155,11 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
     }
 
     public void keyTyped(KeyEvent e) {
+    }
+
+    public void set_start(){
+        leftMove.setLocation(leftMove.getX(),-50);
+         rightMove.setLocation(rightMove.getX(),-50);
     }
 }
     

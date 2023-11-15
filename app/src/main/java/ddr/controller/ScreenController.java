@@ -21,5 +21,6 @@ public class ScreenController implements ScreenObserver {
     public void transition(){
         main.disable();
         game.enable();
+        game.set_start();
     }
 }
