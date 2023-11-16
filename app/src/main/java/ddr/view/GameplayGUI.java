@@ -206,10 +206,10 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
     }
 
     public void set_start(){
-        leftMove.setLocation(leftMove.getX()+65,-50);
-        rightMove.setLocation(rightMove.getX()+65,-50);
-        upMove.setLocation(upMove.getX()+65,-50);
-        downMove.setLocation(downMove.getX()+65,-50);
+        leftMove.setLocation(left.getX(),-50);
+        rightMove.setLocation(right.getX(),-50);
+        upMove.setLocation(up.getX(),-50);
+        downMove.setLocation(down.getX(),-50);
         score.setLocation(downMove.getX()+50,200);
     }
 }
