@@ -11,9 +11,10 @@ public class ResultGUI { //result screen after failing/finishing song
     private JButton buttonRetry;
     private JButton buttonMain;
     private ImageIcon backs;
+    private JFrame frame3;
 
     public ResultGUI(){ //javaswing constructor
-        JFrame frame3 = new JFrame("Results Screen");
+        frame3 = new JFrame("Results Screen");
         frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         backs = new ImageIcon(getClass().getClassLoader().getResource("game_background.png"));
@@ -56,8 +57,6 @@ public class ResultGUI { //result screen after failing/finishing song
         buttonMain.setContentAreaFilled(false);
 
         buttonMain.setPreferredSize(new Dimension(100,50));
-        
-
 
         //final adding stuff
         scorePanel.add(buttonPanel);
@@ -66,4 +65,9 @@ public class ResultGUI { //result screen after failing/finishing song
         frame3.setResizable(false);
         frame3.setVisible(true);
     }
+
+        public void disable(){
+        frame3.setVisible(false);
+        frame3.setEnabled(false);
+        }
 }
