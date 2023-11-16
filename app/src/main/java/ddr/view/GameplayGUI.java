@@ -69,6 +69,7 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         mainPanel.add(downMove);
         mainPanel.add(upMove);
         mainPanel.add(rightMove);
+        
         score = new scores_panel();
         mainPanel.add(score);
         
@@ -81,18 +82,15 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         space2 = new JPanel();
         space3 = new JPanel();
         space4 = new JPanel();
-        space1.setPreferredSize(new Dimension(233,120));
-        space2.setPreferredSize(new Dimension(233,120));
-        space3.setPreferredSize(new Dimension(233,120));
+        space1.setPreferredSize(new Dimension(233,135));
+        space2.setPreferredSize(new Dimension(233,135));
         space1.setOpaque(false);
         space2.setOpaque(false);
-        space3.setOpaque(false);
 
         gridArrows = new JPanel(new GridLayout(5, 1));
         gridArrows.setOpaque(false);
         gridArrows.add(space1);
         gridArrows.add(space2);
-        gridArrows.add(space3);
         gridArrows.add(arrowsPanel);
 
         mainPanel.add(gridArrows);
@@ -209,10 +207,10 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
 
     public void set_start(){
         leftMove.setLocation(leftMove.getX()+65,-50);
-         rightMove.setLocation(rightMove.getX()+65,-50);
+        rightMove.setLocation(rightMove.getX()+65,-50);
         upMove.setLocation(upMove.getX()+65,-50);
         downMove.setLocation(downMove.getX()+65,-50);
-        score.setLocation(downMove.getX()+50,350);
+        score.setLocation(downMove.getX()+50,200);
     }
 }
     

@@ -13,9 +13,11 @@ public class Game {
     int currenty;
     
     int score; //things to keep track of for end screen
-    int combo;
+    int currCombo;
+    int maxCombo;
     int hits; 
     int misses;
+
     
     ArrayList<JLabel> leftArrows; //array list of arrows for columns
     ArrayList<JLabel> downArrows;
@@ -27,7 +29,8 @@ public class Game {
 
     public Game(){
         this.score = 100;
-        this.combo = 0;
+        this.currCombo = 0;
+        this.maxCombo = 0;
         this.hits = 0;
         this.misses = 0;
        
@@ -35,6 +38,8 @@ public class Game {
         this.downArrows = new ArrayList<JLabel>();
         this.upArrows = new ArrayList<JLabel>();
         this.rightArrows = new ArrayList<JLabel>();
+
+        
 
         this.flag = false;
     }
@@ -52,13 +57,16 @@ public class Game {
 
     public void hit(){
         this.hits++;
-        this.combo++;
+        this.currCombo++;
         this.score+= 10;
     }
 
     public void miss(){
         this.misses++;
-        this.combo = 0;
+        if (this.currCombo > this.maxCombo){
+            this.maxCombo = this.currCombo;
+        }
+        this.currCombo = 0;
         this.score-= 10;
     }
 
@@ -78,4 +86,21 @@ public class Game {
         }
         return this.flag;
     }
+
+    public int getScore(){
+        return this.score;
+    }
+
+    public int getHits(){
+        return this.hits;
+    }
+
+    public int getMisses(){
+        return this.misses;
+    }
+
+    public int getHighestCombo(){
+        return this.maxCombo;
+    }
+
 }
