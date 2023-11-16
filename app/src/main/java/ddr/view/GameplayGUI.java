@@ -120,7 +120,7 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
             public void actionPerformed(ActionEvent e) {
                 leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
                 if (leftMove.getY() > 460){
-                    System.out.println("booo");
+                    //System.out.println("booo");
                 }
 
             }
@@ -170,18 +170,24 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
     
     public void keyPressed(KeyEvent e) 
     {   // +420 immediatly goes to bottom arrows
-        int stepSize = 10;
+        //int stepSize = 10;
+        int leftBound = 390;
+        int rightBound = 450;
         //System.out.println("here");
         if(e.getKeyCode()== KeyEvent.VK_RIGHT)
         {
             //System.out.println("right");
-            rightMove.setLocation(rightMove.getX(), rightMove.getY() + stepSize);
+            //rightMove.setLocation(rightMove.getX(), rightMove.getY() + stepSize);
+            if (rightMove.getY() > leftBound && rightMove.getY() < rightBound) {
+                System.out.println("aahhhhh");
+
+            }
         }
         else if(e.getKeyCode()== KeyEvent.VK_LEFT)
         {
             //System.out.println("left");
             //leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
-            if (leftMove.getY() > 400 && leftMove.getY() < 450) {
+            if (leftMove.getY() > leftBound && leftMove.getY() < rightBound) {
                 System.out.println("aahhhhh");
 
             }
@@ -190,12 +196,20 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         else if(e.getKeyCode()== KeyEvent.VK_UP)
         {
             //System.out.println("up");
-            upMove.setLocation(upMove.getX(), upMove.getY() + stepSize);
+            //upMove.setLocation(upMove.getX(), upMove.getY() + stepSize);
+            if (upMove.getY() > leftBound && upMove.getY() < rightBound) {
+                System.out.println("aahhhhh");
+
+            }
         }
         else if(e.getKeyCode()== KeyEvent.VK_DOWN)
         {
             //System.out.println("down");
-            downMove.setLocation(downMove.getX(), downMove.getY() + stepSize);
+            //downMove.setLocation(downMove.getX(), downMove.getY() + stepSize);
+            if (downMove.getY() > leftBound && downMove.getY() < rightBound) {
+                System.out.println("aahhhhh");
+
+            }
         }
     }
     
