@@ -180,7 +180,7 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         else if(e.getKeyCode()== KeyEvent.VK_LEFT)
         {
             //System.out.println("left");
-            leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
+            //leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
             if (leftMove.getY() > 400 && leftMove.getY() < 450) {
                 System.out.println("aahhhhh");
 
