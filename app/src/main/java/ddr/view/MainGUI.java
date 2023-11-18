@@ -14,6 +14,7 @@ public class MainGUI implements ActionListener {
     JLabel [] highscores_a;
     ScreenObserver controller;
     JLayeredPane layeredPane;
+    int difficulty; //1,2,3
 
     public MainGUI(ScreenObserver control) {
         frame1 = new JFrame("Main Menu");
@@ -100,7 +101,10 @@ public class MainGUI implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e){
-       controller.transition();
+      // if (e.getSource() == easy){
+
+  //     }
+        controller.transition();
     }
 
         public void disable(){

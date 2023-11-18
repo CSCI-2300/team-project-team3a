@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import ddr.ClearType;
+import ddr.gameObserver;
 
 public class Game {
     int startingx; //positional stuff
@@ -26,6 +27,8 @@ public class Game {
 
     boolean flag; //flag for gameOver method
     ClearType clearType; //enum for clear type
+
+    gameObserver game;
 
     public Game(){
         this.score = 100;
@@ -55,10 +58,32 @@ public class Game {
         currenty = starty;
     }
 
-    public void hit(){
+    public void hit(int col){
         this.hits++;
         this.currCombo++;
         this.score+= 10;
+        this.notify_obvs();
+        if (col == 1){
+            if (leftArrows.size() !=0){
+            leftArrows.remove(0);
+            }
+        }
+        else if (col ==2){
+            if (downArrows.size() !=0){
+            downArrows.remove(0);
+            }
+        }
+        else if (col ==3){
+             if (upArrows.size() !=0){
+            upArrows.remove(0);
+            }           
+        }
+        else if (col ==4){
+             if (rightArrows.size() !=0){
+            rightArrows.remove(0);
+            }           
+        }
+        
     }
 
     public void miss(){
@@ -103,4 +128,15 @@ public class Game {
         return this.maxCombo;
     }
 
+    public void set_obvs(gameObserver gamer){
+        game = gamer;
+    }
+
+    public void notify_obvs(){
+        game.update();
+    }
+
+        public int getCurrentCombo(){
+        return this.currCombo;
+    }
 }
