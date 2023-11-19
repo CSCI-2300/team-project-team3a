@@ -4,7 +4,11 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class GameplayGUI implements KeyListener { //UI during gameplay
+import ddr.ScreenObserver;
+import ddr.gameObserver;
+import ddr.model.Game;
+
+public class GameplayGUI implements KeyListener, gameObserver { //UI during gameplay
     JFrame frame2;
     ImagePanel mainPanel;
 
@@ -41,9 +45,15 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
 
     int bottom_row = 450;
     scores_panel score;
+
+    Game gamerGame;
+    ScreenObserver controller;
+
+    int scorex;
+    int scorey;
     
     private Timer leftTimer, downTimer, upTimer, rightTimer;
-    public GameplayGUI()
+    public GameplayGUI(ScreenObserver screen, Game game)
     { //javaswing constructor
         frame2 = new JFrame("Gameplay"); 
         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,7 +64,7 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         frame2.addKeyListener(this);
         spawnpoint = new JPanel(new FlowLayout(FlowLayout.CENTER,30,0)); 
         spawnpoint.setOpaque(false);
-        int stepSize =10;
+        int stepSize =2;
         //creating moving arrows and adding them to main panel
         leftIcon = new ImageIcon(getClass().getClassLoader().getResource("left.gif"));
         leftMove = new JLabel(leftIcon);
@@ -64,6 +74,7 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         upMove = new JLabel(upIcon);
         rightIcon = new ImageIcon(getClass().getClassLoader().getResource("right.gif"));
         rightMove = new JLabel(rightIcon);
+        
 
         mainPanel.add(leftMove);
         mainPanel.add(downMove);
@@ -90,7 +101,7 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         gridArrows = new JPanel(new GridLayout(5, 1));
         gridArrows.setOpaque(false);
         gridArrows.add(space1);
-        gridArrows.add(space2);
+       gridArrows.add(space2);
         gridArrows.add(arrowsPanel);
 
         mainPanel.add(gridArrows);
@@ -116,29 +127,29 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         frame2.setVisible(true);
         frame2.setResizable(false);
 
-        leftTimer = new Timer(100, new ActionListener() {
+        leftTimer = new Timer(20, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
                 if (leftMove.getY() > 460){
-                    //System.out.println("booo");
+                    System.out.println("booo");
                 }
 
             }
         });
 
-        downTimer = new Timer(150, new ActionListener() {
+        downTimer = new Timer(40, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 downMove.setLocation(downMove.getX(), downMove.getY() + stepSize);
             }
         });
 
-        upTimer = new Timer(200, new ActionListener() {
+        upTimer = new Timer(60, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 upMove.setLocation(upMove.getX(), upMove.getY() + stepSize);
             }
         });
 
-        rightTimer = new Timer(250, new ActionListener() {
+        rightTimer = new Timer(80, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 rightMove.setLocation(rightMove.getX(), rightMove.getY() + stepSize);
             }});
@@ -146,6 +157,9 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
             leftTimer.start();
             upTimer.start();
             downTimer.start();
+        
+        gamerGame = game;
+        controller = screen;
     }
     
     public void disable()
@@ -170,25 +184,20 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
     
     public void keyPressed(KeyEvent e) 
     {   // +420 immediatly goes to bottom arrows
-        //int stepSize = 10;
-        int leftBound = 390;
-        int rightBound = 450;
+        int stepSize = 10;
         //System.out.println("here");
         if(e.getKeyCode()== KeyEvent.VK_RIGHT)
         {
             //System.out.println("right");
-            //rightMove.setLocation(rightMove.getX(), rightMove.getY() + stepSize);
-            if (rightMove.getY() > leftBound && rightMove.getY() < rightBound) {
-                System.out.println("aahhhhh");
-
-            }
+            rightMove.setLocation(rightMove.getX(), rightMove.getY() + stepSize);
         }
         else if(e.getKeyCode()== KeyEvent.VK_LEFT)
         {
             //System.out.println("left");
-            //leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
-            if (leftMove.getY() > leftBound && leftMove.getY() < rightBound) {
+            leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
+            if (leftMove.getY() > 400 && leftMove.getY() < 450) {
                 System.out.println("aahhhhh");
+                controller.press(1);
 
             }
             
@@ -196,20 +205,12 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         else if(e.getKeyCode()== KeyEvent.VK_UP)
         {
             //System.out.println("up");
-            //upMove.setLocation(upMove.getX(), upMove.getY() + stepSize);
-            if (upMove.getY() > leftBound && upMove.getY() < rightBound) {
-                System.out.println("aahhhhh");
-
-            }
+            upMove.setLocation(upMove.getX(), upMove.getY() + stepSize);
         }
         else if(e.getKeyCode()== KeyEvent.VK_DOWN)
         {
             //System.out.println("down");
-            //downMove.setLocation(downMove.getX(), downMove.getY() + stepSize);
-            if (downMove.getY() > leftBound && downMove.getY() < rightBound) {
-                System.out.println("aahhhhh");
-
-            }
+            downMove.setLocation(downMove.getX(), downMove.getY() + stepSize);
         }
     }
     
@@ -224,7 +225,19 @@ public class GameplayGUI implements KeyListener { //UI during gameplay
         rightMove.setLocation(right.getX(),-50);
         upMove.setLocation(up.getX(),-50);
         downMove.setLocation(down.getX(),-50);
-        score.setLocation(down.getX(),200);
+        score.setLocation(downMove.getX()+50,200);
+        scorex = score.getX();
+        scorey = score.getY();
+    }
+
+    @Override
+    public void update(){
+        score.score_update(gamerGame.getScore());
+        score.combo_update(gamerGame.getCurrentCombo());
+        score.setLocation(scorex, scorey);
+         score.setLocation(scorex, scorey);
+
+
     }
 }
     

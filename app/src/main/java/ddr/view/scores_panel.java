@@ -45,10 +45,16 @@ public class scores_panel extends JPanel {
     public void score_update(int num){
         score = num;
         scoreLabel.setText(score + " score");
+        this.revalidate();
+        this.repaint();
     }
     public void combo_update(int num){
         combo = num;
         comboJLabel.setText(combo + " combo");
+                this.revalidate();
+        this.repaint();
     }
+
 }
+
 
