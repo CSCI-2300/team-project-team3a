@@ -1,8 +1,6 @@
 package ddr.model;
 
 import java.util.ArrayList;
-import java.awt.*;
-import javax.swing.*;
 
 import ddr.ClearType;
 import ddr.gameObserver;
@@ -20,10 +18,11 @@ public class Game {
     int misses;
 
     
-    ArrayList<JLabel> leftArrows; //array list of arrows for columns
+/*   ArrayList<JLabel> leftArrows; //array list of arrows for columns
     ArrayList<JLabel> downArrows;
     ArrayList<JLabel> upArrows;
     ArrayList<JLabel> rightArrows;
+    */ 
 
     boolean flag; //flag for gameOver method
     ClearType clearType; //enum for clear type
@@ -37,10 +36,11 @@ public class Game {
         this.hits = 0;
         this.misses = 0;
        
-        this.leftArrows = new ArrayList<JLabel>();
+/*         this.leftArrows = new ArrayList<JLabel>();
         this.downArrows = new ArrayList<JLabel>();
         this.upArrows = new ArrayList<JLabel>();
         this.rightArrows = new ArrayList<JLabel>();
+        */ 
 
         
 
