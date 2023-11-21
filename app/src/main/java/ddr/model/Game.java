@@ -18,6 +18,7 @@ public class Game {
     int maxCombo;
     int hits; 
     int misses;
+    int [] notes = {60,80,100};
 
     
     ArrayList<JLabel> leftArrows; //array list of arrows for columns
@@ -26,7 +27,8 @@ public class Game {
     ArrayList<JLabel> rightArrows;
      
 
-    boolean flag; //flag for gameOver method
+    boolean flagW; //flag for gameOver method
+    boolean flagL;
     ClearType clearType; //enum for clear type
 
     gameObserver game;
@@ -46,7 +48,8 @@ public class Game {
 
         
 
-        this.flag = false;
+        this.flagW = true;
+        this.flagL = true;
     }
 
 
@@ -65,26 +68,27 @@ public class Game {
         this.currCombo++;
         this.score+= 10;
         this.notify_obvs();
-        if (col == 1){
-            if (leftArrows.size() !=0){
-            leftArrows.remove(0);
-            }
-        }
-        else if (col ==2){
-            if (downArrows.size() !=0){
-            downArrows.remove(0);
-            }
-        }
-        else if (col ==3){
-             if (upArrows.size() !=0){
-            upArrows.remove(0);
-            }           
-        }
-        else if (col ==4){
-             if (rightArrows.size() !=0){
-            rightArrows.remove(0);
-            }           
-        }
+        this.gameOver();
+        // if (col == 1){
+        //     if (leftArrows.size() !=0){
+        //     leftArrows.remove(0);
+        //     }
+        // }
+        // else if (col ==2){
+        //     if (downArrows.size() !=0){
+        //     downArrows.remove(0);
+        //     }
+        // }
+        // else if (col ==3){
+        //      if (upArrows.size() !=0){
+        //     upArrows.remove(0);
+        //     }           
+        // }
+        // else if (col ==4){
+        //      if (rightArrows.size() !=0){
+        //     rightArrows.remove(0);
+        //     }           
+        // }
         
     }
 
@@ -95,23 +99,25 @@ public class Game {
         }
         this.currCombo = 0;
         this.score-= 10;
+        this.notify_obvs();
+        this.gameOver();
     }
 
     public boolean gameOver(){ 
         if(this.score < 0){
-            this.flag = true; //gameOver is TRUE because LOSE (score < 0)
+            this.flagL = false; //gameOver is TRUE because LOSE (score < 0)
             System.out.println("u losT skill issue");
             this.clearType = ClearType.FAIL;
-            return this.flag;
+            return this.flagL;
         }
 
-        if (this.leftArrows.isEmpty() && this.downArrows.isEmpty() && this.upArrows.isEmpty() && this.rightArrows.isEmpty()) {
-            this.flag = true; //gameOver is TRUE because WIN (no notes left)
-            System.out.println("u cleared! ! yay!");
-            this.clearType = ClearType.CLEAR;
-            //can put return here as well
-        }
-        return this.flag;
+        // if (this.leftArrows.isEmpty() && this.downArrows.isEmpty() && this.upArrows.isEmpty() && this.rightArrows.isEmpty()) {
+        //     this.flagW = true; //gameOver is TRUE because WIN (no notes left)
+        //     System.out.println("u cleared! ! yay!");
+        //     this.clearType = ClearType.CLEAR;
+        //     //can put return here as well
+        // }
+         return this.flagL;
     }
 
     public int getScore(){
