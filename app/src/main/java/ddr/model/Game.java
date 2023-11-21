@@ -1,7 +1,6 @@
 package ddr.model;
 
 import java.util.ArrayList;
-import javax.swing.*;
 
 import ddr.ClearType;
 import ddr.gameObserver;
@@ -20,10 +19,11 @@ public class Game {
     int [] notes = {60,80,100};
 
     
-    ArrayList<JLabel> leftArrows; //array list of arrows for columns
+/*   ArrayList<JLabel> leftArrows; //array list of arrows for columns
     ArrayList<JLabel> downArrows;
     ArrayList<JLabel> upArrows;
     ArrayList<JLabel> rightArrows;
+    */ 
 
     boolean flagW; //flag for gameOver method
     boolean flagL;
@@ -38,15 +38,16 @@ public class Game {
         this.hits = 0;
         this.misses = 0;
        
-        this.leftArrows = new ArrayList<JLabel>();
+/*         this.leftArrows = new ArrayList<JLabel>();
         this.downArrows = new ArrayList<JLabel>();
         this.upArrows = new ArrayList<JLabel>();
         this.rightArrows = new ArrayList<JLabel>();
+        */ 
 
         
 
-        this.flagW = false;
-        this.flagL = false;
+        this.flagW = true;
+        this.flagL = true;
     }
 
 
@@ -66,26 +67,26 @@ public class Game {
         this.score+= 10;
         this.notify_obvs();
         this.gameOver();
-        if (col == 1){
-            if (leftArrows.size() !=0){
-            leftArrows.remove(0);
-            }
-        }
-        else if (col ==2){
-            if (downArrows.size() !=0){
-            downArrows.remove(0);
-            }
-        }
-        else if (col ==3){
-             if (upArrows.size() !=0){
-            upArrows.remove(0);
-            }           
-        }
-        else if (col ==4){
-             if (rightArrows.size() !=0){
-            rightArrows.remove(0);
-            }           
-        }
+        // if (col == 1){
+        //     if (leftArrows.size() !=0){
+        //     leftArrows.remove(0);
+        //     }
+        // }
+        // else if (col ==2){
+        //     if (downArrows.size() !=0){
+        //     downArrows.remove(0);
+        //     }
+        // }
+        // else if (col ==3){
+        //      if (upArrows.size() !=0){
+        //     upArrows.remove(0);
+        //     }           
+        // }
+        // else if (col ==4){
+        //      if (rightArrows.size() !=0){
+        //     rightArrows.remove(0);
+        //     }           
+        // }
         
     }
 
@@ -108,13 +109,13 @@ public class Game {
             return this.flagL;
         }
 
-        if (this.leftArrows.isEmpty() && this.downArrows.isEmpty() && this.upArrows.isEmpty() && this.rightArrows.isEmpty()) {
-            this.flagW = true; //gameOver is TRUE because WIN (no notes left)
-            System.out.println("u cleared! ! yay!");
-            this.clearType = ClearType.CLEAR;
-            //can put return here as well
-        }
-        return this.flagW;
+        // if (this.leftArrows.isEmpty() && this.downArrows.isEmpty() && this.upArrows.isEmpty() && this.rightArrows.isEmpty()) {
+        //     this.flagW = true; //gameOver is TRUE because WIN (no notes left)
+        //     System.out.println("u cleared! ! yay!");
+        //     this.clearType = ClearType.CLEAR;
+        //     //can put return here as well
+        // }
+         return this.flagL;
     }
 
     public int getScore(){
