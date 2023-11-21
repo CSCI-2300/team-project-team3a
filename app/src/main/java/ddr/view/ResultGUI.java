@@ -1,7 +1,9 @@
 package ddr.view;
 
+import ddr.model.Game;
 import java.awt.*;
 import javax.swing.*;
+
 
 public class ResultGUI { //result screen after failing/finishing song
     private JPanel scorePanel; // display results
@@ -12,10 +14,12 @@ public class ResultGUI { //result screen after failing/finishing song
     private JButton buttonMain;
     private ImageIcon backs;
     private JFrame frame3;
+    private Game resultsGame;
 
-    public ResultGUI(){ //javaswing constructor
+    public ResultGUI(Game gamer){ //javaswing constructor
         frame3 = new JFrame("Results Screen");
         frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        resultsGame = gamer;
         
         backs = new ImageIcon(getClass().getClassLoader().getResource("game_background.png"));
         scorePanel = new ImagePanel(backs);
@@ -30,7 +34,7 @@ public class ResultGUI { //result screen after failing/finishing song
         scorePanel.add(clearType);
 
         //make score, good, miss counters
-        String[] counts = {"Score: 327928", "Good: 7398", "Miss: 21"}; //hardcoded
+        String[] counts = {"Score: 327928", "Good: 7398", "Miss:" + resultsGame.getMisses()}; //hardcoded
         for(int i = 0; i < counts.length; i++){
             labels = new JLabel(counts[i]);
             labels.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -69,5 +73,10 @@ public class ResultGUI { //result screen after failing/finishing song
         public void disable(){
         frame3.setVisible(false);
         frame3.setEnabled(false);
+        }
+
+        public void enable(){
+        frame3.setVisible(true);
+        frame3.setEnabled(true);
         }
 }
