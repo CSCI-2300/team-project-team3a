@@ -23,6 +23,7 @@ public class MainGUI implements ActionListener {
         panel = new ImagePanel(backs);
         controller = control;
 
+        //making highscores panel
         highscores = new JPanel(new GridLayout(1,3));
         highscores_a = new JLabel[3];
         for(int i = 0; i<3 ;i++){

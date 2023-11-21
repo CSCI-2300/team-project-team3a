@@ -101,7 +101,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         gridArrows = new JPanel(new GridLayout(5, 1));
         gridArrows.setOpaque(false);
         gridArrows.add(space1);
-       gridArrows.add(space2);
+        gridArrows.add(space2);
         gridArrows.add(arrowsPanel);
 
         mainPanel.add(gridArrows);
@@ -176,10 +176,10 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
     {
         frame2.setVisible(true);
         frame2.setEnabled(true);
-            rightTimer.start();
-            leftTimer.start();
-            upTimer.start();
-            downTimer.start();
+        rightTimer.start();
+        leftTimer.start();
+        upTimer.start();
+        downTimer.start();
     }
     
     public void keyPressed(KeyEvent e) 
@@ -235,7 +235,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         score.score_update(gamerGame.getScore());
         score.combo_update(gamerGame.getCurrentCombo());
         score.setLocation(scorex, scorey);
-         score.setLocation(scorex, scorey);
+        score.setLocation(scorex, scorey);
 
 
     }

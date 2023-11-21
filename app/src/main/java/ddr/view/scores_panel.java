@@ -51,7 +51,7 @@ public class scores_panel extends JPanel {
     public void combo_update(int num){
         combo = num;
         comboJLabel.setText(combo + " combo");
-                this.revalidate();
+        this.revalidate();
         this.repaint();
     }
 
