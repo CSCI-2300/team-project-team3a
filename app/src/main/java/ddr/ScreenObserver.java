@@ -5,4 +5,6 @@ public interface ScreenObserver {
     public void press(int col);
     public void miss();
     public void move();
+    public void to_main();
+    public void retry();
 }

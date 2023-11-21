@@ -1,11 +1,13 @@
 package ddr.view;
 
+import ddr.controller.ScreenController;
 import ddr.model.Game;
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
 
 
-public class ResultGUI { //result screen after failing/finishing song
+public class ResultGUI implements ActionListener{ //result screen after failing/finishing song
     private JPanel scorePanel; // display results
     private JLabel clearType; //did player fail or clear?
     private JLabel labels;
@@ -15,11 +17,13 @@ public class ResultGUI { //result screen after failing/finishing song
     private ImageIcon backs;
     private JFrame frame3;
     private Game resultsGame;
+    ScreenController controll;
 
-    public ResultGUI(Game gamer){ //javaswing constructor
+    public ResultGUI(Game gamer, ScreenController controll){ //javaswing constructor
         frame3 = new JFrame("Results Screen");
         frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         resultsGame = gamer;
+        this.controll = controll;
         
         backs = new ImageIcon(getClass().getClassLoader().getResource("game_background.png"));
         scorePanel = new ImagePanel(backs);
@@ -51,7 +55,7 @@ public class ResultGUI { //result screen after failing/finishing song
         buttonRetry.setForeground(Color.WHITE);
         buttonRetry.setOpaque(false);
         buttonRetry.setContentAreaFilled(false);
- 
+        buttonRetry.addActionListener(this);
         buttonPanel.add(buttonRetry);
 
         buttonMain = new JButton("Main Menu");
@@ -59,6 +63,7 @@ public class ResultGUI { //result screen after failing/finishing song
         buttonMain.setForeground(Color.white);
         buttonMain.setOpaque(false);
         buttonMain.setContentAreaFilled(false);
+        buttonMain.addActionListener(this);
 
         buttonMain.setPreferredSize(new Dimension(100,50));
 
@@ -78,5 +83,15 @@ public class ResultGUI { //result screen after failing/finishing song
         public void enable(){
         frame3.setVisible(true);
         frame3.setEnabled(true);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e){
+            if(e.getSource() == buttonMain){
+                controll.to_main();
+            }
+            if(e.getSource() == buttonRetry){
+                controll.retry();
+            }
         }
 }

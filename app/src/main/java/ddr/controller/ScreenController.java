@@ -17,7 +17,7 @@ public class ScreenController implements ScreenObserver {
         game = new GameplayGUI(this,gameplay);
         gameplay.set_obvs(game);
         game.disable();
-        result = new ResultGUI(gameplay);
+        result = new ResultGUI(gameplay,this);
         result.disable();
 
     }
@@ -39,5 +39,16 @@ public class ScreenController implements ScreenObserver {
     public void move(){
         game.disable();
         result.enable();
+    }
+
+    public void to_main(){
+        result.disable();
+        main.enable();
+        System.out.println("hiii");
+    }
+    public void retry(){
+       main.enable();
+        result.disable();
+        main.enable();
     }
 }
