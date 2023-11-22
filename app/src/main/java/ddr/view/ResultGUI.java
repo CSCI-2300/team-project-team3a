@@ -6,6 +6,7 @@ import ddr.model.Game;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 
 public class ResultGUI implements ActionListener{ //result screen after failing/finishing song
@@ -28,6 +29,7 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
 
     ImageIcon deets;
     ImageIcon letter;
+    ArrayList<String> ranks;
 
     public ResultGUI(Game gamer, ScreenController controll){ //javaswing constructor
         frame3 = new JFrame("Results Screen");
@@ -51,8 +53,16 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         deetsPane.setPreferredSize(new Dimension(400, 333));
         deetsPane.add(noMore);
         //scorePanel.add(deetsPane);
+        //adding the images to a arraylist
+        ranks = new ArrayList<String>();
+        ranks.add("rankingS.png");
+        ranks.add("rankingA.png");
+        ranks.add("rankingB.png");
+        ranks.add("rankingC.png");
+        ranks.add("rankingD.png");
 
-        rank = new ImageIcon(getClass().getClassLoader().getResource("rankingS.png"));
+//this is where we should change the ranks.get index to specific rank 
+        rank = new ImageIcon(getClass().getClassLoader().getResource(ranks.get(0)));
         Image letter = rank.getImage().getScaledInstance(76, 96, Image.SCALE_DEFAULT);
         rank.setImage(letter);
         JLabel oneMore = new JLabel(rank);
