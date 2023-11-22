@@ -55,7 +55,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
     JLabel test;
     int tester;
     String ahh;
-    //private Timer leftTimer, downTimer, upTimer, rightTimer;
+    private Timer leftTimer, downTimer, upTimer, rightTimer;
     public GameplayGUI(ScreenObserver screen, Game game)
     { //javaswing constructor
 
@@ -140,43 +140,43 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         frame2.setResizable(false);
 
                         int stepSize =2;
-        //         leftTimer = new Timer(20, new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
-        //         if (leftMove.getY() > 460){
-        //             System.out.println("booo");
-        //         }
+                leftTimer = new Timer(20, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
+                if (leftMove.getY() > 460){
+                    System.out.println("booo");
+                }
 
-        //     }
-        // });
+            }
+        });
 
-        // downTimer = new Timer(40, new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         downMove.setLocation(downMove.getX(), downMove.getY() + stepSize);
-        //     }
-        // });
+        downTimer = new Timer(40, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                downMove.setLocation(downMove.getX(), downMove.getY() + stepSize);
+            }
+        });
 
-        // upTimer = new Timer(60, new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         SwingUtilities.invokeLater(() -> {
-        //             upMove.setLocation(upMove.getX(), upMove.getY() + stepSize);
-        //             // Update other UI components here
-        //             ahh = Integer.toString(tester);
-        //             tester++;
-        //            // test.setText(ahh);
-        //         });
-        //     }
-        // });
+        upTimer = new Timer(60, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(() -> {
+                    upMove.setLocation(upMove.getX(), upMove.getY() + stepSize);
+                    // Update other UI components here
+                    ahh = Integer.toString(tester);
+                    tester++;
+                   // test.setText(ahh);
+                });
+            }
+        });
         
 
-        // rightTimer = new Timer(80, new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         rightMove.setLocation(rightMove.getX(), rightMove.getY() + stepSize);
-        //     }});
-        //     rightTimer.start();
-        //     leftTimer.start();
-        //     upTimer.start();
-        //     downTimer.start();
+        rightTimer = new Timer(80, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                rightMove.setLocation(rightMove.getX(), rightMove.getY() + stepSize);
+            }});
+            rightTimer.start();
+            leftTimer.start();
+            upTimer.start();
+            downTimer.start();
 
         
 
@@ -189,20 +189,20 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
     {
         frame2.setVisible(false);
         frame2.setEnabled(false);
-       // leftTimer.stop();
-        // downTimer.stop();
-        // upTimer.stop();
-        // rightTimer.stop();
+       leftTimer.stop();
+        downTimer.stop();
+        upTimer.stop();
+        rightTimer.stop();
     }
 
     public void enable()
     {
         frame2.setVisible(true);
         frame2.setEnabled(true);
-            // rightTimer.start();
-            // leftTimer.start();
-            // upTimer.start();
-            // downTimer.start();
+            rightTimer.start();
+            leftTimer.start();
+            upTimer.start();
+            downTimer.start();
     }
     
     public void keyPressed(KeyEvent e) {
@@ -214,7 +214,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                 //rightMove.repaint();
             } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
-                if (leftMove.getY() > 400 && leftMove.getY() < 450) {
+                if (gamerGame.check_hit(1,leftMove.getY())) {
                     System.out.println("aahhhhh");
                     controller.press(1);
                     //leftMove.revalidate();
@@ -254,7 +254,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         score.combo_update(gamerGame.getCurrentCombo());
         score.setLocation(scorex, scorey);
         score.setLocation(scorex, scorey);
-        if (!gamerGame.gameOver()){
+        if (gamerGame.gameOver()){
             controller.move();
         }
 
