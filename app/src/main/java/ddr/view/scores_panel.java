@@ -40,6 +40,7 @@ public class scores_panel extends JPanel {
         scoreLabel.setOpaque(false);
         comboJLabel.setForeground(Color.WHITE);
         comboJLabel.setOpaque(false);
+
     }
 
     public void score_update(int num){
