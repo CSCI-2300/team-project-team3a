@@ -44,7 +44,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
     JLabel rightMove;
 
     int bottom_row = 450;
-    ScoresLabel score;
+    scores_panel score;
 
     Game gamerGame;
     ScreenObserver controller;
@@ -88,9 +88,9 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         mainPanel.add(upMove);
         mainPanel.add(rightMove);
         
-        score = new ScoresLabel(gamerGame);
-        //mainPanel.add(score);
-        //score.setLocation(200,200);
+        score = new scores_panel();
+        mainPanel.add(score);
+        score.setLocation(200,200);
         
         //making the arrow receptors panel and adding it to a grid
         arrowsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,30,0));
@@ -138,8 +138,6 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         gamerGame = game;
         controller = screen;
 
-        frame2.add(score);
-        //score.setLocation(200,200);
         frame2.add(mainPanel);
         frame2.pack();
         frame2.setVisible(true);
@@ -216,23 +214,23 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
             int stepSize = 10;
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 rightMove.setLocation(rightMove.getX(), rightMove.getY() + stepSize);
-                //rightMove.revalidate();
-                //rightMove.repaint();
+                rightMove.revalidate();
+                rightMove.repaint();
             } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
                 if (leftMove.getY() > 400 && leftMove.getY() < 450) {
                     System.out.println("aahhhhh");
                     controller.press(1);
-                    //leftMove.revalidate();
-                    //leftMove.repaint();
+                    leftMove.revalidate();
+                    leftMove.repaint();
                 }
             } else if (e.getKeyCode() == KeyEvent.VK_UP) {
                 upMove.setLocation(upMove.getX(), upMove.getY() + stepSize);
                 controller.miss();
             } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 downMove.setLocation(downMove.getX(), downMove.getY() + stepSize);
-                //downMove.revalidate();
-                //downMove.repaint();
+                downMove.revalidate();
+                downMove.repaint();
             }
         });
     }
@@ -249,14 +247,17 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         rightMove.setLocation(right.getX(),-50);
         upMove.setLocation(up.getX(),-50);
         downMove.setLocation(down.getX(),-50);
-        //score.setLocation(400,200);
-        //scorex = score.getX();
-        //scorey = score.getY();
+        score.setLocation(400,200);
+        scorex = score.getX();
+        scorey = score.getY();
     }
 
     @Override
     public void update(){
-        score.updateScore(gamerGame.getScore());
+        score.score_update(gamerGame.getScore());
+        score.combo_update(gamerGame.getCurrentCombo());
+        score.setLocation(scorex, scorey);
+        score.setLocation(scorex, scorey);
         if (!gamerGame.gameOver()){
             controller.move();
         }
