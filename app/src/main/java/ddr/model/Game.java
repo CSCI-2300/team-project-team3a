@@ -2,8 +2,6 @@ package ddr.model;
 
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
-
 import ddr.ClearType;
 import ddr.gameObserver;
 
@@ -18,20 +16,13 @@ public class Game {
     int maxCombo;
     int hits; 
     int misses;
-    int [] notes = {60,80,100};
 
-    
-    ArrayList<JLabel> leftArrows; //array list of arrows for columns
-    ArrayList<JLabel> downArrows;
-    ArrayList<JLabel> upArrows;
-    ArrayList<JLabel> rightArrows;
-     
 
-    boolean flagW; //flag for gameOver method
-    boolean flagL;
+    boolean flag; //flag for gameOver method
     ClearType clearType; //enum for clear type
 
     gameObserver game;
+    boolean check_flag;
 
     public Game(){
         this.score = 100;
@@ -39,17 +30,11 @@ public class Game {
         this.maxCombo = 0;
         this.hits = 0;
         this.misses = 0;
-       
-        this.leftArrows = new ArrayList<JLabel>();
-        this.downArrows = new ArrayList<JLabel>();
-        this.upArrows = new ArrayList<JLabel>();
-        this.rightArrows = new ArrayList<JLabel>();
-         
+
 
         
 
-        this.flagW = true;
-        this.flagL = true;
+        this.flag = false;
     }
 
 
@@ -68,27 +53,6 @@ public class Game {
         this.currCombo++;
         this.score+= 10;
         this.notify_obvs();
-        this.gameOver();
-        // if (col == 1){
-        //     if (leftArrows.size() !=0){
-        //     leftArrows.remove(0);
-        //     }
-        // }
-        // else if (col ==2){
-        //     if (downArrows.size() !=0){
-        //     downArrows.remove(0);
-        //     }
-        // }
-        // else if (col ==3){
-        //      if (upArrows.size() !=0){
-        //     upArrows.remove(0);
-        //     }           
-        // }
-        // else if (col ==4){
-        //      if (rightArrows.size() !=0){
-        //     rightArrows.remove(0);
-        //     }           
-        // }
         
     }
 
@@ -100,24 +64,28 @@ public class Game {
         this.currCombo = 0;
         this.score-= 10;
         this.notify_obvs();
-        this.gameOver();
     }
 
     public boolean gameOver(){ 
         if(this.score < 0){
-            this.flagL = false; //gameOver is TRUE because LOSE (score < 0)
+            this.flag = true; //gameOver is TRUE because LOSE (score < 0)
             System.out.println("u losT skill issue");
             this.clearType = ClearType.FAIL;
-            return this.flagL;
+            return this.flag;
         }
 
-        // if (this.leftArrows.isEmpty() && this.downArrows.isEmpty() && this.upArrows.isEmpty() && this.rightArrows.isEmpty()) {
-        //     this.flagW = true; //gameOver is TRUE because WIN (no notes left)
-        //     System.out.println("u cleared! ! yay!");
-        //     this.clearType = ClearType.CLEAR;
-        //     //can put return here as well
-        // }
-         return this.flagL;
+        return this.flag;
+    }
+    public boolean check_hit(int col, int y){
+        if(col == 1){
+            if (y > 400 && y < 450){
+                check_flag = true;
+            }
+            else{
+                check_flag = false;
+            }
+        }
+        return check_flag;
     }
 
     public int getScore(){
