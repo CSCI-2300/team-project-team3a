@@ -1,5 +1,6 @@
 package ddr.view;
 
+import ddr.ClearType;
 import ddr.controller.ScreenController;
 import ddr.model.Game;
 import java.awt.*;
@@ -17,6 +18,12 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
     private ImageIcon backs;
     private JFrame frame3;
     private Game resultsGame;
+
+    private ImagePanel detailsPanel;
+    private ImageIcon scoreIcon;
+    private ImageIcon rank;
+    private JLabel scoreLabel;
+
     ScreenController controll;
 
     public ResultGUI(Game gamer, ScreenController controll){ //javaswing constructor
@@ -31,20 +38,26 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         scorePanel.setOpaque(false);
         scorePanel.setLayout(new BoxLayout(scorePanel, BoxLayout.Y_AXIS));
 
+        scoreIcon = new ImageIcon(getClass().getClassLoader().getResource("ddrscore.png"));
+        detailsPanel = new ImagePanel(scoreIcon);
+        detailsPanel.setOpaque(false);
+        scorePanel.add(detailsPanel);
+
         //make top header of player clear result
-        clearType = new JLabel("RESULT (SONG FAILED/SONG CLEARED)");
+ /*        clearType = new JLabel("RESULT (SONG FAILED/SONG CLEARED)");
         clearType.setForeground(Color.WHITE);
         clearType.setAlignmentX(Component.CENTER_ALIGNMENT);
         scorePanel.add(clearType);
 
         //make score, good, miss counters
-        String[] counts = {"Score: 327928", "Good: 7398", "Miss:" + resultsGame.getMisses()}; //hardcoded
+        String[] counts = {"Score: " + resultsGame.getScore(), "Good: " + resultsGame.getHits(), "Miss:" + resultsGame.getMisses()}; //hardcoded
         for(int i = 0; i < counts.length; i++){
             labels = new JLabel(counts[i]);
             labels.setAlignmentX(Component.CENTER_ALIGNMENT);
             labels.setForeground(Color.WHITE);
             scorePanel.add(labels);
-        }
+        } 
+        */
 
         //adding buttons now
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,0)); //make navigational buttons panel
