@@ -195,7 +195,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         {
             //System.out.println("left");
             leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
-            if (leftMove.getY() > 400 && leftMove.getY() < 450) {
+            if (gamerGame.check_hit(1,leftMove.getY())) {
                 System.out.println("aahhhhh");
                 controller.press(1);
 

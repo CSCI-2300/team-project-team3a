@@ -29,6 +29,7 @@ public class Game {
     ClearType clearType; //enum for clear type
 
     gameObserver game;
+    boolean check_flag;
 
     public Game(){
         this.score = 100;
@@ -110,6 +111,17 @@ public class Game {
             //can put return here as well
         }
         return this.flag;
+    }
+    public boolean check_hit(int col, int y){
+        if(col == 1){
+            if (y > 400 && y < 450){
+                check_flag = true;
+            }
+            else{
+                check_flag = false;
+            }
+        }
+        return check_flag;
     }
 
     public int getScore(){
