@@ -27,6 +27,7 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
     ScreenController controll;
 
     ImageIcon deets;
+    ImageIcon letter;
 
     public ResultGUI(Game gamer, ScreenController controll){ //javaswing constructor
         frame3 = new JFrame("Results Screen");
@@ -40,6 +41,8 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         scorePanel.setPreferredSize(new Dimension(700,500));
         JPanel deetsPane = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 80));
         deetsPane.setOpaque(false);
+        JPanel rankPane = new JPanel(new FlowLayout(FlowLayout.TRAILING));
+        rankPane.setOpaque(false);
 
         deets = new ImageIcon(getClass().getClassLoader().getResource("ddrscore.png"));
         Image image = deets.getImage().getScaledInstance(398, 253, Image.SCALE_DEFAULT);
@@ -47,9 +50,17 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         JLabel noMore = new JLabel(deets);
         deetsPane.setPreferredSize(new Dimension(400, 333));
         deetsPane.add(noMore);
+        //scorePanel.add(deetsPane);
+
+        rank = new ImageIcon(getClass().getClassLoader().getResource("rankingS.png"));
+        Image letter = rank.getImage().getScaledInstance(76, 96, Image.SCALE_DEFAULT);
+        rank.setImage(letter);
+        JLabel oneMore = new JLabel(rank);
+        rankPane.setPreferredSize(new Dimension(76,96));
+        rankPane.add(oneMore);
+
         scorePanel.add(deetsPane);
-
-
+        scorePanel.add(rankPane);
 
 
         // scorePanel.setOpaque(false);
