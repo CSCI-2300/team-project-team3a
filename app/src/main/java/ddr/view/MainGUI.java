@@ -40,24 +40,22 @@ public class MainGUI implements ActionListener {
         frame1.setLayout(new BorderLayout());
         frame1.add(highscores, BorderLayout.NORTH);
 
+        //logo stuff
         panel.setPreferredSize(new Dimension(700,500));
         panel.setBackground(new Color(135, 206, 235));
         Dimension butoonsize = new Dimension(100,50);
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         titlePanel.setOpaque(false);
-
         
         logo = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
         Image image = logo.getImage().getScaledInstance(300, 350, Image.SCALE_DEFAULT);
         logo.setImage(image);
         JLabel title = new JLabel(logo); 
-        /////////ADD HIGH SCORE TOP LEFT
         titlePanel.setPreferredSize(new Dimension(400,400));
         titlePanel.add(title);
-        //JLabel modes = new JLabel("Modes:");
         panel.add(titlePanel);
-        //panel.add(modes);
 
+        //buttons stuff
         JPanel butoonpanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,0));
         butoonpanel.setOpaque(false);
 

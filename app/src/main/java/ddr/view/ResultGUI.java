@@ -26,22 +26,38 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
 
     ScreenController controll;
 
+    ImageIcon deets;
+
     public ResultGUI(Game gamer, ScreenController controll){ //javaswing constructor
         frame3 = new JFrame("Results Screen");
         frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        resultsGame = gamer;
-        this.controll = controll;
-        
         backs = new ImageIcon(getClass().getClassLoader().getResource("game_background.png"));
         scorePanel = new ImagePanel(backs);
-        scorePanel.setPreferredSize(new Dimension(700,500));
-        scorePanel.setOpaque(false);
-        scorePanel.setLayout(new BoxLayout(scorePanel, BoxLayout.Y_AXIS));
+        resultsGame = gamer;
+        this.controll = controll;
 
-        scoreIcon = new ImageIcon(getClass().getClassLoader().getResource("ddrscore.png"));
-        detailsPanel = new ImagePanel(scoreIcon);
-        detailsPanel.setOpaque(false);
-        scorePanel.add(detailsPanel);
+        //center the details png
+        scorePanel.setPreferredSize(new Dimension(700,500));
+        JPanel deetsPane = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 80));
+        deetsPane.setOpaque(false);
+
+        deets = new ImageIcon(getClass().getClassLoader().getResource("ddrscore.png"));
+        Image image = deets.getImage().getScaledInstance(398, 253, Image.SCALE_DEFAULT);
+        deets.setImage(image);
+        JLabel noMore = new JLabel(deets);
+        deetsPane.setPreferredSize(new Dimension(400, 333));
+        deetsPane.add(noMore);
+        scorePanel.add(deetsPane);
+
+
+
+
+        // scorePanel.setOpaque(false);
+
+        // scoreIcon = new ImageIcon(getClass().getClassLoader().getResource("ddrscore.png"));
+        // detailsPanel = new ImagePanel(scoreIcon);
+        // detailsPanel.setOpaque(false);
+        // scorePanel.add(detailsPanel);
 
         //make top header of player clear result
  /*        clearType = new JLabel("RESULT (SONG FAILED/SONG CLEARED)");
@@ -60,7 +76,7 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         */
 
         //adding buttons now
-        buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,0)); //make navigational buttons panel
+        buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,40,50)); //make navigational buttons panel
         buttonPanel.setOpaque(false);
 
         buttonRetry = new JButton("Play Again");
