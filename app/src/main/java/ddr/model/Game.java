@@ -108,8 +108,6 @@ public class Game {
     public int getRank()
     {
         int rank = 0;
-        this.hits = 10;
-        this.misses = 1;
         float ratio = (this.hits/(this.hits +this.misses))*100;
         if(ratio >= 97)
         {
