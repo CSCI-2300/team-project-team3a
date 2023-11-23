@@ -1,8 +1,6 @@
 package ddr.model;
 
 import java.util.ArrayList;
-import java.awt.*;
-import javax.swing.*;
 
 import ddr.ClearType;
 import ddr.gameObserver;
@@ -16,14 +14,9 @@ public class Game {
     int score; //things to keep track of for end screen
     int currCombo;
     int maxCombo;
-    int hits; 
-    int misses;
+    float hits; 
+    float misses;
 
-    
-    ArrayList<JLabel> leftArrows; //array list of arrows for columns
-    ArrayList<JLabel> downArrows;
-    ArrayList<JLabel> upArrows;
-    ArrayList<JLabel> rightArrows;
 
     boolean flag; //flag for gameOver method
     ClearType clearType; //enum for clear type
@@ -31,17 +24,16 @@ public class Game {
     gameObserver game;
     boolean check_flag;
 
+    int [] difficulty = {60,80,100};
+    int diff;
+
     public Game(){
-        this.score = 100;
+        this.score = 30; // so game ends
         this.currCombo = 0;
         this.maxCombo = 0;
         this.hits = 0;
         this.misses = 0;
-       
-        this.leftArrows = new ArrayList<JLabel>();
-        this.downArrows = new ArrayList<JLabel>();
-        this.upArrows = new ArrayList<JLabel>();
-        this.rightArrows = new ArrayList<JLabel>();
+
 
         
 
@@ -64,26 +56,6 @@ public class Game {
         this.currCombo++;
         this.score+= 10;
         this.notify_obvs();
-        if (col == 1){
-            if (leftArrows.size() !=0){
-            leftArrows.remove(0);
-            }
-        }
-        else if (col ==2){
-            if (downArrows.size() !=0){
-            downArrows.remove(0);
-            }
-        }
-        else if (col ==3){
-             if (upArrows.size() !=0){
-            upArrows.remove(0);
-            }           
-        }
-        else if (col ==4){
-             if (rightArrows.size() !=0){
-            rightArrows.remove(0);
-            }           
-        }
         
     }
 
@@ -94,6 +66,7 @@ public class Game {
         }
         this.currCombo = 0;
         this.score-= 10;
+        this.notify_obvs();
     }
 
     public boolean gameOver(){ 
@@ -104,12 +77,6 @@ public class Game {
             return this.flag;
         }
 
-        if (this.leftArrows.isEmpty() && this.downArrows.isEmpty() && this.upArrows.isEmpty() && this.rightArrows.isEmpty()) {
-            this.flag = true; //gameOver is TRUE because WIN (no notes left)
-            System.out.println("u cleared! ! yay!");
-            this.clearType = ClearType.CLEAR;
-            //can put return here as well
-        }
         return this.flag;
     }
     public boolean check_hit(int col, int y){
@@ -128,16 +95,44 @@ public class Game {
         return this.score;
     }
 
-    public int getHits(){
+    public float getHits(){
         return this.hits;
     }
 
-    public int getMisses(){
+    public float getMisses(){
         return this.misses;
     }
 
     public int getHighestCombo(){
         return this.maxCombo;
+    }
+
+//returns what rank the user should get
+    public int getRank()
+    {
+        int rank = 0;
+        float ratio = (this.hits/(this.hits +this.misses))*100;
+        if(ratio >= 97)
+        {
+            rank = 0;
+        } else if (ratio >= 90)
+        {
+            rank = 1;
+        } else if (ratio >= 80)
+        {
+            rank = 2;
+        } else if (ratio >= 70)
+        {
+            rank = 3;
+        } else if (ratio < 70)
+        {
+            rank = 4;
+        }
+        System.out.println(this.hits);
+        System.out.println(this.misses);
+        System.out.println(ratio);
+        System.out.println(rank);
+        return rank;
     }
 
     public void set_obvs(gameObserver gamer){
@@ -150,5 +145,10 @@ public class Game {
 
         public int getCurrentCombo(){
         return this.currCombo;
+    }
+
+    public void set_diif(int mode){
+        diff = difficulty[mode];
+        System.out.println(diff);
     }
 }

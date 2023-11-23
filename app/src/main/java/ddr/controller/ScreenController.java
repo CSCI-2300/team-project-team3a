@@ -17,18 +17,45 @@ public class ScreenController implements ScreenObserver {
         game = new GameplayGUI(this,gameplay);
         gameplay.set_obvs(game);
         game.disable();
-        result = new ResultGUI();
+        result = new ResultGUI(gameplay,this);
         result.disable();
-
     }
 
-    public void transition(){
+    public void transition(int mode){
         main.disable();
         game.enable();
         game.set_start();
+        gameplay.set_diif(mode);
     }
 
     public void press(int col){
         gameplay.hit(col);
     }
+
+    public void miss(){
+        gameplay.miss();
+    }
+
+    public void move(){
+        game.disable();
+        result.enable();
+        result.setRank();
+    }
+
+    public void to_main(){
+        result.disable();
+        main.enable();
+        System.out.println("hiii");
+    }
+    public void retry(){
+        main.enable();
+        result.disable();
+        main.enable();
+    }
+
+    public int rank()
+    {
+        return gameplay.getRank();
+    }
+    
 }
