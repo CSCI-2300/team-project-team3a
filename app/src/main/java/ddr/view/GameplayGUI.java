@@ -55,6 +55,10 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
     JLabel test;
     int tester;
     String ahh;
+
+    ImageIcon boom;
+    JLabel booms;
+
     private Timer leftTimer, downTimer, upTimer, rightTimer;
     public GameplayGUI(ScreenObserver screen, Game game)
     { //javaswing constructor
@@ -72,6 +76,8 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         spawnpoint.setOpaque(false);
 
         //creating moving arrows and adding them to main panel
+        boom = new ImageIcon(getClass().getClassLoader().getResource("explosion.gif"));
+        booms = new JLabel(boom);
         leftIcon = new ImageIcon(getClass().getClassLoader().getResource("left.gif"));
         leftMove = new JLabel();
         leftMove.setIcon(leftIcon);
@@ -81,7 +87,6 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         upMove = new JLabel(upIcon);
         rightIcon = new ImageIcon(getClass().getClassLoader().getResource("right.gif"));
         rightMove = new JLabel(rightIcon);
-        
 
         mainPanel.add(leftMove);
         mainPanel.add(downMove);
@@ -145,8 +150,12 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                 leftTimer = new Timer(20, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
-                if (leftMove.getY() > 460){
-                    System.out.println("booo");
+                if (leftMove.getY() == 470){
+                    gamerGame.miss();
+                }
+                if (leftMove.getY() > 500){
+                 // gamerGame.miss();
+                   mainPanel.remove(leftMove);
                 }
 
             }
@@ -155,6 +164,13 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         downTimer = new Timer(40, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 downMove.setLocation(downMove.getX(), downMove.getY() + stepSize);
+                if (downMove.getY() == 470){
+                    gamerGame.miss();
+                }
+                if (downMove.getY() > 500){
+                   //gamerGame.miss();
+                   mainPanel.remove(downMove);
+                }
             }
         });
 
@@ -162,10 +178,13 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
             public void actionPerformed(ActionEvent e) {
                 SwingUtilities.invokeLater(() -> {
                     upMove.setLocation(upMove.getX(), upMove.getY() + stepSize);
-                    // Update other UI components here
-                    ahh = Integer.toString(tester);
-                    tester++;
-                   // test.setText(ahh);
+                if (upMove.getY() == 470){
+                    gamerGame.miss();
+                }
+                if (upMove.getY() > 500){
+                   mainPanel.remove(upMove);
+
+                }
                 });
             }
         });
@@ -174,6 +193,13 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         rightTimer = new Timer(80, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 rightMove.setLocation(rightMove.getX(), rightMove.getY() + stepSize);
+                if (rightMove.getY() == 470){
+                    gamerGame.miss();
+                }
+                    if (rightMove.getY() > 500){
+                  // gamerGame.miss();
+                   mainPanel.remove(rightMove);
+                }
             }});
             rightTimer.start();
             leftTimer.start();
@@ -205,6 +231,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
             leftTimer.start();
             upTimer.start();
             downTimer.start();
+        frame2.setTitle("score "+ gamerGame.getScore() + " combo "+gamerGame.getCurrentCombo());
     }
     
     public void keyPressed(KeyEvent e) {
@@ -212,6 +239,16 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
             int stepSize = 10;
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 rightMove.setLocation(rightMove.getX(), rightMove.getY() + stepSize);
+                if (gamerGame.check_hit(1,rightMove.getY())) {
+                    System.out.println("aahhhhh");
+                    controller.press(1);
+                    rightMove.setIcon(boom);
+                    mainPanel.remove(rightMove);
+                    //leftMove.revalidate();
+                    //leftMove.repaint();
+                }
+                gamerGame.miss();
+                //controller.press(3);
                 //rightMove.revalidate();
                 //rightMove.repaint();
             } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -219,16 +256,35 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                 if (gamerGame.check_hit(1,leftMove.getY())) {
                     System.out.println("aahhhhh");
                     controller.press(1);
+                    leftMove.setIcon(boom);
+                    mainPanel.remove(leftMove);
                     //leftMove.revalidate();
                     //leftMove.repaint();
                 }
+                gamerGame.miss();
             } else if (e.getKeyCode() == KeyEvent.VK_UP) {
                 upMove.setLocation(upMove.getX(), upMove.getY() + stepSize);
-                controller.miss();
+                    if (gamerGame.check_hit(1,upMove.getY())) {
+                    System.out.println("aahhhhh");
+                    controller.press(1);
+                    upMove.setIcon(boom);
+                    mainPanel.remove(upMove);
+                    //leftMove.revalidate();
+                    //leftMove.repaint();
+                }
+                gamerGame.miss();
+
             } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 downMove.setLocation(downMove.getX(), downMove.getY() + stepSize);
-                //downMove.revalidate();
-                //downMove.repaint();
+                if (gamerGame.check_hit(1,downMove.getY())) {
+                    System.out.println("aahhhhh");
+                    controller.press(1);
+                    downMove.setIcon(boom);
+                    mainPanel.remove(downMove);
+                    //leftMove.revalidate();
+                    //leftMove.repaint();
+                }
+                gamerGame.miss();
             }
         });
     }
@@ -246,8 +302,6 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         upMove.setLocation(up.getX(),-50);
         downMove.setLocation(down.getX(),-50);
        // score.setLocation(400,200);
-        scorex = score.getX();
-        scorey = score.getY();
     }
 
     @Override
