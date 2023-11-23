@@ -100,10 +100,18 @@ public class MainGUI implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e){
-      // if (e.getSource() == easy){
+        String actionCommand = e.getActionCommand();
+        if ("easy".equals(actionCommand)) {
+            controller.transition(0);
+        }
+        if ("medium".equals(actionCommand)) {
+            controller.transition(1);
+        }
+        if ("hard".equals(actionCommand)) {
+            controller.transition(2);
+        }
 
-  //     }
-        controller.transition();
+
     }
 
         public void disable(){

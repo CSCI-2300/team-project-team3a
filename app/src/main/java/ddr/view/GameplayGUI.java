@@ -88,9 +88,9 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         mainPanel.add(upMove);
         mainPanel.add(rightMove);
         
-        score = new scores_panel();
-        mainPanel.add(score);
-        score.setLocation(200,200);
+       // score = new scores_panel();
+       // mainPanel.add(score);
+      //  score.setLocation(200,200);
         
         //making the arrow receptors panel and adding it to a grid
         arrowsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,30,0));
@@ -101,15 +101,17 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         space2 = new JPanel();
         space3 = new JPanel();
         space4 = new JPanel();
-        space1.setPreferredSize(new Dimension(233,135));
-        space2.setPreferredSize(new Dimension(233,135));
+        space1.setPreferredSize(new Dimension(233,120));
+        space2.setPreferredSize(new Dimension(233,120));
         space1.setOpaque(false);
         space2.setOpaque(false);
+        space3.setOpaque(false);
 
         gridArrows = new JPanel(new GridLayout(5, 1));
         gridArrows.setOpaque(false);
         gridArrows.add(space1);
         gridArrows.add(space2);
+        gridArrows.add(space3);
         gridArrows.add(arrowsPanel);
 
         mainPanel.add(gridArrows);
@@ -243,17 +245,18 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         rightMove.setLocation(right.getX(),-50);
         upMove.setLocation(up.getX(),-50);
         downMove.setLocation(down.getX(),-50);
-        score.setLocation(400,200);
+       // score.setLocation(400,200);
         scorex = score.getX();
         scorey = score.getY();
     }
 
     @Override
     public void update(){
-        score.score_update(gamerGame.getScore());
-        score.combo_update(gamerGame.getCurrentCombo());
-        score.setLocation(scorex, scorey);
-        score.setLocation(scorex, scorey);
+       // score.score_update(gamerGame.getScore());
+        //score.combo_update(gamerGame.getCurrentCombo());
+        //score.setLocation(scorex, scorey);
+        //score.setLocation(scorex, scorey);
+        frame2.setTitle("score "+ gamerGame.getScore() + " Combo "+ gamerGame.getCurrentCombo());
         if (gamerGame.gameOver()){
             controller.move();
         }

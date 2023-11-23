@@ -19,13 +19,13 @@ public class ScreenController implements ScreenObserver {
         game.disable();
         result = new ResultGUI(gameplay,this);
         result.disable();
-
     }
 
-    public void transition(){
+    public void transition(int mode){
         main.disable();
         game.enable();
         game.set_start();
+        gameplay.set_diif(mode);
     }
 
     public void press(int col){

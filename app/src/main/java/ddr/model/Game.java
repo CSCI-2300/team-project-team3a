@@ -24,6 +24,9 @@ public class Game {
     gameObserver game;
     boolean check_flag;
 
+    int [] difficulty = {60,80,100};
+    int diff;
+
     public Game(){
         this.score = 100;
         this.currCombo = 0;
@@ -142,5 +145,10 @@ public class Game {
 
         public int getCurrentCombo(){
         return this.currCombo;
+    }
+
+    public void set_diif(int mode){
+        diff = difficulty[mode];
+        System.out.println(diff);
     }
 }
