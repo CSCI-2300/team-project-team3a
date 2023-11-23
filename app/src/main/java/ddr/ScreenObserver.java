@@ -7,4 +7,5 @@ public interface ScreenObserver {
     public void move();
     public void to_main();
     public void retry();
+    public int rank();
 }

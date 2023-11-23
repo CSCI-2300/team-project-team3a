@@ -31,6 +31,8 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
     ImageIcon letter;
     ArrayList<String> ranks;
 
+    private JLabel rankLabel;
+
     public ResultGUI(Game gamer, ScreenController controll){ //javaswing constructor
         frame3 = new JFrame("Results Screen");
         frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,9 +67,9 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         rank = new ImageIcon(getClass().getClassLoader().getResource(ranks.get(0)));
         Image letter = rank.getImage().getScaledInstance(76, 96, Image.SCALE_DEFAULT);
         rank.setImage(letter);
-        JLabel oneMore = new JLabel(rank);
+        rankLabel = new JLabel(rank);
         rankPane.setPreferredSize(new Dimension(76,96));
-        rankPane.add(oneMore);
+        rankPane.add(rankLabel);
 
         scorePanel.add(deetsPane);
         scorePanel.add(rankPane);
@@ -125,23 +127,30 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         frame3.setVisible(true);
     }
 
-        public void disable(){
+    public void setRank()
+    {
+        rank = new ImageIcon(getClass().getClassLoader().getResource(ranks.get(controll.rank())));
+        rankLabel.setIcon(rank);
+    }
+
+
+    public void disable(){
         frame3.setVisible(false);
         frame3.setEnabled(false);
-        }
+    }
 
-        public void enable(){
+    public void enable(){
         frame3.setVisible(true);
         frame3.setEnabled(true);
-        }
+    }
 
-        @Override
-        public void actionPerformed(ActionEvent e){
-            if(e.getSource() == buttonMain){
-                controll.to_main();
-            }
-            if(e.getSource() == buttonRetry){
-                controll.retry();
-            }
+    @Override
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == buttonMain){
+            controll.to_main();
         }
+        if(e.getSource() == buttonRetry){
+            controll.retry();
+        }
+    }
 }

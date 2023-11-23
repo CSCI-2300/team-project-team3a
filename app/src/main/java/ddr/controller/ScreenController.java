@@ -39,6 +39,7 @@ public class ScreenController implements ScreenObserver {
     public void move(){
         game.disable();
         result.enable();
+        result.setRank();
     }
 
     public void to_main(){
@@ -47,8 +48,14 @@ public class ScreenController implements ScreenObserver {
         System.out.println("hiii");
     }
     public void retry(){
-       main.enable();
+        main.enable();
         result.disable();
         main.enable();
     }
+
+    public int rank()
+    {
+        return gameplay.getRank();
+    }
+    
 }

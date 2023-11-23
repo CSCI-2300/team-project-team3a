@@ -14,8 +14,8 @@ public class Game {
     int score; //things to keep track of for end screen
     int currCombo;
     int maxCombo;
-    int hits; 
-    int misses;
+    float hits; 
+    float misses;
 
 
     boolean flag; //flag for gameOver method
@@ -92,16 +92,46 @@ public class Game {
         return this.score;
     }
 
-    public int getHits(){
+    public float getHits(){
         return this.hits;
     }
 
-    public int getMisses(){
+    public float getMisses(){
         return this.misses;
     }
 
     public int getHighestCombo(){
         return this.maxCombo;
+    }
+
+//returns what rank the user should get
+    public int getRank()
+    {
+        int rank = 0;
+        this.hits = 10;
+        this.misses = 1;
+        float ratio = (this.hits/(this.hits +this.misses))*100;
+        if(ratio >= 97)
+        {
+            rank = 0;
+        } else if (ratio >= 90)
+        {
+            rank = 1;
+        } else if (ratio >= 80)
+        {
+            rank = 2;
+        } else if (ratio >= 70)
+        {
+            rank = 3;
+        } else if (ratio < 70)
+        {
+            rank = 4;
+        }
+        System.out.println(this.hits);
+        System.out.println(this.misses);
+        System.out.println(ratio);
+        System.out.println(rank);
+        return rank;
     }
 
     public void set_obvs(gameObserver gamer){
