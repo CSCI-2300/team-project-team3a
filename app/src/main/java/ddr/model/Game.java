@@ -28,7 +28,7 @@ public class Game {
     int diff;
 
     public Game(){
-        this.score = 30; // so game ends
+        this.score = 100; // so game ends
         this.currCombo = 0;
         this.maxCombo = 0;
         this.hits = 0;

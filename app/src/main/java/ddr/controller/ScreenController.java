@@ -26,6 +26,7 @@ public class ScreenController implements ScreenObserver {
         game.enable();
         game.set_start();
         gameplay.set_diif(mode);
+        game.game_start();
     }
 
     public void press(int col){
@@ -56,6 +57,10 @@ public class ScreenController implements ScreenObserver {
     public int rank()
     {
         return gameplay.getRank();
+    }
+
+    public void startGame(){
+        game.game_start();
     }
     
 }
