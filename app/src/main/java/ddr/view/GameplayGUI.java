@@ -397,18 +397,22 @@ leftTimer = new Timer(20, new ActionListener() {
             Timer GameTimer = new Timer(1500, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     container.addArrow(1);
+                    // make for loop that goes through each allArrows array to store location and then try to use set location to repaint it there. If set location no work, remove everything from pain panel, readd it then use set location with store location
+
+
                     int lastIndex = container.left_col.size() - 1;
                     if (lastIndex > 0) {
                         int newY = container.left_col.get(lastIndex - 1).getY()
-                                + container.left_col.get(lastIndex - 1).getHeight();
+                             + container.left_col.get(lastIndex - 1).getHeight();
                         container.left_col.get(lastIndex).setLocation(left.getX(), +step);
                         step += 100;
                         mainPanel.add(container.left_col.get(lastIndex));
                         mainPanel.setComponentZOrder(container.left_col.get(lastIndex), 0);
                         container.left_col.get(lastIndex).setVisible(true);
                          // mainPanel.revalidate();
+                            System.out.println(container.left_col.size());
                          mainPanel.repaint();
-                        System.out.println(container.left_col.size());
+
                     }
                 }
             });
