@@ -388,30 +388,32 @@ leftTimer = new Timer(20, new ActionListener() {
            // mainPanel.add(container.left_col.get(1));
 
             mainPanel.setComponentZOrder(container.getArrow(1), 0);
-mainPanel.setComponentZOrder(container.getArrow(2), 1);
-mainPanel.setComponentZOrder(container.getArrow(3), 2);
-mainPanel.setComponentZOrder(container.getArrow(4), 3);
- //mainPanel.setComponentZOrder(container.left_col.get(container.left_col.size()-1), 0);
-mainPanel.revalidate();
-mainPanel.repaint();
-                                int stepSize =2;
-                Timer GameTimer = new Timer(1500, new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-         container.addArrow(1);
-         int lastIndex = container.left_col.size() - 1;
+            mainPanel.setComponentZOrder(container.getArrow(2), 1);
+            mainPanel.setComponentZOrder(container.getArrow(3), 2);
+            mainPanel.setComponentZOrder(container.getArrow(4), 3);
+            //mainPanel.setComponentZOrder(container.left_col.get(container.left_col.size()-1), 0);
+            mainPanel.revalidate();
+            mainPanel.repaint();
+            
+            int stepSize =2;
+            Timer GameTimer = new Timer(1500, new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    container.addArrow(1);
+                    int lastIndex = container.left_col.size() - 1;
                                 
-                                        if (lastIndex > 0) {
-                                            int newY = container.left_col.get(lastIndex - 1).getY() + container.left_col.get(lastIndex - 1).getHeight();
-                                            container.left_col.get(lastIndex).setLocation(left.getX(), newY);
-                                            mainPanel.add(container.left_col.get(lastIndex));
-                                            mainPanel.setComponentZOrder(container.left_col.get(lastIndex), 0);
-                                            mainPanel.revalidate();
-                                            mainPanel.repaint();
-                                            System.out.println(container.left_col.size());
-                                        }
-                                    }
-                                });
-                             //   GameTimer.start();
+                    if (lastIndex > 0) {
+                        int newY = container.left_col.get(lastIndex - 1).getY() + container.left_col.get(lastIndex - 1).getHeight();
+                        container.left_col.get(lastIndex).setLocation(left.getX(), newY);
+                        mainPanel.add(container.left_col.get(lastIndex));
+                        mainPanel.setComponentZOrder(container.left_col.get(lastIndex), 0);
+                        mainPanel.revalidate();
+                        mainPanel.repaint();
+                        System.out.println(container.left_col.size());
+                    }
+                }
+            });
+            
+            //GameTimer.start();
                                 
                                 
         }
