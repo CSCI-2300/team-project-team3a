@@ -20,10 +20,11 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
     private JFrame frame3;
     private Game resultsGame;
 
-    private ImagePanel detailsPanel;
-    private ImageIcon scoreIcon;
     private ImageIcon rank;
     private JLabel scoreLabel;
+    private JLabel comboLabel;
+    private JLabel goodLabel;
+    private JLabel missLabel;
 
     ScreenController controll;
 
@@ -43,8 +44,9 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
 
         //center the details png
         scorePanel.setPreferredSize(new Dimension(700,500));
-        JPanel deetsPane = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 80));
-        deetsPane.setOpaque(false);
+        JPanel detailsPanel = new JPanel();
+        detailsPanel.setLayout(new OverlayLayout(detailsPanel));
+        detailsPanel.setOpaque(false);
         JPanel rankPane = new JPanel(new FlowLayout(FlowLayout.TRAILING));
         rankPane.setOpaque(false);
 
@@ -52,8 +54,19 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         Image image = deets.getImage().getScaledInstance(398, 253, Image.SCALE_DEFAULT);
         deets.setImage(image);
         JLabel noMore = new JLabel(deets);
-        deetsPane.setPreferredSize(new Dimension(400, 333));
-        deetsPane.add(noMore);
+        detailsPanel.setPreferredSize(new Dimension(400, 333));
+        //adding number labels
+        scoreLabel = new JLabel(Integer.toString(gamer.getScore()));
+        scoreLabel.setForeground(Color.RED);
+        comboLabel = new JLabel(Integer.toString(gamer.getHighestCombo()));
+        goodLabel = new JLabel(Integer.toString((int)gamer.getHits()));
+        missLabel = new JLabel(Integer.toString((int)gamer.getMisses()));
+
+        detailsPanel.add(missLabel);
+        detailsPanel.add(goodLabel);
+        detailsPanel.add(comboLabel);
+        detailsPanel.add(scoreLabel);
+        detailsPanel.add(noMore);
         //scorePanel.add(deetsPane);
         //adding the images to a arraylist
         ranks = new ArrayList<String>();
@@ -71,8 +84,9 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         rankPane.setPreferredSize(new Dimension(76,96));
         rankPane.add(rankLabel);
 
-        scorePanel.add(deetsPane);
+        scorePanel.add(detailsPanel);
         scorePanel.add(rankPane);
+        
 
 
         // scorePanel.setOpaque(false);
