@@ -17,7 +17,6 @@ public class Game {
     float hits; 
     float misses;
 
-
     boolean flag; //flag for gameOver method
     ClearType clearType; //enum for clear type
 

@@ -45,7 +45,7 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         //center the details png
         scorePanel.setPreferredSize(new Dimension(700,500));
         JPanel detailsPanel = new JPanel();
-        detailsPanel.setLayout(new OverlayLayout(detailsPanel));
+        detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
         detailsPanel.setOpaque(false);
         JPanel rankPane = new JPanel(new FlowLayout(FlowLayout.TRAILING));
         rankPane.setOpaque(false);
@@ -55,6 +55,12 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         deets.setImage(image);
         JLabel noMore = new JLabel(deets);
         detailsPanel.setPreferredSize(new Dimension(400, 333));
+
+        //overlay layout
+        JPanel overPanel = new JPanel();
+        overPanel.setLayout(new OverlayLayout(overPanel));
+        overPanel.setOpaque(false);
+
         //adding number labels
         scoreLabel = new JLabel(Integer.toString(gamer.getScore()));
         scoreLabel.setForeground(Color.RED);
@@ -62,11 +68,26 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         goodLabel = new JLabel(Integer.toString((int)gamer.getHits()));
         missLabel = new JLabel(Integer.toString((int)gamer.getMisses()));
 
-        detailsPanel.add(missLabel);
-        detailsPanel.add(goodLabel);
-        detailsPanel.add(comboLabel);
+        overPanel.add(detailsPanel);
+
+        detailsPanel.setLayout(null);
+    
+        //numb label moving
+        scoreLabel.setBounds(250, 60, 50, 50);
+        scoreLabel.setFont(new Font("Century Gothic", Font.BOLD, 24));
         detailsPanel.add(scoreLabel);
-        detailsPanel.add(noMore);
+        comboLabel.setBounds(250, 105, 50, 50);
+        comboLabel.setFont(new Font("Century Gothic", Font.BOLD, 24));
+        detailsPanel.add(comboLabel);
+        goodLabel.setBounds(250, 153, 50, 50);
+        goodLabel.setFont(new Font("Century Gothic", Font.BOLD, 24));
+        detailsPanel.add(goodLabel);
+        missLabel.setBounds(250, 200, 50, 50);
+        missLabel.setFont(new Font("Century Gothic", Font.BOLD, 24));
+        detailsPanel.add(missLabel);
+
+        overPanel.add(noMore);
+
         //scorePanel.add(deetsPane);
         //adding the images to a arraylist
         ranks = new ArrayList<String>();
@@ -78,16 +99,14 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
 
 //this is where we should change the ranks.get index to specific rank 
         rank = new ImageIcon(getClass().getClassLoader().getResource(ranks.get(0)));
-        Image letter = rank.getImage().getScaledInstance(76, 96, Image.SCALE_DEFAULT);
+        Image letter = rank.getImage().getScaledInstance(92, 96, Image.SCALE_DEFAULT);
         rank.setImage(letter);
         rankLabel = new JLabel(rank);
-        rankPane.setPreferredSize(new Dimension(76,96));
+        rankPane.setPreferredSize(new Dimension(92,96));
         rankPane.add(rankLabel);
 
-        scorePanel.add(detailsPanel);
         scorePanel.add(rankPane);
-        
-
+        scorePanel.add(overPanel);
 
         // scorePanel.setOpaque(false);
 
