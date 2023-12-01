@@ -41,23 +41,16 @@ public class ScreenController implements ScreenObserver {
         gameplay.miss();
     }
 
-    public void move() {
-        game.disable();
-        result.enable();
-
-    }
-
     public void to_main() {
-        result.disable();
         main.enable();
-        main.updateHighScores(); // Update high scores in the MainGUI
+        result.disable();
+        main.updateHighScores();
         System.out.println("hiii");
     }
 
     public void retry() {
-        main.enable();
+        game.enable();
         result.disable();
-        main.enable();
     }
 
     public int rank() {

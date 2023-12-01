@@ -364,7 +364,7 @@ leftTimer = new Timer(20, new ActionListener() {
         //score.setLocation(scorex, scorey);
         frame2.setTitle("Score "+ gamerGame.getScore() + " Combo "+ gamerGame.getCurrentCombo());
         if (gamerGame.gameOver()){
-            controller.move();
+            controller.endGame();
         }
 
 

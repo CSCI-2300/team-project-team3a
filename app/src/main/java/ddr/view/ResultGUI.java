@@ -63,10 +63,13 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
 
         //adding number labels
         scoreLabel = new JLabel(Integer.toString(gamer.getScore()));
-        scoreLabel.setForeground(Color.RED);
+        scoreLabel.setForeground(Color.WHITE);
         comboLabel = new JLabel(Integer.toString(gamer.getHighestCombo()));
+        comboLabel.setForeground(Color.BLACK);
         goodLabel = new JLabel(Integer.toString((int)gamer.getHits()));
+        goodLabel.setForeground(Color.BLUE);
         missLabel = new JLabel(Integer.toString((int)gamer.getMisses()));
+        missLabel.setForeground(Color.RED);
 
         overPanel.add(detailsPanel);
 
