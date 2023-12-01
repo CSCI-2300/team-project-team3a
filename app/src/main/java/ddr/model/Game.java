@@ -89,18 +89,22 @@ public class Game {
     }
 
     public int getScore(){
+        System.out.println(score);
         return this.score;
     }
 
     public float getHits(){
+        System.out.println(hits);
         return this.hits;
     }
 
     public float getMisses(){
+        System.out.println(misses);
         return this.misses;
     }
 
     public int getHighestCombo(){
+        System.out.println(maxCombo);
         return this.maxCombo;
     }
 
@@ -125,10 +129,6 @@ public class Game {
         {
             rank = 4;
         }
-        System.out.println(this.hits);
-        System.out.println(this.misses);
-        System.out.println(ratio);
-        System.out.println(rank);
         return rank;
     }
 
@@ -140,7 +140,7 @@ public class Game {
         game.update();
     }
 
-        public int getCurrentCombo(){
+    public int getCurrentCombo(){
         return this.currCombo;
     }
 

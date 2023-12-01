@@ -160,12 +160,26 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         frame3.setVisible(true);
     }
 
-    public void setRank()
-    {
+    public void updateScoreLabel(int newScore) {
+        scoreLabel.setText(Integer.toString(newScore));
+    }
+
+    public void updateComboLabel(int newCombo) {
+        comboLabel.setText(Integer.toString(newCombo));
+    }
+
+    public void updateGoodLabel(float newHits) {
+        goodLabel.setText(Integer.toString((int) newHits));
+    }
+
+    public void updateMissLabel(float newMisses) {
+        missLabel.setText(Integer.toString((int) newMisses));
+    }
+
+    public void setRank() {
         rank = new ImageIcon(getClass().getClassLoader().getResource(ranks.get(controll.rank())));
         rankLabel.setIcon(rank);
     }
-
 
     public void disable(){
         frame3.setVisible(false);
