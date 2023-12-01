@@ -43,7 +43,7 @@ public class ScreenController implements ScreenObserver {
 
     public void to_main() {
         main.enable();
-        result.disable();
+        //result.disable();
         main.updateHighScores();
         System.out.println("hiii");
     }
