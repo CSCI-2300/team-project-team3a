@@ -322,8 +322,8 @@ leftTimer = new Timer(20, new ActionListener() {
                 if (gamerGame.check_hit(1,container.getArrow(2).getY())) {
                     System.out.println("aahhhhh");
                     controller.press(1);
-                   container.getArrow(2).set_flag();;
-                   container.getArrow(2).setIcon(boom);
+                    container.getArrow(2).set_flag();;
+                    container.getArrow(2).setIcon(boom);
                    // mainPanel.remove(downMove);
                     //leftMove.revalidate();
                     //leftMove.repaint();
@@ -362,7 +362,7 @@ leftTimer = new Timer(20, new ActionListener() {
         //score.combo_update(gamerGame.getCurrentCombo());
         //score.setLocation(scorex, scorey);
         //score.setLocation(scorex, scorey);
-        frame2.setTitle("score "+ gamerGame.getScore() + " Combo "+ gamerGame.getCurrentCombo());
+        frame2.setTitle("Score "+ gamerGame.getScore() + " Combo "+ gamerGame.getCurrentCombo());
         if (gamerGame.gameOver()){
             controller.move();
         }
@@ -412,7 +412,7 @@ leftTimer = new Timer(20, new ActionListener() {
                         mainPanel.setComponentZOrder(container.left_col.get(lastIndex), 0);
                         container.left_col.get(lastIndex).setVisible(true);
                          // mainPanel.revalidate();
-                            System.out.println(container.left_col.size());
+                            //System.out.println(container.left_col.size());
                          mainPanel.repaint();
 
                     }

@@ -44,7 +44,7 @@ public class ScreenController implements ScreenObserver {
     public void move() {
         game.disable();
         result.enable();
-        result.setRank();
+
     }
 
     public void to_main() {
@@ -76,5 +76,11 @@ public class ScreenController implements ScreenObserver {
 
         highscore.addHighscore(gameplay.getScore());
         highscore.saveHighScoresToFile("highscores.ser");
+        // Update the labels with the new game results
+        result.updateScoreLabel(gameplay.getScore());
+        result.updateComboLabel(gameplay.getHighestCombo());
+        result.updateGoodLabel(gameplay.getHits());
+        result.updateMissLabel(gameplay.getMisses());
+        result.setRank();
     }
 }

@@ -34,7 +34,7 @@ public class allArrows {
     public void addArrow(int col){
         if(col == 1){
             left_col.add(new Arrow(leftIcon));
-            System.out.println("11111");
+            //System.out.println("11111");
         }
         else if(col == 3){
             up_col.add(new Arrow(upIcon));
