@@ -11,12 +11,11 @@ public class Highscore implements Serializable {
     private ArrayList<Integer> highscores;
 
     public Highscore() {
-        this.highscores = loadHighScoresFromFile("highscores.ser"); // Load high scores from a file on initialization
+        this.highscores = loadHighScoresFromFile("highscores.ser"); 
         initializeDefaultHighScores(); 
     }
 
     private void initializeDefaultHighScores() {
-        // This method only adds default high scores if the list is empty
         if (highscores.isEmpty()) {
             highscores.add(0);
             highscores.add(0);
@@ -58,6 +57,6 @@ public class Highscore implements Serializable {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return new ArrayList<>(); // Return an empty list in case of an exception
+        return new ArrayList<>(); 
     }
 }
