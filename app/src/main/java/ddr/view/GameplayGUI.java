@@ -332,6 +332,8 @@ leftTimer = new Timer(20, new ActionListener() {
                     controller.miss();
                 }
                 
+            } else if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                controller.endGame();
             }
         });
     }
