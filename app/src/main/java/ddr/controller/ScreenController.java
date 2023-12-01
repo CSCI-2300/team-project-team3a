@@ -11,6 +11,7 @@ public class ScreenController implements ScreenObserver {
     GameplayGUI game;
     ResultGUI result;
     Game gameplay;
+    
     public ScreenController(){
         main = new MainGUI(this);
         gameplay = new Game();
@@ -25,7 +26,7 @@ public class ScreenController implements ScreenObserver {
         main.disable();
         game.enable();
         game.set_start();
-        gameplay.set_diif(mode);
+        gameplay.set_diff(mode);
         game.game_start();
     }
 
@@ -61,6 +62,13 @@ public class ScreenController implements ScreenObserver {
 
     public void startGame(){
         game.game_start();
+    }
+
+    public void endGame(){
+        result.enable();
+        main.disable();
+        game.disable();
+        
     }
     
 }

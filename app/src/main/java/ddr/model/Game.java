@@ -146,7 +146,7 @@ public class Game {
         return this.currCombo;
     }
 
-    public void set_diif(int mode){
+    public void set_diff(int mode){
         diff = difficulty[mode];
         System.out.println(diff);
     }

@@ -416,7 +416,7 @@ leftTimer = new Timer(20, new ActionListener() {
                     }
                 }
             });
-             GameTimer.start();
+            GameTimer.start();
                                 
                                 
         }
