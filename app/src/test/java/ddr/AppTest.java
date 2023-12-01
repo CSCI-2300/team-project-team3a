@@ -6,9 +6,14 @@ package ddr;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import ddr.model.Highscore;
+
 public class AppTest {
-    @Test public void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+    @Test 
+    public void newHighScore() {
+        Highscore high = new Highscore();
+        int big = 99;
+        high.addHighscore(big);
+        assertEquals(true, high.getHighscores().get(0) == big);
     }
 }

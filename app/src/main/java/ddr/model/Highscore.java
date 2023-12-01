@@ -37,7 +37,7 @@ public class Highscore implements Serializable {
     }
 
     public ArrayList<Integer> getHighscores() {
-        return new ArrayList<>(highscores);
+        return highscores;
     }
 
     public void saveHighScoresToFile(String filename) {
