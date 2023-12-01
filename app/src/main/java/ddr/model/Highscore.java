@@ -1,14 +1,8 @@
 package ddr.model;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class Highscore implements Serializable {
 
@@ -17,14 +11,17 @@ public class Highscore implements Serializable {
     private ArrayList<Integer> highscores;
 
     public Highscore() {
-        this.highscores = new ArrayList<>();
+        this.highscores = loadHighScoresFromFile("highscores.ser"); // Load high scores from a file on initialization
         initializeDefaultHighScores(); 
     }
 
     private void initializeDefaultHighScores() {
-        highscores.add(100);
-        highscores.add(90);
-        highscores.add(80);
+        // This method only adds default high scores if the list is empty
+        if (highscores.isEmpty()) {
+            highscores.add(0);
+            highscores.add(0);
+            highscores.add(0);
+        }
     }
 
     public boolean isNewHighscore(int newScore) {
@@ -36,6 +33,7 @@ public class Highscore implements Serializable {
             highscores.remove(Collections.min(highscores));
             highscores.add(newScore);
             Collections.sort(highscores, Collections.reverseOrder());
+            saveHighScoresToFile("highscores.ser"); // Save high scores after updating
         }
     }
 
@@ -43,29 +41,23 @@ public class Highscore implements Serializable {
         return new ArrayList<>(highscores);
     }
 
-    //i don't think i need this
-    public void displayHighscores() {
-        System.out.println("High Scores:");
-        for (int i = 0; i < highscores.size(); i++) {
-            System.out.println((i + 1) + ". " + highscores.get(i));
-        }
-    }
-
     public void saveHighScoresToFile(String filename) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
-            oos.writeObject(highscores);
+        try (FileOutputStream fileOut = new FileOutputStream(filename);
+             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(highscores);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // Deserialize the high scores from a file
     @SuppressWarnings("unchecked")
-    public void loadHighScoresFromFile(String filename) {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
-            highscores = (ArrayList<Integer>) ois.readObject();
+    public ArrayList<Integer> loadHighScoresFromFile(String filename) {
+        try (FileInputStream fileIn = new FileInputStream(filename);
+             ObjectInputStream in = new ObjectInputStream(fileIn)) {
+            return (ArrayList<Integer>) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return new ArrayList<>(); // Return an empty list in case of an exception
     }
 }

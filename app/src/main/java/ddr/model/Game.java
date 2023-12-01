@@ -34,8 +34,6 @@ public class Game {
         this.misses = 0;
 
 
-        
-
         this.flag = false;
     }
 

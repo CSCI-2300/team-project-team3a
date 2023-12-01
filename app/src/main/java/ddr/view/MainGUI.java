@@ -1,9 +1,12 @@
 package ddr.view;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 import ddr.ScreenObserver;
+import ddr.model.Highscore;
 
 public class MainGUI implements ActionListener {
     JFrame frame1;
@@ -14,7 +17,10 @@ public class MainGUI implements ActionListener {
     JLabel [] highscores_a;
     ScreenObserver controller;
     JLayeredPane layeredPane;
+
+    Highscore highscore;
     int difficulty; //1,2,3
+    ArrayList<Integer> currentHighScores;
 
     public MainGUI(ScreenObserver control) {
         frame1 = new JFrame("Main Menu");
@@ -22,19 +28,23 @@ public class MainGUI implements ActionListener {
         backs = new ImageIcon(getClass().getClassLoader().getResource("game_background.png"));
         panel = new ImagePanel(backs);
         controller = control;
+        highscore = new Highscore();
 
         //making highscores panel
-        highscores = new JPanel(new GridLayout(1,3));
+
+        highscores = new JPanel(new GridLayout(1, 3));
         highscores_a = new JLabel[3];
-        for(int i = 0; i<3 ;i++){
-            highscores_a[i] = new JLabel("#"+ (i+1) + " High Score: ");
+        for (int i = 0; i < 3; i++) {
+            highscores_a[i] = new JLabel("#" + (i + 1) + " High Score: ");
             highscores_a[i].setForeground(Color.WHITE);
         }
 
-        for(int i = 0; i<3 ;i++){
+        for (int i = 0; i < 3; i++) {
             highscores.add(highscores_a[i]);
         }
         highscores.setBackground(Color.BLACK);
+        
+        updateHighScores(); 
 
         //adding highscores to main frame
         frame1.setLayout(new BorderLayout());
@@ -96,6 +106,13 @@ public class MainGUI implements ActionListener {
         frame1.pack();
         frame1.setVisible(true);
         frame1.setResizable(false);
+    }
+
+    public void updateHighScores() {
+        currentHighScores = highscore.getHighscores();
+        for (int i = 0; i < 3; i++) {
+            highscores_a[i].setText("#" + (i + 1) + " High Score: " + currentHighScores.get(i));
+        }
     }
 
     @Override
