@@ -35,7 +35,7 @@ public class Game {
         this.flag = false;
     }
 
-
+/* 
     public void save_start(int startx, int starty){
         startingx = startx;
         startingy = starty;
@@ -45,11 +45,12 @@ public class Game {
         currentx = startx;
         currenty = starty;
     }
-
+*/
     public void hit(){
         this.hits++;
         this.currCombo++;
         this.score+= 10;
+        System.out.println("hit");
         this.notify_obvs();
         
     }
@@ -61,6 +62,7 @@ public class Game {
         }
         this.currCombo = 0;
         this.score-= 10;
+        System.out.println("miss");
         this.notify_obvs();
     }
 
