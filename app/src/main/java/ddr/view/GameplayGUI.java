@@ -272,7 +272,7 @@ leftTimer = new Timer(20, new ActionListener() {
                 //rightMove.setLocation(rightMove.getX(), rightMove.getY() + stepSize);
                 if (gamerGame.check_hit(1,container.getArrow(4).getY())) {
                     System.out.println("aahhhhh");
-                    controller.press(1);
+                    controller.press();
                     container.getArrow(4).set_flag();
                     container.getArrow(4).setIcon(boom);
                    // mainPanel.remove(rightMove);
@@ -290,7 +290,7 @@ leftTimer = new Timer(20, new ActionListener() {
                // leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
                 if (gamerGame.check_hit(1,container.getArrow(1).getY())) {
                     System.out.println("aahhhhh");
-                    controller.press(1);
+                    controller.press();
                     container.getArrow(1).set_flag();
                     container.getArrow(1).setIcon(boom);
                     //mainPanel.remove(leftMove);
@@ -305,7 +305,7 @@ leftTimer = new Timer(20, new ActionListener() {
                // upMove.setLocation(upMove.getX(), upMove.getY() + stepSize);
                     if (gamerGame.check_hit(1,container.getArrow(3).getY())) {
                     System.out.println("aahhhhh");
-                    controller.press(1);
+                    controller.press();
                     container.getArrow(3).set_flag();
                     container.getArrow(3).setIcon(boom);
                    // mainPanel.remove(upMove);
@@ -321,7 +321,7 @@ leftTimer = new Timer(20, new ActionListener() {
                // downMove.setLocation(downMove.getX(), downMove.getY() + stepSize);
                 if (gamerGame.check_hit(1,container.getArrow(2).getY())) {
                     System.out.println("aahhhhh");
-                    controller.press(1);
+                    controller.press();
                     container.getArrow(2).set_flag();;
                     container.getArrow(2).setIcon(boom);
                    // mainPanel.remove(downMove);

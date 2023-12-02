@@ -33,8 +33,8 @@ public class ScreenController implements ScreenObserver {
         game.game_start();
     }
 
-    public void press(int col) {
-        gameplay.hit(col);
+    public void press() {
+        gameplay.hit();
     }
 
     public void miss() {

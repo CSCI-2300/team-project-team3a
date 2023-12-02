@@ -7,13 +7,28 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import ddr.model.Highscore;
+import ddr.model.Game;
 
 public class AppTest {
     @Test 
     public void newHighScore() {
         Highscore high = new Highscore();
-        int big = 99;
+        int big = 99; //you might want to delete the .ser file to reset the high scores cuz this is hard coded
         high.addHighscore(big);
         assertEquals(true, high.getHighscores().get(0) == big);
     }
+
+    /* 
+    @Test
+    public void rankBTest() { //testing for B rank
+        Game game = new Game();
+        for(int i = 0; i < 7; i++){
+            game.hit(); // 7 hits
+        }
+        for(int i = 0; i < 3; i++){
+            game.miss(); // 3 misses
+        }
+        assertEquals(true, game.getHits() == 6);
+    }
+    */
 }

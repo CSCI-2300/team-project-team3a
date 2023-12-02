@@ -48,7 +48,7 @@ public class Game {
         currenty = starty;
     }
 
-    public void hit(int col){
+    public void hit(){
         this.hits++;
         this.currCombo++;
         this.score+= 10;
@@ -115,19 +115,19 @@ public class Game {
         float ratio = (this.hits/(this.hits +this.misses))*100;
         if(ratio >= 97)
         {
-            rank = 0;
+            rank = 0; // S rank
         } else if (ratio >= 90)
         {
-            rank = 1;
+            rank = 1; // A rank
         } else if (ratio >= 80)
         {
-            rank = 2;
+            rank = 2; // B rank
         } else if (ratio >= 70)
         {
-            rank = 3;
+            rank = 3; // C rank
         } else if (ratio < 70)
         {
-            rank = 4;
+            rank = 4; // D rank
         }
         return rank;
     }
