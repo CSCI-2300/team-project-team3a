@@ -21,11 +21,11 @@ public class Game {
     gameObserver game;
     boolean check_flag;
 
-    int [] difficulty = {60,80,100};
+    int [] difficulty = {10,80,100};
     int diff;
 
     public Game(){
-        this.score = 1000; // so game ends
+        this.score = 100; // so game ends
         this.currCombo = 0;
         this.maxCombo = 0;
         this.hits = 0;
@@ -163,5 +163,8 @@ public class Game {
         hits = 0;
         misses = 0;
         flag = false;
+    }
+    public int return_totalnotes(){
+        return diff;
     }
 }
