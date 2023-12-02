@@ -25,7 +25,7 @@ public class Game {
     int diff;
 
     public Game(){
-        this.score = 100; // so game ends
+        this.score = 1000; // so game ends
         this.currCombo = 0;
         this.maxCombo = 0;
         this.hits = 0;
@@ -76,7 +76,7 @@ public class Game {
     }
     public boolean check_hit(int col, int y){
         if(col == 1){
-            if (y > 400 && y < 450){
+            if (y > 380 && y < 430){
                 check_flag = true;
             }
             else{

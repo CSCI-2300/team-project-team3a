@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import java.util.Random;
+import java.util.random.*;
+
 import ddr.ScreenObserver;
 import ddr.gameObserver;
 import ddr.model.Game;
@@ -64,12 +67,18 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
 
     int step;
 
+    int notes;
+    Random random;
+
     private Timer leftTimer, downTimer, upTimer, rightTimer;
     public GameplayGUI(ScreenObserver screen, Game game)
     { //javaswing constructor
+        notes = 0;
         position = 0;
         step = 10;
         container = new allArrows(1); // one for now
+
+        random = new Random();
 
         frame2 = new JFrame("Gameplay"); 
         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,9 +116,9 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         //mainPanel.add(rightMove);
         
         score = new scores_panel();
-        score.setBounds(400, 280, 300, 300);
         mainPanel.add(score);
-        score.setLocation(200,200);
+        score.setBounds(250, 275,300,100);
+
         
       
         //making the arrow receptors panel and adding it to a grid
@@ -237,6 +246,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                  // gamerGame.miss();
                    mainPanel.remove(container.getArrow(4));
                    container.removeArrow(4);
+                   
                 }
             }
             }});
@@ -265,7 +275,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         leftTimer.start();
         upTimer.start();
         downTimer.start();
-        frame2.setTitle("Score: "+ gamerGame.getScore() + " Combo: "+gamerGame.getCurrentCombo());
+        frame2.setTitle("Gameplay");
     }
     
     public void keyPressed(KeyEvent e) {
@@ -376,8 +386,8 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
     public void update(){
         score.score_update(gamerGame.getScore());
         score.combo_update(gamerGame.getCurrentCombo());
-        //score.setLocation(scorex, scorey);
-        //score.setLocation(scorex, scorey);
+
+
         frame2.setTitle("Score "+ gamerGame.getScore() + " Combo "+ gamerGame.getCurrentCombo());
         if (gamerGame.gameOver()){
             controller.endGame();
@@ -387,53 +397,97 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
     }
 
     public void game_start(){
-            container.addArrow(1);
-            container.addArrow(2);
-            container.addArrow(3);
-            container.addArrow(4);
-            container.addArrow(1);
+        //     container.addArrow(1);
+        //     container.addArrow(2);
+        //     container.addArrow(3);
+        //     container.addArrow(4);
+        //     container.addArrow(1);
         
-            container.getArrow(1).setBounds(50, 100, 100, 100);
+        //     container.getArrow(1).setBounds(175, -125, 80, 80);
+        //     container.getArrow(2).setBounds(275, -125, 80, 90);
+        //     container.getArrow(3).setBounds(365, -125, 80, 80);
+        //      container.getArrow(4).setBounds(450, -125, 80, 80);
 
-            container.getArrow(2).setLocation(400, 300);
-            container.getArrow(3).setLocation(500, 300);
-            container.getArrow(4).setLocation(600, 300);
-            container.left_col.get(1).setLocation(50, 100-70);
+        //     // container.getArrow(2).setLocation(400, 300);
+        //     // container.getArrow(3).setLocation(500, 300);
+        //     // container.getArrow(4).setLocation(600, 300);
         
-            mainPanel.add(container.getArrow(1));
-            mainPanel.add(container.getArrow(2));
-            mainPanel.add(container.getArrow(3));
-            mainPanel.add(container.getArrow(4));
-        //     mainPanel.add(container.left_col.get(1));
+        //     mainPanel.add(container.getArrow(1));
+        //     mainPanel.add(container.getArrow(2));
+        //     mainPanel.add(container.getArrow(3));
+        //     mainPanel.add(container.getArrow(4));
+        // //     mainPanel.add(container.left_col.get(1));
 
-            mainPanel.setComponentZOrder(container.getArrow(1), 0);
-            mainPanel.setComponentZOrder(container.getArrow(2), 1);
-            mainPanel.setComponentZOrder(container.getArrow(3), 2);
-            mainPanel.setComponentZOrder(container.getArrow(4), 3);
-          //   mainPanel.setComponentZOrder(container.left_col.get(container.left_col.size()-1), 0);
-            mainPanel.revalidate();
-            mainPanel.repaint();
-            Timer GameTimer = new Timer(1500, new ActionListener() {
+        //     mainPanel.setComponentZOrder(container.getArrow(1), 0);
+        //     mainPanel.setComponentZOrder(container.getArrow(2), 1);
+        //     mainPanel.setComponentZOrder(container.getArrow(3), 2);
+        //     mainPanel.setComponentZOrder(container.getArrow(4), 3);
+        //   //   mainPanel.setComponentZOrder(container.left_col.get(container.left_col.size()-1), 0);
+        //     mainPanel.revalidate();
+        //     mainPanel.repaint();
+            Timer GameTimer = new Timer(2000, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    container.addArrow(1);
+                    int choice = random.nextInt(4)+1;
+
+
 
                     // make for loop that goes through each allArrows array to store location and then try to use set location to repaint it there. If set location no work, remove everything from pain panel, readd it then use set location with store location
-
+                    if (choice ==1){
+                    container.addArrow(1);
 
                     int lastIndex = container.left_col.size() - 1;
                     if (lastIndex > 0) {
-                        int newY = container.left_col.get(lastIndex - 1).getY()
-                             + container.left_col.get(lastIndex - 1).getHeight();
-                        container.left_col.get(lastIndex).setBounds(50, 100, 100, 100);
+                        container.left_col.get(lastIndex).setBounds(175, -100, 100, 100);
                         step += 100;
                         mainPanel.add(container.left_col.get(lastIndex));
                         mainPanel.setComponentZOrder(container.left_col.get(lastIndex), 0);
                         container.left_col.get(lastIndex).setVisible(true);
                         mainPanel.revalidate();
-                            //System.out.println(container.left_col.size());
                         mainPanel.repaint();
 
-                    }
+                    }}
+                    if (choice ==2){
+                        container.addArrow(2);
+
+                    int lastIndex2 = container.down_col.size() - 1;
+                    if (lastIndex2 > 0) {
+                        container.down_col.get(lastIndex2).setBounds(275, -100, 80, 90);
+                        step += 100;
+                        mainPanel.add(container.down_col.get(lastIndex2));
+                        mainPanel.setComponentZOrder(container.down_col.get(lastIndex2), 0);
+                        container.down_col.get(lastIndex2).setVisible(true);
+                        mainPanel.revalidate();
+                        mainPanel.repaint();
+
+                    }}
+                    if (choice ==3){
+                            container.addArrow(3);
+                   
+                    int lastIndex3 = container.up_col.size() - 1;
+                    if (lastIndex3 > 0) {
+                        container.up_col.get(lastIndex3).setBounds(365, -100, 80, 80);
+                        step += 100;
+                        mainPanel.add(container.up_col.get(lastIndex3));
+                        mainPanel.setComponentZOrder(container.up_col.get(lastIndex3), 0);
+                        container.up_col.get(lastIndex3).setVisible(true);
+                        mainPanel.revalidate();
+                        mainPanel.repaint();
+
+                    }}
+
+                    if (choice ==4){
+                         container.addArrow(4);
+                    int lastIndex4 = container.right_col.size() - 1;
+                    if (lastIndex4 > 0) {
+                        container.right_col.get(lastIndex4).setBounds(450, -100, 80, 80);
+                        step += 100;
+                        mainPanel.add(container.right_col.get(lastIndex4));
+                        mainPanel.setComponentZOrder(container.right_col.get(lastIndex4), 0);
+                        container.right_col.get(lastIndex4).setVisible(true);
+                        mainPanel.revalidate();
+                        mainPanel.repaint();
+
+                    }}
                 }
             });
             GameTimer.start();
