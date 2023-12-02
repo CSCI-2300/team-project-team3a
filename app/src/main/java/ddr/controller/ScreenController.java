@@ -43,12 +43,14 @@ public class ScreenController implements ScreenObserver {
 
     public void to_main() {
         main.enable();
-        //result.disable();
+        result.disable();
         main.updateHighScores();
         System.out.println("hiii");
     }
 
     public void retry() {
+        gameplay.reset();
+        game.game_start(); //idk do i need this
         game.enable();
         result.disable();
     }
@@ -69,11 +71,12 @@ public class ScreenController implements ScreenObserver {
 
         highscore.addHighscore(gameplay.getScore());
         highscore.saveHighScoresToFile("highscores.ser");
-        // Update the labels with the new game results
+
         result.updateScoreLabel(gameplay.getScore());
         result.updateComboLabel(gameplay.getHighestCombo());
         result.updateGoodLabel(gameplay.getHits());
         result.updateMissLabel(gameplay.getMisses());
         result.setRank();
+
     }
 }

@@ -158,23 +158,23 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         frame2.setResizable(false);
 
 
-                        int stepSize =2;
-leftTimer = new Timer(20, new ActionListener() {
-    public void actionPerformed(ActionEvent e) {
-        if (!container.left_col.isEmpty()) {
-            for (int i = 0; i < container.ArrLength(1); i++) {
-                container.left_col.get(i).setLocation(container.left_col.get(i).getX(), container.left_col.get(i).getY() + stepSize);
+        int stepSize =2;
+        leftTimer = new Timer(20, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (!container.left_col.isEmpty()) {
+                    for (int i = 0; i < container.ArrLength(1); i++) {
+                        container.left_col.get(i).setLocation(container.left_col.get(i).getX(), container.left_col.get(i).getY() + stepSize);
+                    }
+                    if (container.getArrow(1).getY() == 470 && container.getArrow(1).check_flag() == false) {
+                        gamerGame.miss();
+                    }
+                    if (container.getArrow(1).getY() > 500) {
+                        mainPanel.remove(container.getArrow(1));
+                        container.removeArrow(1);
+                    }
+                }
             }
-            if (container.getArrow(1).getY() == 470 && container.getArrow(1).check_flag() == false) {
-                gamerGame.miss();
-            }
-            if (container.getArrow(1).getY() > 500) {
-                mainPanel.remove(container.getArrow(1));
-                container.removeArrow(1);
-            }
-        }
-    }
-});
+        });
 
 
 
@@ -236,11 +236,6 @@ leftTimer = new Timer(20, new ActionListener() {
             leftTimer.start();
             upTimer.start();
             downTimer.start();
-
-        
-
-
-        
 
     }
     

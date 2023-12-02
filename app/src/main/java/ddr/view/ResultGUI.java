@@ -111,29 +111,6 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         scorePanel.add(rankPane);
         scorePanel.add(overPanel);
 
-        // scorePanel.setOpaque(false);
-
-        // scoreIcon = new ImageIcon(getClass().getClassLoader().getResource("ddrscore.png"));
-        // detailsPanel = new ImagePanel(scoreIcon);
-        // detailsPanel.setOpaque(false);
-        // scorePanel.add(detailsPanel);
-
-        //make top header of player clear result
- /*        clearType = new JLabel("RESULT (SONG FAILED/SONG CLEARED)");
-        clearType.setForeground(Color.WHITE);
-        clearType.setAlignmentX(Component.CENTER_ALIGNMENT);
-        scorePanel.add(clearType);
-
-        //make score, good, miss counters
-        String[] counts = {"Score: " + resultsGame.getScore(), "Good: " + resultsGame.getHits(), "Miss:" + resultsGame.getMisses()}; //hardcoded
-        for(int i = 0; i < counts.length; i++){
-            labels = new JLabel(counts[i]);
-            labels.setAlignmentX(Component.CENTER_ALIGNMENT);
-            labels.setForeground(Color.WHITE);
-            scorePanel.add(labels);
-        } 
-        */
-
         //adding buttons now
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,40,50)); //make navigational buttons panel
         buttonPanel.setOpaque(false);

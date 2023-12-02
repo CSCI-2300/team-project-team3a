@@ -1,7 +1,5 @@
 package ddr.model;
 
-import java.util.ArrayList;
-
 import ddr.ClearType;
 import ddr.gameObserver;
 
@@ -147,5 +145,14 @@ public class Game {
     public void set_diff(int mode){
         diff = difficulty[mode];
         System.out.println(diff);
+    }
+
+    public void reset(){
+        score = 100;
+        currCombo = 0;
+        maxCombo = 0;
+        hits = 0;
+        misses = 0;
+        flag = false;
     }
 }

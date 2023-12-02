@@ -32,7 +32,7 @@ public class Highscore implements Serializable {
             highscores.remove(Collections.min(highscores));
             highscores.add(newScore);
             Collections.sort(highscores, Collections.reverseOrder());
-            saveHighScoresToFile("highscores.ser"); // Save high scores after updating
+            saveHighScoresToFile("highscores.ser");
         }
     }
 
