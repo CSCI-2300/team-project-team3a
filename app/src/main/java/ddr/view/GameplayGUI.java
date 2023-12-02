@@ -60,24 +60,28 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
     JLabel booms;
 
     allArrows container;
+    int position;
 
     int step;
 
     private Timer leftTimer, downTimer, upTimer, rightTimer;
     public GameplayGUI(ScreenObserver screen, Game game)
     { //javaswing constructor
+        position = 0;
         step = 10;
         container = new allArrows(1); // one for now
 
         frame2 = new JFrame("Gameplay"); 
         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        backs = new ImageIcon(getClass().getClassLoader().getResource("game_background.png"));
+        backs = new ImageIcon(getClass().getClassLoader().getResource("receptorBackground.png"));
         mainPanel = new ImagePanel(backs);
         
-        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER,30,0));
+        mainPanel.setLayout(null);
         mainPanel.setPreferredSize(new Dimension(700,500));
         frame2.addKeyListener(this);
-        spawnpoint = new JPanel(new FlowLayout(FlowLayout.CENTER,30,0)); 
+        spawnpoint = new JPanel(); 
+        spawnpoint.setLayout(new FlowLayout(FlowLayout.CENTER,30,0));
+        spawnpoint.setPreferredSize(new Dimension(700,100));
         spawnpoint.setOpaque(false);
 
 
@@ -106,6 +110,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
        // mainPanel.add(score);
       //  score.setLocation(200,200);
         
+      /* 
         //making the arrow receptors panel and adding it to a grid
         arrowsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,30,0));
         arrowsPanel.setPreferredSize(new Dimension(700,100));
@@ -129,11 +134,11 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         gridArrows.add(arrowsPanel);
 
         mainPanel.add(gridArrows);
-
+        
 
         lefts = new ImageIcon(getClass().getClassLoader().getResource("leftarrow.png"));
         left = new JLabel(lefts);
-       arrowsPanel.add(left);
+        arrowsPanel.add(left);
 
         downs = new ImageIcon(getClass().getClassLoader().getResource("downarrow.png"));
         down = new JLabel(downs);
@@ -146,6 +151,8 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         rights = new ImageIcon(getClass().getClassLoader().getResource("rightarrow.png"));
         right = new JLabel(rights);
         arrowsPanel.add(right);
+
+        */
 
         gamerGame = game;
         controller = screen;
@@ -182,18 +189,18 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         downTimer = new Timer(40, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!container.down_col.isEmpty()) {
-                for(int i = 0; i < container.ArrLength(2);i++){
-                container.down_col.get(i).setLocation(container.down_col.get(i).getX(), container.down_col.get(i).getY() + stepSize);
-                 }
-                if (container.getArrow(2).getY() == 470 && container.getArrow(2).check_flag() == false){
-                    gamerGame.miss();
+                    for(int i = 0; i < container.ArrLength(2);i++){
+                    container.down_col.get(i).setLocation(container.down_col.get(i).getX(), container.down_col.get(i).getY() + stepSize);
+                    }
+                    if (container.getArrow(2).getY() == 470 && container.getArrow(2).check_flag() == false){
+                        gamerGame.miss();
+                    }
+                    if (container.getArrow(2).getY() > 500){
+                    // gamerGame.miss();
+                    mainPanel.remove(container.getArrow(2));
+                    container.removeArrow(2);
+                    }
                 }
-                if (container.getArrow(2).getY() > 500){
-                 // gamerGame.miss();
-                   mainPanel.remove(container.getArrow(2));
-                   container.removeArrow(2);
-                }
-            }
             }
         });
 
@@ -243,7 +250,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
     {
         frame2.setVisible(false);
         frame2.setEnabled(false);
-       leftTimer.stop();
+        leftTimer.stop();
         downTimer.stop();
         upTimer.stop();
         rightTimer.stop();
@@ -253,51 +260,57 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
     {
         frame2.setVisible(true);
         frame2.setEnabled(true);
-            rightTimer.start();
-            leftTimer.start();
-            upTimer.start();
-            downTimer.start();
-        frame2.setTitle("score "+ gamerGame.getScore() + " combo "+gamerGame.getCurrentCombo());
+        rightTimer.start();
+        leftTimer.start();
+        upTimer.start();
+        downTimer.start();
+        frame2.setTitle("Score: "+ gamerGame.getScore() + " Combo: "+gamerGame.getCurrentCombo());
     }
     
     public void keyPressed(KeyEvent e) {
         SwingUtilities.invokeLater(() -> {
             int stepSize = 10;
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                //rightMove.setLocation(rightMove.getX(), rightMove.getY() + stepSize);
-                if (gamerGame.check_hit(1,container.getArrow(4).getY())) {
-                    System.out.println("aahhhhh");
-                    controller.press();
-                    container.getArrow(4).set_flag();
-                    container.getArrow(4).setIcon(boom);
-                   // mainPanel.remove(rightMove);
-                    //leftMove.revalidate();
-                    //leftMove.repaint();
-                }
-                else{
+                if (!container.right_col.isEmpty()) {
+                
+                    //rightMove.setLocation(rightMove.getX(), rightMove.getY() + stepSize);
+                    if (gamerGame.check_hit(1,container.getArrow(4).getY())) {
+                        System.out.println("aahhhhh");
+                        controller.press();
+                        container.getArrow(4).set_flag();
+                        container.getArrow(4).setIcon(boom);
+                    // mainPanel.remove(rightMove);
+                        //leftMove.revalidate();
+                        //leftMove.repaint();
+                    }
+                    else {
+                        controller.miss();
+                    }
+                } else {
                     controller.miss();
                 }
-               
-                //controller.press(3);
-                //rightMove.revalidate();
-                //rightMove.repaint();
             } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-               // leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
-                if (gamerGame.check_hit(1,container.getArrow(1).getY())) {
-                    System.out.println("aahhhhh");
-                    controller.press();
-                    container.getArrow(1).set_flag();
-                    container.getArrow(1).setIcon(boom);
-                    //mainPanel.remove(leftMove);
-                    //leftMove.revalidate();
-                    //leftMove.repaint();
-                }
-                else{
+                if (!container.left_col.isEmpty()) {
+                    // leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
+                    if (gamerGame.check_hit(1,container.getArrow(1).getY())) {
+                        System.out.println("aahhhhh");
+                        controller.press();
+                        container.getArrow(1).set_flag();
+                        container.getArrow(1).setIcon(boom);
+                        //mainPanel.remove(leftMove);
+                        //leftMove.revalidate();
+                        //leftMove.repaint();
+                    }
+                    else{
+                        controller.miss();
+                    }
+                } else {
                     controller.miss();
                 }
                
             } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-               // upMove.setLocation(upMove.getX(), upMove.getY() + stepSize);
+                if (!container.up_col.isEmpty()) {
+                    // upMove.setLocation(upMove.getX(), upMove.getY() + stepSize);
                     if (gamerGame.check_hit(1,container.getArrow(3).getY())) {
                     System.out.println("aahhhhh");
                     controller.press();
@@ -306,24 +319,31 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                    // mainPanel.remove(upMove);
                     //leftMove.revalidate();
                     //leftMove.repaint();
-                }
-                else{
+                    }
+                    else{
+                        controller.miss();
+                    }
+                } else {
                     controller.miss();
                 }
                
 
             } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-               // downMove.setLocation(downMove.getX(), downMove.getY() + stepSize);
-                if (gamerGame.check_hit(1,container.getArrow(2).getY())) {
-                    System.out.println("aahhhhh");
-                    controller.press();
-                    container.getArrow(2).set_flag();;
-                    container.getArrow(2).setIcon(boom);
-                   // mainPanel.remove(downMove);
-                    //leftMove.revalidate();
-                    //leftMove.repaint();
-                }
-                else{
+                if (!container.down_col.isEmpty()) {
+                    // downMove.setLocation(downMove.getX(), downMove.getY() + stepSize);
+                    if (gamerGame.check_hit(1,container.getArrow(2).getY())) {
+                        System.out.println("aahhhhh");
+                        controller.press();
+                        container.getArrow(2).set_flag();;
+                        container.getArrow(2).setIcon(boom);
+                    // mainPanel.remove(downMove);
+                        //leftMove.revalidate();
+                        //leftMove.repaint();
+                    }
+                    else{
+                        controller.miss();
+                    }
+                } else {
                     controller.miss();
                 }
                 
@@ -372,11 +392,12 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
             container.addArrow(4);
             container.addArrow(1);
         
-            container.getArrow(1).setLocation(left.getX(), left.getY());
+            container.getArrow(1).setBounds(50, 100, 100, 100);
+
             container.getArrow(2).setLocation(400, 300);
             container.getArrow(3).setLocation(500, 300);
             container.getArrow(4).setLocation(600, 300);
-            container.left_col.get(1).setLocation(left.getX(), left.getY()-70);
+            container.left_col.get(1).setLocation(50, 100-70);
         
             mainPanel.add(container.getArrow(1));
             mainPanel.add(container.getArrow(2));
@@ -394,6 +415,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
             Timer GameTimer = new Timer(1500, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     container.addArrow(1);
+
                     // make for loop that goes through each allArrows array to store location and then try to use set location to repaint it there. If set location no work, remove everything from pain panel, readd it then use set location with store location
 
 
@@ -401,14 +423,14 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                     if (lastIndex > 0) {
                         int newY = container.left_col.get(lastIndex - 1).getY()
                              + container.left_col.get(lastIndex - 1).getHeight();
-                        container.left_col.get(lastIndex).setLocation(left.getX(), +step);
+                        container.left_col.get(lastIndex).setBounds(50, 100, 100, 100);
                         step += 100;
                         mainPanel.add(container.left_col.get(lastIndex));
                         mainPanel.setComponentZOrder(container.left_col.get(lastIndex), 0);
                         container.left_col.get(lastIndex).setVisible(true);
-                         // mainPanel.revalidate();
+                        mainPanel.revalidate();
                             //System.out.println(container.left_col.size());
-                         mainPanel.repaint();
+                        mainPanel.repaint();
 
                     }
                 }

@@ -8,29 +8,29 @@ import ddr.view.MainGUI;
 import ddr.view.ResultGUI;
 
 public class ScreenController implements ScreenObserver {
-    MainGUI main;
-    GameplayGUI game;
-    ResultGUI result;
+    MainGUI mainScreen;
+    GameplayGUI gameScreen;
+    ResultGUI resultScreen;
     Game gameplay;
     Highscore highscore;
 
     public ScreenController() {
-        this.main = new MainGUI(this);
+        this.mainScreen = new MainGUI(this);
         this.gameplay = new Game();
-        this.game = new GameplayGUI(this, gameplay);
-        this.gameplay.set_obvs(game);
-        this.game.disable();
-        this.result = new ResultGUI(gameplay, this);
-        this.result.disable();
+        this.gameScreen = new GameplayGUI(this, gameplay);
+        this.gameplay.set_obvs(gameScreen);
+        this.gameScreen.disable();
+        this.resultScreen = new ResultGUI(gameplay, this);
+        this.resultScreen.disable();
         this.highscore = new Highscore();
     }
 
     public void transition(int mode) {
-        main.disable();
-        game.enable();
-        game.set_start();
+        mainScreen.disable();
+        gameScreen.enable();
+        gameScreen.set_start();
         gameplay.set_diff(mode);
-        game.game_start();
+        gameScreen.game_start();
     }
 
     public void press() {
@@ -42,17 +42,18 @@ public class ScreenController implements ScreenObserver {
     }
 
     public void to_main() {
-        main.enable();
-        result.disable();
-        main.updateHighScores();
+        gameplay.reset();
+        mainScreen.enable();
+        resultScreen.disable();
+        mainScreen.updateHighScores();
         System.out.println("hiii");
     }
 
     public void retry() {
         gameplay.reset();
-        game.game_start(); //idk do i need this
-        game.enable();
-        result.disable();
+        gameScreen.game_start(); //idk do i need this
+        gameScreen.enable();
+        resultScreen.disable();
     }
 
     public int rank() {
@@ -60,24 +61,24 @@ public class ScreenController implements ScreenObserver {
     }
 
     public void startGame() {
-        game.game_start();
+        gameScreen.game_start();
         highscore.addHighscore(gameplay.getScore());
     }
 
     public void endGame() {
-        result.enable();
-        main.disable();
-        game.disable();
+        resultScreen.enable();
+        mainScreen.disable();
+        gameScreen.disable();
 
         highscore.addHighscore(gameplay.getScore());
         highscore.saveHighScoresToFile("highscores.ser");
 
-        result.updateScoreLabel(gameplay.getScore());
-        result.updateComboLabel(gameplay.getHighestCombo());
-        result.updateGoodLabel(gameplay.getHits());
-        result.updateMissLabel(gameplay.getMisses());
-        result.updateClearLabel(gameplay.getClearType());
-        result.setRank();
+        resultScreen.updateScoreLabel(gameplay.getScore());
+        resultScreen.updateComboLabel(gameplay.getHighestCombo());
+        resultScreen.updateGoodLabel(gameplay.getHits());
+        resultScreen.updateMissLabel(gameplay.getMisses());
+        resultScreen.updateClearLabel(gameplay.getClearType());
+        resultScreen.setRank();
 
     }
 }

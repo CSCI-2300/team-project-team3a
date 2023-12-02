@@ -28,7 +28,7 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
 
     ScreenController controll;
 
-    ImageIcon deets;
+    ImageIcon scorepng;
     ImageIcon letter;
     ArrayList<String> ranks;
 
@@ -47,13 +47,13 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         JPanel detailsPanel = new JPanel();
         detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
         detailsPanel.setOpaque(false);
-        JPanel rankPane = new JPanel(new FlowLayout(FlowLayout.TRAILING));
-        rankPane.setOpaque(false);
+        JPanel rankPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
+        rankPanel.setOpaque(false);
 
-        deets = new ImageIcon(getClass().getClassLoader().getResource("ddrscore.png"));
-        Image image = deets.getImage().getScaledInstance(398, 253, Image.SCALE_DEFAULT);
-        deets.setImage(image);
-        JLabel noMore = new JLabel(deets);
+        scorepng = new ImageIcon(getClass().getClassLoader().getResource("ddrscore.png"));
+        Image image = scorepng.getImage().getScaledInstance(398, 253, Image.SCALE_DEFAULT);
+        scorepng.setImage(image);
+        JLabel noMore = new JLabel(scorepng);
         detailsPanel.setPreferredSize(new Dimension(400, 333));
 
         //overlay layout
@@ -111,10 +111,10 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         Image letter = rank.getImage().getScaledInstance(92, 96, Image.SCALE_DEFAULT);
         rank.setImage(letter);
         rankLabel = new JLabel(rank);
-        rankPane.setPreferredSize(new Dimension(92,96));
-        rankPane.add(rankLabel);
+        rankPanel.setPreferredSize(new Dimension(92,96));
+        rankPanel.add(rankLabel);
 
-        scorePanel.add(rankPane);
+        scorePanel.add(rankPanel);
         scorePanel.add(overPanel);
 
         //adding buttons now
@@ -167,7 +167,7 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
             clearLabel.setText("CLEAR!");
         }
         if (c == ClearType.FAIL){
-            clearLabel.setText("FAIL...");
+            clearLabel.setText("FAIL . . .");
         }
     }
 

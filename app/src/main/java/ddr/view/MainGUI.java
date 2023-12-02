@@ -12,7 +12,7 @@ public class MainGUI implements ActionListener {
     JFrame frame1;
     ImagePanel panel;
     ImageIcon logo;
-    ImageIcon backs;
+    ImageIcon background;
     JPanel highscores;
     JLabel [] highscores_a;
     ScreenObserver controller;
@@ -25,8 +25,8 @@ public class MainGUI implements ActionListener {
     public MainGUI(ScreenObserver control) {
         frame1 = new JFrame("Main Menu");
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        backs = new ImageIcon(getClass().getClassLoader().getResource("game_background.png"));
-        panel = new ImagePanel(backs);
+        background = new ImageIcon(getClass().getClassLoader().getResource("game_background.png"));
+        panel = new ImagePanel(background);
         controller = control;
         highscore = new Highscore();
 
@@ -66,12 +66,12 @@ public class MainGUI implements ActionListener {
         panel.add(titlePanel);
 
         //buttons stuff
-        JPanel butoonpanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,0));
-        butoonpanel.setOpaque(false);
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,0));
+        buttonPanel.setOpaque(false);
 
         JButton easy = new JButton("easy");
         easy.setForeground(Color.WHITE);
-        butoonpanel.add(easy);
+        buttonPanel.add(easy);
         easy.setPreferredSize(butoonsize);
         easy.setOpaque(false);
         easy.setContentAreaFilled(false);
@@ -82,7 +82,7 @@ public class MainGUI implements ActionListener {
         JButton medium = new JButton("medium");
         medium.setForeground(Color.WHITE);
         medium.setPreferredSize(butoonsize);
-        butoonpanel.add(medium);
+        buttonPanel.add(medium);
 
         medium.setOpaque(false);
         medium.setContentAreaFilled(false);
@@ -93,7 +93,7 @@ public class MainGUI implements ActionListener {
         JButton hard = new JButton("hard");
         hard.setPreferredSize(butoonsize);
         hard.setForeground(Color.WHITE);
-        butoonpanel.add(hard);
+        buttonPanel.add(hard);
 
         hard.setOpaque(false);
         hard.setContentAreaFilled(false);
@@ -101,7 +101,7 @@ public class MainGUI implements ActionListener {
 
         //panel.add(hardPanel);
 
-        panel.add(butoonpanel);
+        panel.add(buttonPanel);
         frame1.add(panel);
         frame1.pack();
         frame1.setVisible(true);
