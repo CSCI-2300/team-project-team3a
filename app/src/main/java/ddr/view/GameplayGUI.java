@@ -106,11 +106,12 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         //mainPanel.add(upMove);
         //mainPanel.add(rightMove);
         
-       // score = new scores_panel();
-       // mainPanel.add(score);
-      //  score.setLocation(200,200);
+        score = new scores_panel();
+        score.setBounds(400, 280, 300, 300);
+        mainPanel.add(score);
+        score.setLocation(200,200);
         
-      /* 
+      
         //making the arrow receptors panel and adding it to a grid
         arrowsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,30,0));
         arrowsPanel.setPreferredSize(new Dimension(700,100));
@@ -152,7 +153,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         right = new JLabel(rights);
         arrowsPanel.add(right);
 
-        */
+        
 
         gamerGame = game;
         controller = screen;
@@ -373,8 +374,8 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
 
     @Override
     public void update(){
-       // score.score_update(gamerGame.getScore());
-        //score.combo_update(gamerGame.getCurrentCombo());
+        score.score_update(gamerGame.getScore());
+        score.combo_update(gamerGame.getCurrentCombo());
         //score.setLocation(scorex, scorey);
         //score.setLocation(scorex, scorey);
         frame2.setTitle("Score "+ gamerGame.getScore() + " Combo "+ gamerGame.getCurrentCombo());
