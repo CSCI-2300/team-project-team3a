@@ -113,21 +113,26 @@ public class Game {
     {
         int rank = 0;
         float ratio = (this.hits/(this.hits +this.misses))*100;
-        if(ratio >= 97)
+        if(this.score < 0)
         {
-            rank = 0; // S rank
-        } else if (ratio >= 90)
-        {
-            rank = 1; // A rank
-        } else if (ratio >= 80)
-        {
-            rank = 2; // B rank
-        } else if (ratio >= 70)
-        {
-            rank = 3; // C rank
-        } else if (ratio < 70)
-        {
-            rank = 4; // D rank
+            rank = 5; // F rank
+        } else {
+            if(ratio >= 97)
+            {
+                rank = 0; // S rank
+            } else if (ratio >= 90)
+            {
+                rank = 1; // A rank
+            } else if (ratio >= 80)
+            {
+                rank = 2; // B rank
+            } else if (ratio >= 70)
+            {
+                rank = 3; // C rank
+            } else if (ratio < 70)
+            {
+                rank = 4; // D rank
+            } 
         }
         return rank;
     }

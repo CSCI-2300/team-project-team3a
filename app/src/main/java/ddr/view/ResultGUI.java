@@ -11,8 +11,7 @@ import java.util.ArrayList;
 
 public class ResultGUI implements ActionListener{ //result screen after failing/finishing song
     private JPanel scorePanel; // display results
-    private JLabel clearType; //did player fail or clear?
-    private JLabel labels;
+
     private JPanel buttonPanel; // display navigational buttons
     private JButton buttonRetry;
     private JButton buttonMain;
@@ -63,13 +62,13 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         overPanel.setOpaque(false);
 
         //adding number labels
-        scoreLabel = new JLabel(Integer.toString(gamer.getScore()));
+        scoreLabel = new JLabel(Integer.toString(resultsGame.getScore()));
         scoreLabel.setForeground(Color.WHITE);
-        comboLabel = new JLabel(Integer.toString(gamer.getHighestCombo()));
+        comboLabel = new JLabel(Integer.toString(resultsGame.getHighestCombo()));
         comboLabel.setForeground(Color.BLACK);
-        goodLabel = new JLabel(Integer.toString((int)gamer.getHits()));
+        goodLabel = new JLabel(Integer.toString((int)resultsGame.getHits()));
         goodLabel.setForeground(Color.BLUE);
-        missLabel = new JLabel(Integer.toString((int)gamer.getMisses()));
+        missLabel = new JLabel(Integer.toString((int)resultsGame.getMisses()));
         missLabel.setForeground(Color.RED);
         clearLabel = new JLabel("CLEAR");
         clearLabel.setForeground(Color.WHITE);
@@ -105,6 +104,7 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         ranks.add("rankingB.png");
         ranks.add("rankingC.png");
         ranks.add("rankingD.png");
+        ranks.add("rankingF.png");
 
 //this is where we should change the ranks.get index to specific rank 
         rank = new ImageIcon(getClass().getClassLoader().getResource(ranks.get(0)));
@@ -116,15 +116,6 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
 
         scorePanel.add(rankPane);
         scorePanel.add(overPanel);
-
-        // scorePanel.setOpaque(false);
-
-        // scoreIcon = new ImageIcon(getClass().getClassLoader().getResource("ddrscore.png"));
-        // detailsPanel = new ImagePanel(scoreIcon);
-        // detailsPanel.setOpaque(false);
-        // scorePanel.add(detailsPanel);
-
-        //make top header of player clear result
 
         //adding buttons now
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,40,50)); //make navigational buttons panel
