@@ -74,6 +74,7 @@ public class ScreenController implements ScreenObserver {
         result.updateComboLabel(gameplay.getHighestCombo());
         result.updateGoodLabel(gameplay.getHits());
         result.updateMissLabel(gameplay.getMisses());
+        result.updateClearLabel(gameplay.getClearType());
         result.setRank();
     }
 }

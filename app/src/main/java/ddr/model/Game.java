@@ -132,6 +132,10 @@ public class Game {
         return rank;
     }
 
+    public ClearType getClearType(){
+        return this.clearType;
+    }
+
     public void set_obvs(gameObserver gamer){
         game = gamer;
     }

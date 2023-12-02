@@ -25,6 +25,7 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
     private JLabel comboLabel;
     private JLabel goodLabel;
     private JLabel missLabel;
+    private JLabel clearLabel;
 
     ScreenController controll;
 
@@ -70,6 +71,8 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         goodLabel.setForeground(Color.BLUE);
         missLabel = new JLabel(Integer.toString((int)gamer.getMisses()));
         missLabel.setForeground(Color.RED);
+        clearLabel = new JLabel("CLEAR");
+        clearLabel.setForeground(Color.WHITE);
 
         overPanel.add(detailsPanel);
 
@@ -88,6 +91,9 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         missLabel.setBounds(250, 200, 50, 50);
         missLabel.setFont(new Font("Century Gothic", Font.BOLD, 24));
         detailsPanel.add(missLabel);
+        clearLabel.setBounds(250, 244, 200, 50);
+        clearLabel.setFont(new Font("Century Gothic", Font.BOLD, 24));
+        detailsPanel.add(clearLabel);
 
         overPanel.add(noMore);
 
@@ -119,20 +125,6 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         // scorePanel.add(detailsPanel);
 
         //make top header of player clear result
- /*        clearType = new JLabel("RESULT (SONG FAILED/SONG CLEARED)");
-        clearType.setForeground(Color.WHITE);
-        clearType.setAlignmentX(Component.CENTER_ALIGNMENT);
-        scorePanel.add(clearType);
-
-        //make score, good, miss counters
-        String[] counts = {"Score: " + resultsGame.getScore(), "Good: " + resultsGame.getHits(), "Miss:" + resultsGame.getMisses()}; //hardcoded
-        for(int i = 0; i < counts.length; i++){
-            labels = new JLabel(counts[i]);
-            labels.setAlignmentX(Component.CENTER_ALIGNMENT);
-            labels.setForeground(Color.WHITE);
-            scorePanel.add(labels);
-        } 
-        */
 
         //adding buttons now
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,40,50)); //make navigational buttons panel
@@ -177,6 +169,15 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
 
     public void updateMissLabel(float newMisses) {
         missLabel.setText(Integer.toString((int) newMisses));
+    }
+
+    public void updateClearLabel(ClearType c) {
+        if (c == ClearType.CLEAR){
+            clearLabel.setText("CLEAR!");
+        }
+        if (c == ClearType.FAIL){
+            clearLabel.setText("FAIL...");
+        }
     }
 
     public void setRank() {
