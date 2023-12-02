@@ -384,7 +384,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
 
     @Override
     public void update(){
-        score.score_update(gamerGame.getScore());
+       score.score_update(gamerGame.getScore());
         score.combo_update(gamerGame.getCurrentCombo());
 
 
