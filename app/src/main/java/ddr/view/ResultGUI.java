@@ -139,7 +139,7 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         buttonMain.setPreferredSize(new Dimension(100,50));
 
         //final adding stuff
-        scorePanel.add(buttonPanel);
+       // scorePanel.add(buttonPanel);
         frame3.add(scorePanel);
         frame3.pack();
         frame3.setResizable(false);

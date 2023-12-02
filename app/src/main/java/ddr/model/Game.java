@@ -21,8 +21,8 @@ public class Game {
     gameObserver game;
     boolean check_flag;
 
-    int [] difficulty = {10,80,100};
-    int diff;
+    int [] difficulty = {2000,1000,600};
+   public  int diff;
 
     public Game(){
         this.score = 100; // so game ends
@@ -166,7 +166,9 @@ public class Game {
         misses = 0;
         flag = false;
     }
-    public int return_totalnotes(){
+    public int return_speed(){
+        System.out.println(diff);
         return diff;
+
     }
 }

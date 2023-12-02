@@ -67,13 +67,13 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
 
     int step;
 
-    int notes;
+    int speed;
     Random random;
 
     private Timer leftTimer, downTimer, upTimer, rightTimer;
     public GameplayGUI(ScreenObserver screen, Game game)
     { //javaswing constructor
-        notes = 0;
+
         position = 0;
         step = 10;
         container = new allArrows(1); // one for now
@@ -174,9 +174,9 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         frame2.setVisible(true);
         frame2.setResizable(false);
 
-
-        int stepSize =2;
-        leftTimer = new Timer(10, new ActionListener() {
+        int delay = 2;
+        int stepSize =8;
+        leftTimer = new Timer(delay, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!container.left_col.isEmpty()) {
                     for (int i = 0; i < container.ArrLength(1); i++) {
@@ -198,7 +198,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         });
 
 
-        downTimer = new Timer(10, new ActionListener() {
+        downTimer = new Timer(delay, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!container.down_col.isEmpty()) {
                     for(int i = 0; i < container.ArrLength(2);i++){
@@ -216,7 +216,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
             }
         });
  
-        upTimer = new Timer(10, new ActionListener() {
+        upTimer = new Timer(delay, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!container.up_col.isEmpty()) {
                 for(int i = 0; i < container.ArrLength(3);i++){
@@ -235,7 +235,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         });
         
 
-        rightTimer = new Timer(10, new ActionListener() {
+        rightTimer = new Timer(delay, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!container.right_col.isEmpty()) {
                 for(int i = 0; i < container.ArrLength(4);i++){
@@ -366,9 +366,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                 }
 
                 
-            } else if(e.getKeyCode() == KeyEvent.VK_SPACE){
-                controller.endGame();
-            }
+            } 
         });
     }
     
@@ -433,10 +431,14 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         //   //   mainPanel.setComponentZOrder(container.left_col.get(container.left_col.size()-1), 0);
         //     mainPanel.revalidate();
         //     mainPanel.repaint();
-            Timer GameTimer = new Timer(600, new ActionListener() {
+
+            Timer GameTimer = new Timer(gamerGame.diff, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     int choice = random.nextInt(4)+1;
+                            if (position == 60){
+                                controller.endGame();
 
+        }
 
 
                     // make for loop that goes through each allArrows array to store location and then try to use set location to repaint it there. If set location no work, remove everything from pain panel, readd it then use set location with store location
@@ -498,6 +500,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                         mainPanel.repaint();
 
                     }}
+                    position++;
                 }
             });
             GameTimer.start();
