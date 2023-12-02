@@ -298,7 +298,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                         controller.miss();
                     }
                 } else {
-                    controller.miss();
+                   controller.miss(); 
                 }
             } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 if (!container.left_col.isEmpty()) {
@@ -335,7 +335,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                         controller.miss();
                     }
                 } else {
-                    controller.miss();
+                   controller.miss(); 
                 }
                
 
