@@ -20,7 +20,7 @@ public class scores_panel extends JPanel {
         setPreferredSize(new Dimension(200, 150));
 
 
-        score = 0;
+        score = 100;
         combo = 0;
         scoreLabel = new JLabel(score +" score");
         comboJLabel = new JLabel(combo + " combo");
