@@ -8,6 +8,8 @@ import static org.junit.Assert.*;
 
 import ddr.model.Highscore;
 import ddr.model.Game;
+import ddr.view.GameplayGUI;
+import ddr.controller.ScreenController;
 
 public class AppTest {
     @Test 
@@ -18,17 +20,53 @@ public class AppTest {
         assertEquals(true, high.getHighscores().get(0) == big);
     }
 
-    /* 
     @Test
     public void rankBTest() { //testing for B rank
         Game game = new Game();
-        for(int i = 0; i < 7; i++){
-            game.hit(); // 7 hits
+        ScreenController dum = new ScreenController();
+        GameplayGUI dummy = new GameplayGUI(dum, game);
+        game.set_obvs(dummy);
+        for(int i = 0; i < 8; i++){
+            game.hit();
+        }
+        for(int i = 0; i < 2; i++){
+            game.miss();
+        }
+        assertEquals(true, game.getRank() == 2);
+    }
+
+    public void currentComboTest() { //testing for current combo (resets to 0 when missing)
+        Game game = new Game();
+        ScreenController dum = new ScreenController();
+        GameplayGUI dummy = new GameplayGUI(dum, game);
+        game.set_obvs(dummy);
+        for(int i = 0; i < 10; i++){ 
+            game.hit();
+        }
+        for(int i = 0; i < 1; i++){
+            game.miss();
         }
         for(int i = 0; i < 3; i++){
-            game.miss(); // 3 misses
+            game.hit();
         }
-        assertEquals(true, game.getHits() == 6);
+        assertEquals(true, game.getCurrentCombo() == 3);
     }
-    */
+
+    public void highestComboTest() { //testing for highest combo (does not reset to 0)
+        Game game = new Game();
+        ScreenController dum = new ScreenController();
+        GameplayGUI dummy = new GameplayGUI(dum, game);
+        game.set_obvs(dummy);
+        for(int i = 0; i < 10; i++){ 
+            game.hit();
+        }
+        for(int i = 0; i < 1; i++){
+            game.miss();
+        }
+        for(int i = 0; i < 3; i++){
+            game.hit();
+        }
+        assertEquals(true, game.getHighestCombo() == 10);
+    }
+    
 }
