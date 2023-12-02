@@ -433,7 +433,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         //   //   mainPanel.setComponentZOrder(container.left_col.get(container.left_col.size()-1), 0);
         //     mainPanel.revalidate();
         //     mainPanel.repaint();
-            Timer GameTimer = new Timer(2000, new ActionListener() {
+            Timer GameTimer = new Timer(600, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     int choice = random.nextInt(4)+1;
 
