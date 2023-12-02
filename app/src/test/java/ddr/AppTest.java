@@ -35,6 +35,7 @@ public class AppTest {
         assertEquals(true, game.getRank() == 2);
     }
 
+    @Test
     public void currentComboTest() { //testing for current combo (resets to 0 when missing)
         Game game = new Game();
         ScreenController dum = new ScreenController();
@@ -52,7 +53,8 @@ public class AppTest {
         assertEquals(true, game.getCurrentCombo() == 3);
     }
 
-    public void highestComboTest() { //testing for highest combo (does not reset to 0)
+    @Test
+    public void highestComboTest() { //testing for highest combo (saves highest combo)
         Game game = new Game();
         ScreenController dum = new ScreenController();
         GameplayGUI dummy = new GameplayGUI(dum, game);
@@ -69,4 +71,5 @@ public class AppTest {
         assertEquals(true, game.getHighestCombo() == 10);
     }
     
+
 }
