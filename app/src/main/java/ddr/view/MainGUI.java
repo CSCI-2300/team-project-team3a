@@ -43,7 +43,7 @@ public class MainGUI implements ActionListener {
             highscores.add(highscores_a[i]);
         }
         highscores.setBackground(Color.BLACK);
-        
+
         updateHighScores(); 
 
         //adding highscores to main frame
@@ -131,13 +131,14 @@ public class MainGUI implements ActionListener {
 
     }
 
-        public void disable(){
+    public void disable() {
         frame1.setVisible(false);
         frame1.setEnabled(false);
-        }
+    }
 
-        public void enable(){
-        panel.setVisible(true);
-        panel.setEnabled(true);
-        }
+    public void enable() {
+        frame1.setVisible(true);
+        frame1.setEnabled(true);
+    }
+
 }
