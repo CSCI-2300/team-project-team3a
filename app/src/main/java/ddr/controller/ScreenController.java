@@ -53,7 +53,6 @@ public class ScreenController implements ScreenObserver {
         mainScreen.enable();
         resultScreen.disable();
         mainScreen.updateHighScores();
-        System.out.println("hiii");
     }
 
     public void retry() {

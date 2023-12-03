@@ -45,7 +45,6 @@ public class Game {
         this.hits++;
         this.currCombo++;
         this.score+= 10;
-        System.out.println("hit");
         this.notify_obvs();
         
     }
@@ -82,7 +81,6 @@ public class Game {
     }
 
     public int getScore(){
-        System.out.println(score);
         return this.score;
     }
 

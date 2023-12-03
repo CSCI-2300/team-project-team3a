@@ -34,7 +34,6 @@ public class allArrows {
     public void addArrow(int col){
         if(col == 1){
             left_col.add(new Arrow(leftIcon));
-            System.out.println("arrow added");
         }
         else if(col == 3){
             up_col.add(new Arrow(upIcon));
@@ -50,7 +49,6 @@ public class allArrows {
     public void removeArrow(int col) {
         if (col == 1 && !left_col.isEmpty()) {
             left_col.remove(0);
-            System.out.println("removed");
         } else if (col == 3 && !up_col.isEmpty()) {
             up_col.remove(0);
         } else if (col == 2 && !down_col.isEmpty()) {

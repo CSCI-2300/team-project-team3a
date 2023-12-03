@@ -352,8 +352,10 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         score.combo_update(gamerGame.getCurrentCombo());
 
         if(gamerGame.gameOver()){
+            System.out.println("end");
             stopBackgroundMusic();
             controller.endGame();
+            
         }
     }
 
@@ -363,6 +365,8 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
             public void actionPerformed(ActionEvent e) {
                 int choice = random.nextInt(4)+1;
                         if (position == 10){
+                            System.out.println("end");
+                            stopBackgroundMusic();
                             controller.endGame();
 
                         }
@@ -431,11 +435,11 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                 position++;
             }
         });
-        GameTimer.start();
-                            
+        GameTimer.start();                   
                             
     }
         
+    //music 
     private Clip backgroundMusicClip;
     private void playBackgroundMusic() 
     {
