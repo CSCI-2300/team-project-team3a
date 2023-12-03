@@ -2,6 +2,13 @@ package ddr.view;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import javax.swing.*;
 
 import java.util.Random;
@@ -345,89 +352,115 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         score.combo_update(gamerGame.getCurrentCombo());
 
         if(gamerGame.gameOver()){
+            stopBackgroundMusic();
             controller.endGame();
         }
     }
 
     public void game_start(){
-            Timer GameTimer = new Timer(gamerGame.diff, new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    int choice = random.nextInt(4)+1;
-                            if (position == 60){
-                                controller.endGame();
-
-                            }
-                    // make for loop that goes through each allArrows array to store location and then try to use set location to repaint it there. If set location no work, remove everything from pain panel, readd it then use set location with store location
-                    if (choice ==1){
-                        container.addArrow(1);
-
-                        int lastIndex = container.left_col.size() - 1;
-                        if (lastIndex >= 0) {
-                            container.left_col.get(lastIndex).setBounds(180, -100, 100, 100);
-                            step += 100;
-                            mainPanel.add(container.left_col.get(lastIndex));
-                            mainPanel.setComponentZOrder(container.left_col.get(lastIndex), 0);
-                            container.left_col.get(lastIndex).setVisible(true);
-                            
-                            mainPanel.revalidate();
-                            mainPanel.repaint();
+        playBackgroundMusic();
+        Timer GameTimer = new Timer(gamerGame.diff, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int choice = random.nextInt(4)+1;
+                        if (position == 10){
+                            controller.endGame();
 
                         }
+                // make for loop that goes through each allArrows array to store location and then try to use set location to repaint it there. If set location no work, remove everything from pain panel, readd it then use set location with store location
+                if (choice ==1){
+                    container.addArrow(1);
+
+                    int lastIndex = container.left_col.size() - 1;
+                    if (lastIndex >= 0) {
+                        container.left_col.get(lastIndex).setBounds(180, -100, 100, 100);
+                        step += 100;
+                        mainPanel.add(container.left_col.get(lastIndex));
+                        mainPanel.setComponentZOrder(container.left_col.get(lastIndex), 0);
+                        container.left_col.get(lastIndex).setVisible(true);
+                        
+                        mainPanel.revalidate();
+                        mainPanel.repaint();
+
                     }
-                    if (choice == 2){
-                        container.addArrow(2);
-
-                        int lastIndex2 = container.down_col.size() - 1;
-                        if (lastIndex2 >= 0) {
-                            container.down_col.get(lastIndex2).setBounds(275, -100, 80, 90);
-                            step += 100;
-                            mainPanel.add(container.down_col.get(lastIndex2));
-                            mainPanel.setComponentZOrder(container.down_col.get(lastIndex2), 0);
-                            container.down_col.get(lastIndex2).setVisible(true);
-                            mainPanel.revalidate();
-                            mainPanel.repaint();
-
-                        }
-                    }
-                    if (choice ==3){
-                            container.addArrow(3);
-                   
-                        int lastIndex3 = container.up_col.size() - 1;
-                        if (lastIndex3 >= 0) {
-                            container.up_col.get(lastIndex3).setBounds(365, -100, 80, 80);
-                            step += 100;
-                            mainPanel.add(container.up_col.get(lastIndex3));
-                            mainPanel.setComponentZOrder(container.up_col.get(lastIndex3), 0);
-                            container.up_col.get(lastIndex3).setVisible(true);
-                            mainPanel.revalidate();
-                            mainPanel.repaint();
-
-                        }
-                    }
-
-                    if (choice ==4){
-                        container.addArrow(4);
-                        int lastIndex4 = container.right_col.size() - 1;
-                        if (lastIndex4 >= 0) {
-                            container.right_col.get(lastIndex4).setBounds(455, -100, 80, 80);
-                            step += 100;
-                            mainPanel.add(container.right_col.get(lastIndex4));
-                            mainPanel.setComponentZOrder(container.right_col.get(lastIndex4), 0);
-                            container.right_col.get(lastIndex4).setVisible(true);
-                            mainPanel.revalidate();
-                            mainPanel.repaint();
-
-                        }
-                    }
-                    position++;
                 }
-            });
-            GameTimer.start();
-                                
-                                
-        }
-        
+                if (choice == 2){
+                    container.addArrow(2);
 
+                    int lastIndex2 = container.down_col.size() - 1;
+                    if (lastIndex2 >= 0) {
+                        container.down_col.get(lastIndex2).setBounds(275, -100, 80, 90);
+                        step += 100;
+                        mainPanel.add(container.down_col.get(lastIndex2));
+                        mainPanel.setComponentZOrder(container.down_col.get(lastIndex2), 0);
+                        container.down_col.get(lastIndex2).setVisible(true);
+                        mainPanel.revalidate();
+                        mainPanel.repaint();
+
+                    }
+                }
+                if (choice ==3){
+                        container.addArrow(3);
+                
+                    int lastIndex3 = container.up_col.size() - 1;
+                    if (lastIndex3 >= 0) {
+                        container.up_col.get(lastIndex3).setBounds(365, -100, 80, 80);
+                        step += 100;
+                        mainPanel.add(container.up_col.get(lastIndex3));
+                        mainPanel.setComponentZOrder(container.up_col.get(lastIndex3), 0);
+                        container.up_col.get(lastIndex3).setVisible(true);
+                        mainPanel.revalidate();
+                        mainPanel.repaint();
+
+                    }
+                }
+
+                if (choice ==4){
+                    container.addArrow(4);
+                    int lastIndex4 = container.right_col.size() - 1;
+                    if (lastIndex4 >= 0) {
+                        container.right_col.get(lastIndex4).setBounds(455, -100, 80, 80);
+                        step += 100;
+                        mainPanel.add(container.right_col.get(lastIndex4));
+                        mainPanel.setComponentZOrder(container.right_col.get(lastIndex4), 0);
+                        container.right_col.get(lastIndex4).setVisible(true);
+                        mainPanel.revalidate();
+                        mainPanel.repaint();
+
+                    }
+                }
+                position++;
+            }
+        });
+        GameTimer.start();
+                            
+                            
+    }
+        
+    private Clip backgroundMusicClip;
+    private void playBackgroundMusic() 
+    {
+        try 
+        {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("banger.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream));
+            DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());
+            backgroundMusicClip = (Clip) AudioSystem.getLine(info);
+            backgroundMusicClip.open(audioInputStream);
+            backgroundMusicClip.loop(Clip.LOOP_CONTINUOUSLY);
+        } 
+        catch (Exception ex) 
+        {
+            ex.printStackTrace();
+        }
+    }    
+    
+    public void stopBackgroundMusic() 
+    {
+        if (backgroundMusicClip != null) 
+        {
+            backgroundMusicClip.stop();
+        }
+    } 
     
 }
     

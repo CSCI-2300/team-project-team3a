@@ -21,7 +21,6 @@ public class ScreenController implements ScreenObserver {
     ResultGUI resultScreen;
     Game gameplay;
     Highscore highscore;
-    private Clip backgroundMusicClip;
 
     public ScreenController() {
         this.mainScreen = new MainGUI(this);
@@ -70,7 +69,6 @@ public class ScreenController implements ScreenObserver {
 
     public void startGame() {
         gameScreen.game_start();
-        playBackgroundMusic();
         highscore.addHighscore(gameplay.getScore());
     }
 
@@ -91,28 +89,4 @@ public class ScreenController implements ScreenObserver {
 
     }
 
-        private void playBackgroundMusic() 
-    {
-        try 
-        {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("arcade-music-loop.wav");
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream));
-            DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());
-            backgroundMusicClip = (Clip) AudioSystem.getLine(info);
-            backgroundMusicClip.open(audioInputStream);
-            backgroundMusicClip.loop(Clip.LOOP_CONTINUOUSLY);
-        } 
-        catch (Exception ex) 
-        {
-            ex.printStackTrace();
-        }
-    }    
-    
-    public void stopBackgroundMusic() 
-    {
-        if (backgroundMusicClip != null) 
-        {
-            backgroundMusicClip.stop();
-        }
-    } 
 }
