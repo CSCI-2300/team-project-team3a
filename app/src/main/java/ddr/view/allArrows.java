@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 public class allArrows {
-    int[] totalNotes = {60, 80, 100};
     public ArrayList<Arrow> left_col;
     public ArrayList<Arrow> up_col;
     public ArrayList<Arrow> down_col;

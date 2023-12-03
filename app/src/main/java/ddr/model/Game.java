@@ -26,7 +26,8 @@ public class Game {
     private gameObserver game;
     private boolean check_flag;
 
-    int [] difficulty = {2000,1000,600};
+    //int [] difficulty = {1000,500,250}; //windows
+    int [] difficulty = {2000,1000,750}; //mac
     public  int diff;
 
     public ArrayList<String> sounds;
