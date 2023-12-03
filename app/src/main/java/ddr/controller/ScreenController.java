@@ -28,7 +28,6 @@ public class ScreenController implements ScreenObserver {
     public void transition(int mode) {
         mainScreen.disable();
         gameScreen.enable();
-        gameScreen.set_start();
         gameplay.set_diff(mode);
         gameScreen.game_start();
     }
@@ -51,7 +50,7 @@ public class ScreenController implements ScreenObserver {
 
     public void retry() {
         gameplay.reset();
-        gameScreen.game_start(); //idk do i need this
+        gameScreen.game_start(); 
         gameScreen.enable();
         resultScreen.disable();
     }

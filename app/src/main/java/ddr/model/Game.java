@@ -22,7 +22,7 @@ public class Game {
     boolean check_flag;
 
     int [] difficulty = {2000,1000,600};
-   public  int diff;
+    public  int diff;
 
     public Game(){
         this.score = 100; // so game ends
@@ -94,17 +94,14 @@ public class Game {
     }
 
     public float getHits(){
-        System.out.println(hits);
         return this.hits;
     }
 
     public float getMisses(){
-        System.out.println(misses);
         return this.misses;
     }
 
     public int getHighestCombo(){
-        System.out.println(maxCombo);
         return this.maxCombo;
     }
 

@@ -5,7 +5,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import java.util.Random;
-import java.util.random.*;
 
 import ddr.ScreenObserver;
 import ddr.gameObserver;
@@ -109,11 +108,6 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         rightIcon = new ImageIcon(getClass().getClassLoader().getResource("right.gif"));
         rightMove = new Arrow();
         rightMove.setIcon(rightIcon);
-
-       // mainPanel.add(leftMove);
-        //mainPanel.add(downMove);
-        //mainPanel.add(upMove);
-        //mainPanel.add(rightMove);
         
         score = new scores_panel();
         mainPanel.add(score);
@@ -162,19 +156,15 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         right = new JLabel(rights);
         arrowsPanel.add(right);
 
-        
-
         gamerGame = game;
         controller = screen;
-
-
 
         frame2.add(mainPanel);
         frame2.pack();
         frame2.setVisible(true);
         frame2.setResizable(false);
 
-        int delay = 2;
+        int delay = 50;
         int stepSize =8;
         leftTimer = new Timer(delay, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -183,15 +173,13 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                         container.left_col.get(i).setLocation(container.left_col.get(i).getX(), container.left_col.get(i).getY() + stepSize);
                     }
                      
-                    if (container.getArrow(1).getY() == 470 && container.getArrow(1).check_flag() == false) {
-                        System.out.println("miss ln186");
-                        controller.miss();
-                    }
-                    
-                    if (container.getArrow(1).getY() > 500) {
+                     if (container.getArrow(1).getY() > 500){
+                        if (container.getArrow(1).check_flag() == false){
+                            gamerGame.miss();
+                        }
                         mainPanel.remove(container.getArrow(1));
                         container.removeArrow(1);
-                    }
+                    } 
                     
                 }
             }
@@ -204,14 +192,16 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                     for(int i = 0; i < container.ArrLength(2);i++){
                         container.down_col.get(i).setLocation(container.down_col.get(i).getX(), container.down_col.get(i).getY() + stepSize);
                     }
-                    if (container.getArrow(2).getY() == 470 && container.getArrow(2).check_flag() == false){
-                        gamerGame.miss();
-                    }
+                    //if (container.getArrow(2).getY() == 470 && container.getArrow(2).check_flag() == false){
+                      //  gamerGame.miss();
+                    //}
                     if (container.getArrow(2).getY() > 500){
-                    // gamerGame.miss();
-                    mainPanel.remove(container.getArrow(2));
-                    container.removeArrow(2);
-                    }
+                        if (container.getArrow(2).check_flag() == false){
+                            gamerGame.miss();
+                        }
+                        mainPanel.remove(container.getArrow(2));
+                        container.removeArrow(2);
+                    } 
                 }
             }
         });
@@ -222,14 +212,13 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                 for(int i = 0; i < container.ArrLength(3);i++){
                 container.up_col.get(i).setLocation(container.up_col.get(i).getX(), container.up_col.get(i).getY() + stepSize);
                  }
-                if (container.getArrow(3).getY() == 470 && container.getArrow(3).check_flag() == false){
-                    gamerGame.miss();
-                }
-                if (container.getArrow(3).getY() > 500){
-                 // gamerGame.miss();
-                   mainPanel.remove(container.getArrow(3));
-                   container.removeArrow(3);
-                }
+                 if (container.getArrow(3).getY() > 500){
+                        if (container.getArrow(3).check_flag() == false){
+                            gamerGame.miss();
+                        }
+                        mainPanel.remove(container.getArrow(3));
+                        container.removeArrow(3);
+                    } 
             }
             }
         });
@@ -241,15 +230,13 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                 for(int i = 0; i < container.ArrLength(4);i++){
                 container.right_col.get(i).setLocation(container.right_col.get(i).getX(), container.right_col.get(i).getY() + stepSize);
                  }
-                if (container.getArrow(4).getY() == 470 && container.getArrow(4).check_flag() == false){
-                    gamerGame.miss();
-                }
-                if (container.getArrow(4).getY() > 500){
-                 // gamerGame.miss();
-                   mainPanel.remove(container.getArrow(4));
-                   container.removeArrow(4);
-                   
-                }
+                 if (container.getArrow(4).getY() > 500){
+                        if (container.getArrow(2).check_flag() == false){
+                            gamerGame.miss();
+                        }
+                        mainPanel.remove(container.getArrow(4));
+                        container.removeArrow(4);
+                    } 
             }
             }});
 
@@ -287,36 +274,24 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 if (!container.right_col.isEmpty()) {
                 
-                    //rightMove.setLocation(rightMove.getX(), rightMove.getY() + stepSize);
-                    if (gamerGame.check_hit(1,container.getArrow(4).getY())) {
-                        System.out.println("aahhhhh");
+                    if (gamerGame.check_hit(1,container.getArrow(4).getY()) && container.getArrow(4).check_flag() == false) {
                         controller.press();
                         container.getArrow(4).set_flag();
                         container.getArrow(4).setIcon(boom);
-                        // mainPanel.remove(rightMove);
-                        //leftMove.revalidate();
-                        //leftMove.repaint();
                     }
                     else {
-                        System.out.println("miss ln300");
                         controller.miss();
                     }
                 } else {
-                    System.out.println("miss ln304");
                     controller.miss(); 
                 }
 
             } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 if (!container.left_col.isEmpty()) {
-                    // leftMove.setLocation(leftMove.getX(), leftMove.getY() + stepSize);
-                    if (gamerGame.check_hit(1,container.getArrow(1).getY())) {
-                        System.out.println("aahhhhh");
+                    if (gamerGame.check_hit(1,container.getArrow(1).getY()) && container.getArrow(1).check_flag() == false) {
                         controller.press();
                         container.getArrow(1).set_flag();
                         container.getArrow(1).setIcon(boom);
-                        //mainPanel.remove(leftMove);
-                        //leftMove.revalidate();
-                        //leftMove.repaint();
                     }
                     else{
                         controller.miss();
@@ -328,15 +303,10 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
 
             } else if (e.getKeyCode() == KeyEvent.VK_UP) {
                 if (!container.up_col.isEmpty()) {
-                    // upMove.setLocation(upMove.getX(), upMove.getY() + stepSize);
-                    if (gamerGame.check_hit(1,container.getArrow(3).getY())) {
-                    System.out.println("aahhhhh");
+                    if (gamerGame.check_hit(1,container.getArrow(3).getY()) && container.getArrow(3).check_flag() == false) {
                     controller.press();
                     container.getArrow(3).set_flag();
                     container.getArrow(3).setIcon(boom);
-                    // mainPanel.remove(upMove);
-                    //leftMove.revalidate();
-                    //leftMove.repaint();
                     }
                     else{
                         controller.miss();
@@ -348,15 +318,10 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
 
             } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 if (!container.down_col.isEmpty()) {
-                    // downMove.setLocation(downMove.getX(), downMove.getY() + stepSize);
-                    if (gamerGame.check_hit(1,container.getArrow(2).getY())) {
-                        System.out.println("aahhhhh");
+                    if (gamerGame.check_hit(1,container.getArrow(2).getY()) && container.getArrow(2).check_flag() == false) {
                         controller.press();
                         container.getArrow(2).set_flag();;
                         container.getArrow(2).setIcon(boom);
-                        // mainPanel.remove(downMove);
-                        //leftMove.revalidate();
-                        //leftMove.repaint();
                     }
                     else{
                         controller.miss();
@@ -377,17 +342,6 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
     public void keyTyped(KeyEvent e) {
     }
 
-    public void set_start(){
-       // leftMove.setLocation(left.getX(),-50);
-        //rightMove.setLocation(right.getX(),-50);
-        //upMove.setLocation(up.getX(),-50);
-        //downMove.setLocation(down.getX(),-50);
-
-
-        
-       // score.setLocation(400,200);
-    }
-
     @Override
     public void update(){
        score.score_update(gamerGame.getScore());
@@ -403,35 +357,6 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
     }
 
     public void game_start(){
-        //     container.addArrow(1);
-        //     container.addArrow(2);
-        //     container.addArrow(3);
-        //     container.addArrow(4);
-        //     container.addArrow(1);
-        
-        //     container.getArrow(1).setBounds(175, -125, 80, 80);
-        //     container.getArrow(2).setBounds(275, -125, 80, 90);
-        //     container.getArrow(3).setBounds(365, -125, 80, 80);
-        //      container.getArrow(4).setBounds(450, -125, 80, 80);
-
-        //     // container.getArrow(2).setLocation(400, 300);
-        //     // container.getArrow(3).setLocation(500, 300);
-        //     // container.getArrow(4).setLocation(600, 300);
-        
-        //     mainPanel.add(container.getArrow(1));
-        //     mainPanel.add(container.getArrow(2));
-        //     mainPanel.add(container.getArrow(3));
-        //     mainPanel.add(container.getArrow(4));
-        // //     mainPanel.add(container.left_col.get(1));
-
-        //     mainPanel.setComponentZOrder(container.getArrow(1), 0);
-        //     mainPanel.setComponentZOrder(container.getArrow(2), 1);
-        //     mainPanel.setComponentZOrder(container.getArrow(3), 2);
-        //     mainPanel.setComponentZOrder(container.getArrow(4), 3);
-        //   //   mainPanel.setComponentZOrder(container.left_col.get(container.left_col.size()-1), 0);
-        //     mainPanel.revalidate();
-        //     mainPanel.repaint();
-
             Timer GameTimer = new Timer(gamerGame.diff, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     int choice = random.nextInt(4)+1;
@@ -461,45 +386,48 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                     if (choice == 2){
                         container.addArrow(2);
 
-                    int lastIndex2 = container.down_col.size() - 1;
-                    if (lastIndex2 >= 0) {
-                        container.down_col.get(lastIndex2).setBounds(275, -100, 80, 90);
-                        step += 100;
-                        mainPanel.add(container.down_col.get(lastIndex2));
-                        mainPanel.setComponentZOrder(container.down_col.get(lastIndex2), 0);
-                        container.down_col.get(lastIndex2).setVisible(true);
-                        mainPanel.revalidate();
-                        mainPanel.repaint();
+                        int lastIndex2 = container.down_col.size() - 1;
+                        if (lastIndex2 >= 0) {
+                            container.down_col.get(lastIndex2).setBounds(275, -100, 80, 90);
+                            step += 100;
+                            mainPanel.add(container.down_col.get(lastIndex2));
+                            mainPanel.setComponentZOrder(container.down_col.get(lastIndex2), 0);
+                            container.down_col.get(lastIndex2).setVisible(true);
+                            mainPanel.revalidate();
+                            mainPanel.repaint();
 
-                    }}
+                        }
+                    }
                     if (choice ==3){
                             container.addArrow(3);
                    
-                    int lastIndex3 = container.up_col.size() - 1;
-                    if (lastIndex3 >= 0) {
-                        container.up_col.get(lastIndex3).setBounds(365, -100, 80, 80);
-                        step += 100;
-                        mainPanel.add(container.up_col.get(lastIndex3));
-                        mainPanel.setComponentZOrder(container.up_col.get(lastIndex3), 0);
-                        container.up_col.get(lastIndex3).setVisible(true);
-                        mainPanel.revalidate();
-                        mainPanel.repaint();
+                        int lastIndex3 = container.up_col.size() - 1;
+                        if (lastIndex3 >= 0) {
+                            container.up_col.get(lastIndex3).setBounds(365, -100, 80, 80);
+                            step += 100;
+                            mainPanel.add(container.up_col.get(lastIndex3));
+                            mainPanel.setComponentZOrder(container.up_col.get(lastIndex3), 0);
+                            container.up_col.get(lastIndex3).setVisible(true);
+                            mainPanel.revalidate();
+                            mainPanel.repaint();
 
-                    }}
+                        }
+                    }
 
                     if (choice ==4){
-                         container.addArrow(4);
-                    int lastIndex4 = container.right_col.size() - 1;
-                    if (lastIndex4 >= 0) {
-                        container.right_col.get(lastIndex4).setBounds(450, -100, 80, 80);
-                        step += 100;
-                        mainPanel.add(container.right_col.get(lastIndex4));
-                        mainPanel.setComponentZOrder(container.right_col.get(lastIndex4), 0);
-                        container.right_col.get(lastIndex4).setVisible(true);
-                        mainPanel.revalidate();
-                        mainPanel.repaint();
+                        container.addArrow(4);
+                        int lastIndex4 = container.right_col.size() - 1;
+                        if (lastIndex4 >= 0) {
+                            container.right_col.get(lastIndex4).setBounds(450, -100, 80, 80);
+                            step += 100;
+                            mainPanel.add(container.right_col.get(lastIndex4));
+                            mainPanel.setComponentZOrder(container.right_col.get(lastIndex4), 0);
+                            container.right_col.get(lastIndex4).setVisible(true);
+                            mainPanel.revalidate();
+                            mainPanel.repaint();
 
-                    }}
+                        }
+                    }
                     position++;
                 }
             });
