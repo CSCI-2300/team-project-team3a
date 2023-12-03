@@ -8,6 +8,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 
+import ddr.ClearType;
 import ddr.ScreenObserver;
 import ddr.model.Game;
 import ddr.model.Highscore;
@@ -90,6 +91,10 @@ public class ScreenController implements ScreenObserver {
 
     public boolean gameLost(){
         return gameplay.lost();
+    }
+
+   public boolean clear(){
+        return gameplay.won();
     }
 
 }

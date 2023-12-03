@@ -2,6 +2,7 @@ package ddr.model;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -25,10 +26,10 @@ public class Game {
     private gameObserver game;
     private boolean check_flag;
 
-    private Clip backgroundMusicClip;
-
     int [] difficulty = {2000,1000,600};
     public  int diff;
+
+    public ArrayList<String> sounds;
 
     public Game(){
         this.score = 100; // so game ends
@@ -36,9 +37,11 @@ public class Game {
         this.maxCombo = 0;
         this.hits = 0;
         this.misses = 0;
-
-
         this.flag = false;
+
+        sounds = new ArrayList<String>();
+        sounds.add("wawaFail.wav");
+        sounds.add("robloxClear.wav");
     }
 
     public void hit(){
@@ -63,11 +66,23 @@ public class Game {
         if(this.score < 0){
             this.flag = true; //gameOver is TRUE because LOSE (score < 0)
             this.clearType = ClearType.FAIL;
+            //noise = sounds[0];
+            playSelectNoise(sounds.get(0));
             return this.flag;
         }
 
         return this.flag;
     }
+
+    public boolean won(){
+        this.clearType = ClearType.CLEAR;
+        if (this.clearType == ClearType.CLEAR){
+            playSelectNoise(sounds.get(1));
+            return true;
+        }
+        return true;
+    }
+
     public boolean check_hit(int col, int y){
         if(col == 1){
             if (y > 380 && y < 430){
@@ -158,5 +173,23 @@ public class Game {
         System.out.println(diff);
         return diff;
 
+    }
+
+    //sound effects
+    public void playSelectNoise(String string)
+    {
+        try 
+        {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(string);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream));
+            DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());
+            Clip clip = (Clip) AudioSystem.getLine(info);
+            clip.open(audioInputStream);
+            clip.start();
+        } 
+        catch (Exception ex) 
+        {
+            ex.printStackTrace();
+        }
     }
 }

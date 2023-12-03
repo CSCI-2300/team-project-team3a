@@ -10,4 +10,5 @@ public interface ScreenObserver {
     public void startGame();
     public void endGame();
     public boolean gameLost();
+    public boolean clear();
 }
