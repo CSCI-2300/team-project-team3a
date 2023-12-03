@@ -88,4 +88,8 @@ public class ScreenController implements ScreenObserver {
 
     }
 
+    public boolean gameLost(){
+        return gameplay.lost();
+    }
+
 }

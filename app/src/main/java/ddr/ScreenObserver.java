@@ -9,4 +9,5 @@ public interface ScreenObserver {
     public int rank();
     public void startGame();
     public void endGame();
+    public boolean gameLost();
 }

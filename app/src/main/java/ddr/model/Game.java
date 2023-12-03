@@ -59,7 +59,7 @@ public class Game {
         this.notify_obvs();
     }
 
-    public boolean gameOver(){ 
+    public boolean lost(){ 
         if(this.score < 0){
             this.flag = true; //gameOver is TRUE because LOSE (score < 0)
             this.clearType = ClearType.FAIL;
@@ -159,30 +159,4 @@ public class Game {
         return diff;
 
     }
-
-    private void playBackgroundMusic() 
-    {
-        try 
-        {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("arcade-music-loop.wav");
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream));
-            DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());
-            backgroundMusicClip = (Clip) AudioSystem.getLine(info);
-            backgroundMusicClip.open(audioInputStream);
-            backgroundMusicClip.loop(Clip.LOOP_CONTINUOUSLY);
-        } 
-
-        catch (Exception ex) 
-        {
-            ex.printStackTrace();
-        }
-    }    
-    
-    public void stopBackgroundMusic() 
-    {
-        if (backgroundMusicClip != null) 
-        {
-            backgroundMusicClip.stop();
-        }
-    }  
 }

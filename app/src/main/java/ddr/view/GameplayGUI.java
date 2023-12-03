@@ -69,7 +69,6 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
     JLabel booms;
 
     allArrows container;
-    int position;
 
     int step;
 
@@ -80,7 +79,6 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
     public GameplayGUI(ScreenObserver screen, Game game)
     { //javaswing constructor
 
-        position = 0;
         step = 10;
         container = new allArrows(1); // one for now
 
@@ -351,25 +349,38 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         score.score_update(gamerGame.getScore());
         score.combo_update(gamerGame.getCurrentCombo());
 
-        if(gamerGame.gameOver()){
+        if(controller.gameLost()){
             System.out.println("end");
             stopBackgroundMusic();
             controller.endGame();
-            
+            GameTimer.stop();
         }
     }
 
+    //timer for game (49 seconds)
+    private Timer GameTimer;
+    private Timer elapsedTimeTimer;
+    private int elapsedTime = 0;
+
     public void game_start(){
         playBackgroundMusic();
-        Timer GameTimer = new Timer(gamerGame.diff, new ActionListener() {
+
+        elapsedTimeTimer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                elapsedTime++; // Increase elapsed time every second
+                if (elapsedTime == 49) {
+                    stopBackgroundMusic();
+                    controller.endGame();
+                    GameTimer.stop();
+                    elapsedTimeTimer.stop();
+                }
+            }
+        });
+
+        GameTimer = new Timer(gamerGame.diff, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int choice = random.nextInt(4)+1;
-                        if (position == 10){
-                            System.out.println("end");
-                            stopBackgroundMusic();
-                            controller.endGame();
-
-                        }
                 // make for loop that goes through each allArrows array to store location and then try to use set location to repaint it there. If set location no work, remove everything from pain panel, readd it then use set location with store location
                 if (choice ==1){
                     container.addArrow(1);
@@ -432,12 +443,13 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
 
                     }
                 }
-                position++;
             }
         });
-        GameTimer.start();                   
+        elapsedTimeTimer.start(); // Start the elapsed time timer
+        GameTimer.start();                  
                             
     }
+
         
     //music 
     private Clip backgroundMusicClip;
