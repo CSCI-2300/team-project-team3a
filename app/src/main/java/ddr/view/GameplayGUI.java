@@ -169,7 +169,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
         frame2.setVisible(true);
         frame2.setResizable(false);
 
-        int delay = 50;
+        int delay = 30; // should work but MIGHT be different number for different devices
         int stepSize =8;
         leftTimer = new Timer(delay, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
