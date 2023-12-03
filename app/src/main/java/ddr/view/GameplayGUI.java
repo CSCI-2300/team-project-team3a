@@ -231,7 +231,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                 container.right_col.get(i).setLocation(container.right_col.get(i).getX(), container.right_col.get(i).getY() + stepSize);
                  }
                  if (container.getArrow(4).getY() > 500){
-                        if (container.getArrow(2).check_flag() == false){
+                        if (container.getArrow(4).check_flag() == false){
                             gamerGame.miss();
                         }
                         mainPanel.remove(container.getArrow(4));
@@ -372,7 +372,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
 
                         int lastIndex = container.left_col.size() - 1;
                         if (lastIndex >= 0) {
-                            container.left_col.get(lastIndex).setBounds(175, -100, 100, 100);
+                            container.left_col.get(lastIndex).setBounds(180, -100, 100, 100);
                             step += 100;
                             mainPanel.add(container.left_col.get(lastIndex));
                             mainPanel.setComponentZOrder(container.left_col.get(lastIndex), 0);
@@ -418,7 +418,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                         container.addArrow(4);
                         int lastIndex4 = container.right_col.size() - 1;
                         if (lastIndex4 >= 0) {
-                            container.right_col.get(lastIndex4).setBounds(450, -100, 80, 80);
+                            container.right_col.get(lastIndex4).setBounds(455, -100, 80, 80);
                             step += 100;
                             mainPanel.add(container.right_col.get(lastIndex4));
                             mainPanel.setComponentZOrder(container.right_col.get(lastIndex4), 0);
