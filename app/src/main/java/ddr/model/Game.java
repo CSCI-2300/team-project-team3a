@@ -1,25 +1,31 @@
 package ddr.model;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+
 import ddr.ClearType;
 import ddr.gameObserver;
 
 public class Game {
-    int startingx; //positional stuff
-    int startingy;
-    int currentx;
-    int currenty;
     
-    int score; //things to keep track of for end screen
-    int currCombo;
-    int maxCombo;
-    float hits; 
-    float misses;
+    private int score; //things to keep track of for end screen
+    private int currCombo;
+    private int maxCombo;
+    private float hits; 
+    private float misses;
 
-    boolean flag; //flag for gameOver method
-    ClearType clearType; //enum for clear type
+    private boolean flag; //flag for gameOver method
+    private ClearType clearType; //enum for clear type
 
-    gameObserver game;
-    boolean check_flag;
+    private gameObserver game;
+    private boolean check_flag;
+
+    private Clip backgroundMusicClip;
 
     int [] difficulty = {2000,1000,600};
     public  int diff;
@@ -35,17 +41,6 @@ public class Game {
         this.flag = false;
     }
 
-/* 
-    public void save_start(int startx, int starty){
-        startingx = startx;
-        startingy = starty;
-    }
-
-    public void change_local(int startx, int starty){
-        currentx = startx;
-        currenty = starty;
-    }
-*/
     public void hit(){
         this.hits++;
         this.currCombo++;
@@ -166,4 +161,30 @@ public class Game {
         return diff;
 
     }
+
+    private void playBackgroundMusic() 
+    {
+        try 
+        {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("arcade-music-loop.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream));
+            DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());
+            backgroundMusicClip = (Clip) AudioSystem.getLine(info);
+            backgroundMusicClip.open(audioInputStream);
+            backgroundMusicClip.loop(Clip.LOOP_CONTINUOUSLY);
+        } 
+
+        catch (Exception ex) 
+        {
+            ex.printStackTrace();
+        }
+    }    
+    
+    public void stopBackgroundMusic() 
+    {
+        if (backgroundMusicClip != null) 
+        {
+            backgroundMusicClip.stop();
+        }
+    }  
 }

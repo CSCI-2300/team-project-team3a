@@ -343,6 +343,10 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
     public void update(){
         score.score_update(gamerGame.getScore());
         score.combo_update(gamerGame.getCurrentCombo());
+
+        if(gamerGame.gameOver()){
+            controller.endGame();
+        }
     }
 
     public void game_start(){
@@ -352,9 +356,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                             if (position == 60){
                                 controller.endGame();
 
-        }
-
-
+                            }
                     // make for loop that goes through each allArrows array to store location and then try to use set location to repaint it there. If set location no work, remove everything from pain panel, readd it then use set location with store location
                     if (choice ==1){
                         container.addArrow(1);

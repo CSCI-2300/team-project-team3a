@@ -1,8 +1,14 @@
 package ddr.view;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import javax.swing.*;
 
 import ddr.ScreenObserver;
@@ -112,6 +118,7 @@ public class MainGUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e){
         String actionCommand = e.getActionCommand();
+        playSelectNoise();
         if ("easy".equals(actionCommand)) {
             controller.transition(0);
         }
@@ -133,6 +140,23 @@ public class MainGUI implements ActionListener {
     public void enable() {
         frame1.setVisible(true);
         frame1.setEnabled(true);
+    }
+
+    public void playSelectNoise()
+    {
+        try 
+        {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("click.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream));
+            DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());
+            Clip clip = (Clip) AudioSystem.getLine(info);
+            clip.open(audioInputStream);
+            clip.start();
+        } 
+        catch (Exception ex) 
+        {
+            ex.printStackTrace();
+        }
     }
 
 }

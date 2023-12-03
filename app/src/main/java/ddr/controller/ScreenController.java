@@ -1,5 +1,13 @@
 package ddr.controller;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+
 import ddr.ScreenObserver;
 import ddr.model.Game;
 import ddr.model.Highscore;
@@ -13,6 +21,7 @@ public class ScreenController implements ScreenObserver {
     ResultGUI resultScreen;
     Game gameplay;
     Highscore highscore;
+    private Clip backgroundMusicClip;
 
     public ScreenController() {
         this.mainScreen = new MainGUI(this);
@@ -61,6 +70,7 @@ public class ScreenController implements ScreenObserver {
 
     public void startGame() {
         gameScreen.game_start();
+        playBackgroundMusic();
         highscore.addHighscore(gameplay.getScore());
     }
 
@@ -80,4 +90,29 @@ public class ScreenController implements ScreenObserver {
         resultScreen.setRank();
 
     }
+
+        private void playBackgroundMusic() 
+    {
+        try 
+        {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("arcade-music-loop.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream));
+            DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());
+            backgroundMusicClip = (Clip) AudioSystem.getLine(info);
+            backgroundMusicClip.open(audioInputStream);
+            backgroundMusicClip.loop(Clip.LOOP_CONTINUOUSLY);
+        } 
+        catch (Exception ex) 
+        {
+            ex.printStackTrace();
+        }
+    }    
+    
+    public void stopBackgroundMusic() 
+    {
+        if (backgroundMusicClip != null) 
+        {
+            backgroundMusicClip.stop();
+        }
+    } 
 }
