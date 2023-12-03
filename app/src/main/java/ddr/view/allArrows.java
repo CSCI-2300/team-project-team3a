@@ -80,7 +80,7 @@ public class allArrows {
                 return right_col.get(0);
             }
         }
-        // Return null if the specified list is empty or the column is invalid
+        //return null if the specified list is empty or the column is invalid
         return null;
     }
 
@@ -94,7 +94,7 @@ public class allArrows {
         } else if (col == 4) {
             return right_col.size();
         }
-        return 0; // Return 0 if the column is invalid
+        return 0; //return 0 if the column is invalid
     }
     
 }

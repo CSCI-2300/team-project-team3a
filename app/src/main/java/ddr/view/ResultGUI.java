@@ -96,7 +96,6 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
 
         overPanel.add(noMore);
 
-        //scorePanel.add(deetsPane);
         //adding the images to a arraylist
         ranks = new ArrayList<String>();
         ranks.add("rankingS.png");
@@ -139,7 +138,6 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         buttonMain.setPreferredSize(new Dimension(100,50));
 
         //final adding stuff
-       // scorePanel.add(buttonPanel);
         frame3.add(scorePanel);
         frame3.pack();
         frame3.setResizable(false);

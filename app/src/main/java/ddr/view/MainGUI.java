@@ -50,7 +50,7 @@ public class MainGUI implements ActionListener {
         frame1.setLayout(new BorderLayout());
         frame1.add(highscores, BorderLayout.NORTH);
 
-        //logo stuff
+        //logo
         panel.setPreferredSize(new Dimension(700,500));
         panel.setBackground(new Color(135, 206, 235));
         Dimension butoonsize = new Dimension(100,50);
@@ -77,8 +77,6 @@ public class MainGUI implements ActionListener {
         easy.setContentAreaFilled(false);
         easy.addActionListener(this);
 
-        //panel.add(easyPanel);
-
         JButton medium = new JButton("medium");
         medium.setForeground(Color.WHITE);
         medium.setPreferredSize(butoonsize);
@@ -88,8 +86,6 @@ public class MainGUI implements ActionListener {
         medium.setContentAreaFilled(false);
         medium.addActionListener(this);
 
-        //panel.add(mediumPanel);
-
         JButton hard = new JButton("hard");
         hard.setPreferredSize(butoonsize);
         hard.setForeground(Color.WHITE);
@@ -98,8 +94,6 @@ public class MainGUI implements ActionListener {
         hard.setOpaque(false);
         hard.setContentAreaFilled(false);
         hard.addActionListener(this);
-
-        //panel.add(hardPanel);
 
         panel.add(buttonPanel);
         frame1.add(panel);

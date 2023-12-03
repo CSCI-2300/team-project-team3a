@@ -192,9 +192,6 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                     for(int i = 0; i < container.ArrLength(2);i++){
                         container.down_col.get(i).setLocation(container.down_col.get(i).getX(), container.down_col.get(i).getY() + stepSize);
                     }
-                    //if (container.getArrow(2).getY() == 470 && container.getArrow(2).check_flag() == false){
-                      //  gamerGame.miss();
-                    //}
                     if (container.getArrow(2).getY() > 500){
                         if (container.getArrow(2).check_flag() == false){
                             gamerGame.miss();
@@ -344,16 +341,8 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
 
     @Override
     public void update(){
-       score.score_update(gamerGame.getScore());
+        score.score_update(gamerGame.getScore());
         score.combo_update(gamerGame.getCurrentCombo());
-
-
-        frame2.setTitle("Score "+ gamerGame.getScore() + " Combo "+ gamerGame.getCurrentCombo());
-        if (gamerGame.gameOver()){
-            controller.endGame();
-        }
-
-
     }
 
     public void game_start(){

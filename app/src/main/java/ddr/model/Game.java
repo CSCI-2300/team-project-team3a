@@ -62,14 +62,12 @@ public class Game {
         }
         this.currCombo = 0;
         this.score-= 10;
-        System.out.println("miss");
         this.notify_obvs();
     }
 
     public boolean gameOver(){ 
         if(this.score < 0){
             this.flag = true; //gameOver is TRUE because LOSE (score < 0)
-            System.out.println("u losT skill issue");
             this.clearType = ClearType.FAIL;
             return this.flag;
         }
