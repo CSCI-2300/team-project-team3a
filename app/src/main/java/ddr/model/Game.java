@@ -48,6 +48,7 @@ public class Game {
     public void hit(){
         this.hits++;
         this.currCombo++;
+        this.maxCombo++;
         this.score+= 10;
         this.notify_obvs();
         
