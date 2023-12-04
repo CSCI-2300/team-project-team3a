@@ -162,14 +162,6 @@ public class Game {
         System.out.println(diff);
     }
 
-    public void reset(){
-        score = 100;
-        currCombo = 0;
-        maxCombo = 0;
-        hits = 0;
-        misses = 0;
-        flag = false;
-    }
     public int return_speed(){
         System.out.println(diff);
         return diff;

@@ -15,6 +15,7 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
     private JPanel buttonPanel; // display navigational buttons
     private JButton buttonRetry;
     private JButton buttonMain;
+    private JButton buttonExit;
     private ImageIcon backs;
     private JFrame frame3;
     private Game resultsGame;
@@ -105,7 +106,7 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         ranks.add("rankingD.png");
         ranks.add("rankingF.png");
 
-//this is where we should change the ranks.get index to specific rank 
+        //this is where we should change the ranks.get index to specific rank 
         rank = new ImageIcon(getClass().getClassLoader().getResource(ranks.get(0)));
         Image letter = rank.getImage().getScaledInstance(92, 96, Image.SCALE_DEFAULT);
         rank.setImage(letter);
@@ -120,24 +121,35 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,40,50)); //make navigational buttons panel
         buttonPanel.setOpaque(false);
 
+        //retry button
         buttonRetry = new JButton("Play Again");
         buttonRetry.setPreferredSize(new Dimension(100,50));
         buttonRetry.setForeground(Color.WHITE);
         buttonRetry.setOpaque(false);
         buttonRetry.setContentAreaFilled(false);
         buttonRetry.addActionListener(this);
-        buttonPanel.add(buttonRetry);
+        //buttonPanel.add(buttonRetry);
 
+        //main menu button
         buttonMain = new JButton("Main Menu");
-        buttonPanel.add(buttonMain);
+        //buttonPanel.add(buttonMain);
         buttonMain.setForeground(Color.white);
         buttonMain.setOpaque(false);
         buttonMain.setContentAreaFilled(false);
         buttonMain.addActionListener(this);
-
         buttonMain.setPreferredSize(new Dimension(100,50));
 
+        //exit button
+        buttonExit = new JButton("Exit");
+        buttonExit.setPreferredSize(new Dimension(100,50));
+        buttonExit.setForeground(Color.WHITE);
+        buttonExit.setOpaque(false);
+        buttonExit.setContentAreaFilled(false);
+        buttonExit.addActionListener(this);
+        buttonPanel.add(buttonExit);
+
         //final adding stuff
+        scorePanel.add(buttonPanel);
         frame3.add(scorePanel);
         frame3.pack();
         frame3.setResizable(false);
@@ -191,6 +203,9 @@ public class ResultGUI implements ActionListener{ //result screen after failing/
         }
         if(e.getSource() == buttonRetry){
             controll.retry();
+        }
+        if(e.getSource() == buttonExit){
+            System.exit(0);
         }
     }
 }

@@ -373,6 +373,7 @@ public class GameplayGUI implements KeyListener, gameObserver { //UI during game
                 if (elapsedTime == 49) {
                     stopBackgroundMusic();
                     controller.endGame();
+                    controller.clear();
                     GameTimer.stop();
                     elapsedTimeTimer.stop();
                 }

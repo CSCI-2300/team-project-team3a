@@ -22,6 +22,7 @@ public class ScreenController implements ScreenObserver {
     ResultGUI resultScreen;
     Game gameplay;
     Highscore highscore;
+    Game newgame;
 
     public ScreenController() {
         this.mainScreen = new MainGUI(this);
@@ -50,14 +51,12 @@ public class ScreenController implements ScreenObserver {
     }
 
     public void to_main() {
-        gameplay.reset();
         mainScreen.enable();
         resultScreen.disable();
         mainScreen.updateHighScores();
     }
 
     public void retry() {
-        gameplay.reset();
         gameScreen.game_start(); 
         gameScreen.enable();
         resultScreen.disable();
